@@ -1,0 +1,25 @@
+.link {
+  text-decoration: none;
+  font-size: 2rem;
+  color: $color-primary;
+  transition: all 0.2s;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      height: 3px;
+      background-color: currentColor;
+      animation: underline 0.4s ease forwards;
+    }
+  }
+
+  &:focus {
+    color: $color-black;
+    outline: none;
+  }
+}

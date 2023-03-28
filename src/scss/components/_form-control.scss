@@ -1,0 +1,31 @@
+.form-control {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 2rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__label {
+    transition: all 0.2s;
+  }
+
+  &__input {
+    padding: 0.5rem 1.2rem;
+    width: 100%;
+    border: none;
+    outline: 2px solid $color-black;
+    transition: all 0.2s;
+    margin-top: 2rem;
+    font-size: inherit;
+    &:focus {
+      outline: 2px solid $color-primary;
+    }
+    &:focus ~ label {
+      color: $color-primary;
+    }
+  }
+}
