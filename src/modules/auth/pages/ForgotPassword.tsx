@@ -1,46 +1,60 @@
-import { FormEvent, FormEventHandler, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import isValidEmail from '../../../utils/validators/isValidEmail';
+import PrimaryButton from '../components/PrimaryButton';
+import SecondaryButton from '../components/SecondaryButton';
+import FormInput from '../components/FormInput';
+import AuthPagesText from '../components/AuthPagesText';
 
 const ForgotPassword = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
 
+  const [isEmail, setIsEmail] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
+  const [isInvalidMessage, setIsInvalidMessage] = useState('');
+
   const formSubmitHandler: FormEventHandler = (event: FormEvent) => {
-    console.log(event);
+    event.preventDefault();
+    const email = emailInputRef.current?.value;
+    if (!email || !isValidEmail(email)) {
+      if (isTouched) setIsEmail(false);
+      setIsTouched(true);
+      setIsInvalidMessage('Please Enter a Valid E-Mail');
+
+      return;
+    }
+
+    setIsInvalidMessage('');
+    setIsTouched(true);
+    setIsEmail(true);
   };
+
+  const emailInputClasses = `form-control__input ${
+    !isEmail && isTouched ? 'form-control__input--invalid' : ''
+  }`;
 
   return (
     <div className="forgot-password">
-      <div className="auth-content__text">
-        <h2 className=" heading-primary">Forgot your password?</h2>
-        <p className="heading-tertiary">
-          Enter your email to send recovery link to you
-        </p>
-      </div>
-      <form className="auth-content__form" onSubmit={formSubmitHandler}>
-        <div className="form-control">
-          <input
-            ref={emailInputRef}
-            className="form-control__input"
-            type="email"
-            id="email"
-          />
-          <label className="form-control__label" htmlFor="email">
-            E-Mail
-          </label>
-        </div>
+      <AuthPagesText
+        title="Forgot your password?"
+        text="Enter your email to send recovery link to you"
+      />
+      <form
+        className="auth-content__form"
+        onSubmit={formSubmitHandler}
+        noValidate
+      >
+        <FormInput
+          id="email"
+          type="email"
+          label="E-Mail"
+          isInvalidMessage={isInvalidMessage}
+          ref={emailInputRef}
+          className={emailInputClasses}
+        />
 
-        <div className="form-control">
-          <button className="btn btn-primary auth-content__action--primary">
-            SEND
-          </button>
-        </div>
+        <PrimaryButton text="SEND" type="submit" />
       </form>
-      <div className="auth-content__action--secondary ">
-        <p className="paragraph auth-content__action--secondary__text">Or</p>
-        <Link to="/" className="btn btn-secondary">
-          Login
-        </Link>
-      </div>
+      <SecondaryButton text="Or" link="/" toPage="Login" />
     </div>
   );
 };

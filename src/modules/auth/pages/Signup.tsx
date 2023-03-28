@@ -1,91 +1,130 @@
-import { FormEvent, FormEventHandler, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import SecondaryButton from '../components/SecondaryButton';
+import PrimaryButton from '../components/PrimaryButton';
+import AuthPagesText from '../components/AuthPagesText';
+import FormInput from '../components/FormInput';
+import isValidEmail from '../../../utils/validators/isValidEmail';
+import isValidPassword from '../../../utils/validators/isValidPassword';
 
 const Signup = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const passwordConfirmInputRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
+
+  const [isEmail, setIsEmail] = useState(false);
+  const [emailIsTouched, setEmailIsTouched] = useState(false);
+  const [emailIsInvalidMessage, setEmailIsInvalidMessage] = useState('');
+
+  const [isPassword, setIsPassword] = useState(false);
+  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
+  const [passwordIsInvalidMessage, setPasswordIsInvalidMessage] = useState('');
+
+  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
+  const [confirmPasswordIsTouched, setConfirmPasswordIsTouched] =
+    useState(false);
+  const [confirmPasswordIsInvalidMessage, setConfirmPasswordIsInvalidMessage] =
+    useState('');
 
   const formSubmitHandler: FormEventHandler = (event: FormEvent) => {
     event.preventDefault();
     const name = nameInputRef.current?.value;
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
-    const passwordConfirm = passwordConfirmInputRef.current?.value;
-    console.log(name, email, password, passwordConfirm);
+    const confirmPassword = confirmPasswordInputRef.current?.value;
+    if (!email || !isValidEmail(email)) {
+      if (emailIsTouched) setIsEmail(false);
+      setEmailIsTouched(true);
+      setEmailIsInvalidMessage('Please Enter a Valid E-Mail');
+
+      return;
+    }
+
+    if (!password || !isValidPassword(password)) {
+      if (passwordIsTouched) setIsPassword(false);
+      setPasswordIsTouched(true);
+      setPasswordIsInvalidMessage('Password should be at least 6 characters ');
+
+      return;
+    }
+
+    if (confirmPassword !== password) {
+      if (confirmPasswordIsTouched) setIsConfirmPassword(false);
+      setConfirmPasswordIsTouched(true);
+      setConfirmPasswordIsInvalidMessage('Passwords not matched');
+
+      return;
+    }
+    setEmailIsInvalidMessage('');
+    setPasswordIsInvalidMessage('');
+    setConfirmPasswordIsInvalidMessage('');
+    setEmailIsTouched(true);
+    setPasswordIsTouched(true);
+    setConfirmPasswordIsTouched(true);
+    setIsEmail(true);
+    setIsPassword(true);
+    setIsConfirmPassword(true);
+
+    console.log(name, email, password, confirmPassword);
   };
+
+  const emailInputClasses = `form-control__input ${
+    !isEmail && emailIsTouched ? 'form-control__input--invalid' : ''
+  }`;
+
+  const passwordInputClasses = `form-control__input ${
+    !isPassword && passwordIsTouched ? 'form-control__input--invalid' : ''
+  }`;
+
+  const confirmPasswordInputClasses = `form-control__input ${
+    !isConfirmPassword && passwordIsTouched
+      ? 'form-control__input--invalid'
+      : ''
+  }`;
 
   return (
     <div className="signup">
-      <div className="auth-content__text">
-        <h2 className=" heading-primary">Welcome</h2>
-        <p className="heading-tertiary">
-          Welcome to react training App! <br />
-          signup and try its nice features
-        </p>
-      </div>
+      <AuthPagesText
+        title="Welcome"
+        text="Welcome to react training App! signup and try its nice features"
+      />
+
       <form className="auth-content__form" onSubmit={formSubmitHandler}>
-        <div className="form-control">
-          <input
-            ref={nameInputRef}
-            className="form-control__input"
-            type="text"
-            id="name"
-          />
-          <label className="form-control__label" htmlFor="name">
-            Name
-          </label>
-        </div>
-        <div className="form-control">
-          <input
-            ref={emailInputRef}
-            className="form-control__input"
-            type="email"
-            id="email"
-          />
-          <label className="form-control__label" htmlFor="email">
-            E-Mail
-          </label>
-        </div>
-        <div className="form-control">
-          <input
-            ref={passwordInputRef}
-            className="form-control__input"
-            type="password"
-            id="password"
-            minLength={6}
-          />
-          <label className="form-control__label" htmlFor="password">
-            Password
-          </label>
-        </div>
-        <div className="form-control">
-          <input
-            ref={passwordConfirmInputRef}
-            className="form-control__input"
-            type="password"
-            id="confirm-password"
-            minLength={6}
-          />
-          <label className="form-control__label" htmlFor="confirm-password">
-            Confirm Password
-          </label>
-        </div>
-        <div className="form-control">
-          <button className="btn btn-primary auth-content__action--primary">
-            Signup
-          </button>
-        </div>
+        <FormInput id="name" type="text" label="Name" ref={nameInputRef} />
+
+        <FormInput
+          id="email"
+          type="email"
+          label="E-Mail"
+          isInvalidMessage={emailIsInvalidMessage}
+          ref={emailInputRef}
+          className={emailInputClasses}
+        />
+        <FormInput
+          id="password"
+          type="password"
+          label="Password"
+          isInvalidMessage={passwordIsInvalidMessage}
+          ref={passwordInputRef}
+          className={passwordInputClasses}
+        />
+
+        <FormInput
+          id="confirm-password"
+          type="password"
+          label="Confirm Password"
+          isInvalidMessage={confirmPasswordIsInvalidMessage}
+          ref={confirmPasswordInputRef}
+          className={confirmPasswordInputClasses}
+        />
+
+        <PrimaryButton text="Signup" type="submit" />
       </form>
-      <div className="auth-content__action--secondary">
-        <p className="paragraph auth-content__action--secondary__text">
-          Already have an account?
-        </p>
-        <Link to="/" className="btn btn-secondary ">
-          Login
-        </Link>
-      </div>
+      <SecondaryButton
+        text="Already have an account?"
+        link="/"
+        toPage="Login"
+      />
     </div>
   );
 };

@@ -1,69 +1,102 @@
-import { FormEvent, FormEventHandler, useRef } from 'react';
+import { FormEvent, FormEventHandler, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PrimaryButton from '../components/PrimaryButton';
+import SecondaryButton from '../components/SecondaryButton';
+import FormInput from '../components/FormInput';
+import isValidEmail from '../../../utils/validators/isValidEmail';
+import isValidPassword from '../../../utils/validators/isValidPassword';
+import AuthPagesText from '../components/AuthPagesText';
 
 const Login = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
+  const [isEmail, setIsEmail] = useState(false);
+  const [emailIsTouched, setEmailIsTouched] = useState(false);
+  const [emailIsInvalidMessage, setEmailIsInvalidMessage] = useState('');
+
+  const [isPassword, setIsPassword] = useState(false);
+  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
+  const [passwordIsInvalidMessage, setPasswordIsInvalidMessage] = useState('');
+
   const formSubmitHandler: FormEventHandler = (event: FormEvent) => {
     event.preventDefault();
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
-    console.log(email, password);
+
+    if (!email || !isValidEmail(email)) {
+      if (emailIsTouched) setIsEmail(false);
+      setEmailIsTouched(true);
+      setEmailIsInvalidMessage('Please Enter a Valid E-Mail');
+
+      return;
+    }
+
+    if (!password || !isValidPassword(password)) {
+      if (passwordIsTouched) setIsPassword(false);
+      setPasswordIsTouched(true);
+      setPasswordIsInvalidMessage('Password should be at least 6 characters ');
+
+      return;
+    }
+    setEmailIsInvalidMessage('');
+    setPasswordIsInvalidMessage('');
+    setEmailIsTouched(true);
+    setPasswordIsTouched(true);
+    setIsEmail(true);
+    setIsPassword(true);
   };
+
+  const emailInputClasses = `form-control__input ${
+    !isEmail && emailIsTouched ? 'form-control__input--invalid' : ''
+  }`;
+
+  const passwordInputClasses = `form-control__input ${
+    !isPassword && passwordIsTouched ? 'form-control__input--invalid' : ''
+  }`;
 
   return (
     <div className="login">
-      <div className="auth-content__text">
-        <h2 className=" heading-primary">Welcome</h2>
-        <p className="heading-tertiary">
-          Welcome again to react training App! <br />
-          login and try its nice features
-        </p>
-      </div>
-      <form className="auth-content__form" onSubmit={formSubmitHandler}>
-        <div className="form-control">
-          <input
-            ref={emailInputRef}
-            className="form-control__input"
-            type="email"
-            id="email"
-          />
-          <label className="form-control__label" htmlFor="email">
-            E-Mail
-          </label>
-        </div>
-        <div className="form-control">
-          <input
-            ref={passwordInputRef}
-            className="form-control__input"
-            type="password"
-            id="password"
-            minLength={6}
-          />
-          <label className="form-control__label" htmlFor="password">
-            Password
-          </label>
-        </div>
-        <div className="form-control">
-          <button className="btn btn-primary auth-content__action--primary">
-            Login
-          </button>
-        </div>
+      <AuthPagesText
+        title="Welcome"
+        text="Welcome again to react training App! 
+          login and try its nice features"
+      />
+
+      <form
+        className="auth-content__form"
+        onSubmit={formSubmitHandler}
+        noValidate
+      >
+        <FormInput
+          id="email"
+          type="email"
+          label="E-Mail"
+          isInvalidMessage={emailIsInvalidMessage}
+          ref={emailInputRef}
+          className={emailInputClasses}
+        />
+        <FormInput
+          id="password"
+          type="password"
+          label="Password"
+          isInvalidMessage={passwordIsInvalidMessage}
+          ref={passwordInputRef}
+          className={passwordInputClasses}
+        />
+        <PrimaryButton text="Login" type="submit" />
         <div className="form-control">
           <Link className="link auth-content__link" to="/forgot-password">
             Forgot your password?
           </Link>
         </div>
       </form>
-      <div className="auth-content__action--secondary ">
-        <p className="paragraph auth-content__action--secondary__text">
-          doesn't have an account?
-        </p>
-        <Link to="signup" className="btn btn-secondary">
-          Signup
-        </Link>
-      </div>
+
+      <SecondaryButton
+        text="doesn't have an account?"
+        link="/signup"
+        toPage="Signup"
+      />
     </div>
   );
 };
