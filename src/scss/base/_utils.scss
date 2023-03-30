@@ -1,5 +1,9 @@
 .invalid {
   &__message {
-    color: $color-error;
+    color: $color-error-opacity;
   }
+}
+
+.hidden {
+  display: none;
 }

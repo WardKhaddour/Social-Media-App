@@ -1,13 +1,24 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import FormInput from '../components/FormInput';
+import AuthPagesText from '../components/AuthPagesText';
+import LoadingSpinner from '../../../components/LoadingSpinner';
+
 import isValidEmail from '../../../utils/validators/isValidEmail';
 import isValidPassword from '../../../utils/validators/isValidPassword';
-import AuthPagesText from '../components/AuthPagesText';
+import { login } from '../store/actions';
+import { AppDispatch, RootState } from '../../../store';
 
 const Login = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const { isLoading } = useSelector((state: RootState) => state.auth);
+
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -19,7 +30,7 @@ const Login = () => {
   const [passwordIsTouched, setPasswordIsTouched] = useState(false);
   const [passwordIsInvalidMessage, setPasswordIsInvalidMessage] = useState('');
 
-  const formSubmitHandler: FormEventHandler = (event: FormEvent) => {
+  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
     event.preventDefault();
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
@@ -45,6 +56,11 @@ const Login = () => {
     setPasswordIsTouched(true);
     setIsEmail(true);
     setIsPassword(true);
+
+    const success = await dispatch(login({ email, password }));
+    if (success) {
+      navigate('/home');
+    }
   };
 
   const emailInputClasses = `form-control__input ${
@@ -57,6 +73,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      <LoadingSpinner loading={isLoading} />
       <AuthPagesText
         title="Welcome"
         text="Welcome again to react training App! 

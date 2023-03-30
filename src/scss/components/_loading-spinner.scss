@@ -1,0 +1,13 @@
+.loading-spinner {
+  @include absoluteCenter;
+  display: inline-block;
+  opacity: 1;
+  z-index: 2;
+  width: 8rem;
+  height: 8rem;
+  border-width: 1rem;
+  border-style: solid;
+  border-color: $color-primary transparent $color-primary transparent;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}

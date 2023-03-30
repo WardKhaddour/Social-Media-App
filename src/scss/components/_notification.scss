@@ -1,0 +1,30 @@
+.notification {
+  width: 35rem;
+  height: 15rem;
+  position: absolute;
+  top: 10%;
+  right: 0;
+  text-align: center;
+  color: $color-white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 5px;
+  transform: translateX(100%);
+  z-index: 4;
+  transition: all 0.5s;
+  &--shown {
+    transform: translateX(0);
+  }
+
+  &--success {
+    background-color: $color-success;
+  }
+
+  &--fail {
+    background-color: $color-error;
+  }
+}

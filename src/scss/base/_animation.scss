@@ -1,4 +1,13 @@
-@keyframes App-logo-spin {
+@keyframes spinner {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
@@ -13,5 +22,14 @@
   }
   to {
     width: 100%;
+  }
+}
+
+@keyframes showNotification {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
