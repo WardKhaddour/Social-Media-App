@@ -1,20 +1,29 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-import routes from '../../modules/home/routes';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useRoutes } from 'react-router-dom';
+import routes from 'modules/home/routes';
+
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+import './index.scss';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'store';
+import { homeLayoutActions } from './store';
 
 const HomeModuleLayout = () => {
   const element = useRoutes(routes);
-  const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
 
-  if (!user.isAuthenticated) {
-    return <Navigate to="/" />;
-  }
+  const hideUserOptions = () => {
+    dispatch(homeLayoutActions.hideOptions());
+  };
 
   return (
-    <section className="home-layout">
-      <div className="home-layout__content home-content">{element}</div>
-    </section>
+    <>
+      <Header onClick={hideUserOptions} />
+      <main onClick={hideUserOptions} className="home-layout">
+        <Sidebar />
+        <div className="content">{element}</div>
+      </main>
+    </>
   );
 };
 

@@ -2,17 +2,20 @@ import ReactDOM from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { useEffect } from 'react';
-import { uiActions } from '../store/ui';
+import { notificationActions } from '../store/notification';
+
+import './Notification.scss';
+
 const Notification = () => {
   const { success, message, shown } = useSelector(
-    (state: RootState) => state.ui
+    (state: RootState) => state.notification
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (shown) {
-        dispatch(uiActions.hideNotification());
+        dispatch(notificationActions.hideNotification());
       }
     }, 4000);
     return () => {

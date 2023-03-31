@@ -6,13 +6,13 @@ import HomeModuleLayout from '../layout/Home';
 
 const router = createBrowserRouter([
   {
-    path: '/*',
+    path: '/auth/*',
     element: <AuthModuleLayout />,
     errorElement: <NotFound />,
     children: AuthModuleRoutes,
   },
   {
-    path: '/home/*',
+    path: '/*',
     element: <HomeModuleLayout />,
   },
 ]);

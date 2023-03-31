@@ -1,3 +1,5 @@
+@import "assets/scss/main.scss";
+
 .loading-spinner {
   @include absoluteCenter;
   display: inline-block;
@@ -10,4 +12,13 @@
   border-color: $color-primary transparent $color-primary transparent;
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }

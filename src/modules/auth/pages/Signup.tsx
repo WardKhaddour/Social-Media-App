@@ -3,8 +3,10 @@ import SecondaryButton from '../components/SecondaryButton';
 import PrimaryButton from '../components/PrimaryButton';
 import AuthPagesText from '../components/AuthPagesText';
 import FormInput from '../components/FormInput';
-import isValidEmail from '../../../utils/validators/isValidEmail';
-import isValidPassword from '../../../utils/validators/isValidPassword';
+import isValidEmail from 'utils/validators/isValidEmail';
+import isValidPassword from 'utils/validators/isValidPassword';
+
+import './Signup.scss';
 
 const Signup = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -122,7 +124,7 @@ const Signup = () => {
       </form>
       <SecondaryButton
         text="Already have an account?"
-        link="/"
+        link="/auth"
         toPage="Login"
       />
     </div>

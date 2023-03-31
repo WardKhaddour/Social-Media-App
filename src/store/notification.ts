@@ -12,13 +12,12 @@ const initialState: IState = {
   shown: false,
 };
 
-const uiSlice = createSlice({
-  name: 'ui',
+const notificationSlice = createSlice({
+  name: 'notification',
   initialState,
   reducers: {
     showNotification(state) {
       state.shown = true;
-      console.log('Hellooo');
     },
     hideNotification(state) {
       state.shown = false;
@@ -33,5 +32,5 @@ const uiSlice = createSlice({
   },
 });
 
-export const uiActions = uiSlice.actions;
-export default uiSlice.reducer;
+export const notificationActions = notificationSlice.actions;
+export default notificationSlice.reducer;

@@ -1,9 +1,11 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
-import isValidEmail from '../../../utils/validators/isValidEmail';
+import isValidEmail from 'utils/validators/isValidEmail';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import FormInput from '../components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
+
+import './ForgotPassword.scss';
 
 const ForgotPassword = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -54,7 +56,7 @@ const ForgotPassword = () => {
 
         <PrimaryButton text="SEND" type="submit" />
       </form>
-      <SecondaryButton text="Or" link="/" toPage="Login" />
+      <SecondaryButton text="Or" link="/auth" toPage="Login" />
     </div>
   );
 };

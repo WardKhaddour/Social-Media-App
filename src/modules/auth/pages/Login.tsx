@@ -6,18 +6,20 @@ import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import FormInput from '../components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
-import LoadingSpinner from '../../../components/LoadingSpinner';
+import LoadingSpinner from 'components/LoadingSpinner';
 
-import isValidEmail from '../../../utils/validators/isValidEmail';
-import isValidPassword from '../../../utils/validators/isValidPassword';
+import isValidEmail from 'utils/validators/isValidEmail';
+import isValidPassword from 'utils/validators/isValidPassword';
 import { login } from '../store/actions';
-import { AppDispatch, RootState } from '../../../store';
+import { AppDispatch, RootState } from 'store';
+
+import './Login.scss';
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const { isLoading } = useSelector((state: RootState) => state.auth);
+  const { isLoading } = useSelector((state: RootState) => state.user);
 
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -103,7 +105,7 @@ const Login = () => {
         />
         <PrimaryButton text="Login" type="submit" />
         <div className="form-control">
-          <Link className="link auth-content__link" to="/forgot-password">
+          <Link className="link auth-content__link" to="/auth/forgot-password">
             Forgot your password?
           </Link>
         </div>
@@ -111,7 +113,7 @@ const Login = () => {
 
       <SecondaryButton
         text="doesn't have an account?"
-        link="/signup"
+        link="/auth/signup"
         toPage="Signup"
       />
     </div>

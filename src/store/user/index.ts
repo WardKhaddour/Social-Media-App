@@ -9,6 +9,7 @@ interface UserData {
   isAuthenticated: boolean;
   email: string;
   name: string;
+  photo: string;
 }
 
 const initialState: IState = {
@@ -17,11 +18,12 @@ const initialState: IState = {
     isAuthenticated: false,
     email: '',
     name: '',
+    photo: '',
   },
 };
 
-const authSlice = createSlice({
-  name: 'auth',
+const userSlice = createSlice({
+  name: 'user',
   initialState,
 
   reducers: {
@@ -31,9 +33,17 @@ const authSlice = createSlice({
     setUserData(state, action: PayloadAction<UserData>) {
       state.user = action.payload;
     },
+    reset(state) {
+      state.user = {
+        name: '',
+        email: '',
+        photo: '',
+        isAuthenticated: false,
+      };
+    },
   },
 });
 
-export const authActions = authSlice.actions;
+export const userActions = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

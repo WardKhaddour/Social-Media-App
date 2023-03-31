@@ -1,10 +1,10 @@
 import axios from 'axios';
-import store from '../../store';
-import { uiActions } from '../../store/ui';
+import store from 'store';
+import { notificationActions } from 'store/notification';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:8000/api/v1/';
+  baseURL = `${process.env.REACT_APP_BASE_URL}/api/v1`;
 }
 
 const axiosInstance = axios.create({
@@ -15,20 +15,20 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   res => {
     const { message } = res.data;
-    store.dispatch(uiActions.showNotification());
+    store.dispatch(notificationActions.showNotification());
     store.dispatch(
-      uiActions.setNotificationContent({ message, success: true })
+      notificationActions.setNotificationContent({ message, success: true })
     );
     return res;
   },
   err => {
-    if (err.config.url === '/user/') {
+    if (err.config.url === '/user/' || err.config.url === '/user') {
       return Promise.reject(err.message);
     }
     const { message } = err.response.data;
-    store.dispatch(uiActions.showNotification());
+    store.dispatch(notificationActions.showNotification());
     store.dispatch(
-      uiActions.setNotificationContent({ message, success: false })
+      notificationActions.setNotificationContent({ message, success: false })
     );
     return Promise.reject(err.message);
   }

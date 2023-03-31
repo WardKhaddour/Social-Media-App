@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authSlice from '../modules/auth/store';
-import uiSlice from './ui';
+import userSlice from './user';
+import notificationSlice from './notification';
+import homeLayoutSlice from 'layout/Home/store';
 
 const store = configureStore({
   reducer: {
-    auth: authSlice,
-    ui: uiSlice,
+    user: userSlice,
+    notification: notificationSlice,
+    homeLayout: homeLayoutSlice,
   },
 });
 

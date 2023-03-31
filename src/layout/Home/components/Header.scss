@@ -1,0 +1,126 @@
+@import "assets/scss/main.scss";
+
+.header {
+  background-color: $color-primary;
+  color: $color-white;
+  font-size: 2.6rem;
+  padding: 0 2rem;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  &__user {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    z-index: 2;
+  }
+
+  &__user-photo {
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    margin-left: 2rem;
+    clip-path: circle(50%);
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__user-options {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 20%;
+    height: 10rem;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: $color-white;
+    color: $color-primary;
+    transform: translateY(-100%);
+    transition: all 0.2s;
+    opacity: 0;
+    animation: closeUserList 0.3s forwards;
+
+    &--shown {
+      animation: openUserList 0.3s forwards;
+    }
+  }
+
+  &__user-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 5px;
+    padding: 2px;
+    &:hover {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+
+    &--icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      fill: currentColor;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &__nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__actions {
+    display: flex;
+    padding-right: 1rem;
+    justify-content: space-between;
+  }
+
+  &__action {
+    margin: 0 0.5rem !important;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@keyframes openUserList {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeUserList {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

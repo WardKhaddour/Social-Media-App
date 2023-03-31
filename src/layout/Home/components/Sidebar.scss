@@ -1,0 +1,124 @@
+@import "assets/scss/main.scss";
+
+.sidebar {
+  position: absolute;
+  width: 25%;
+  height: 20%;
+  background-color: $color-primary;
+  box-shadow: 0.5rem 0.2rem 2rem $color-black;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -23%;
+  z-index: 2;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: all 0.5s;
+  animation: hideSideBar 0.5s forwards;
+  cursor: pointer;
+
+  &--hidden {
+    display: none;
+  }
+
+  &:hover {
+    top: 0;
+    transform: translateY(0);
+    height: 100%;
+    animation: showSideBar 0.5s 0.5s forwards;
+    transition: all 0.5s;
+    // left: 0;
+  }
+  &:hover > .sidebar__list {
+    visibility: visible;
+  }
+
+  &__list {
+    list-style: none;
+    font-size: 2.4rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-top: 7.6rem;
+    visibility: hidden;
+  }
+
+  &__list-item {
+    text-decoration: none;
+    color: $color-white;
+    width: 100%;
+    // height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 1rem;
+    margin: 0.4rem 0;
+    position: relative;
+    transition: all 0.3s;
+    cursor: pointer;
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    &--label {
+    }
+    &--icon {
+      display: inline-block;
+      // height: 100%;
+      // width: 100%;
+      font-size: inherit;
+      fill: currentColor;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -1rem;
+      transform: translateY(-50%);
+      height: 10%;
+      width: 2rem;
+      background-color: $color-white;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+      color: $color-black;
+      &::after {
+        opacity: 0.3;
+        height: 100%;
+        animation: listItemHover 0.5s 0.5s forwards;
+      }
+    }
+  }
+}
+
+@keyframes listItemHover {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes showSideBar {
+  from {
+    left: -23%;
+  }
+  to {
+    left: 0;
+  }
+}
+@keyframes hideSideBar {
+  from {
+    left: 0;
+  }
+  to {
+    left: -23%;
+  }
+}
