@@ -1,32 +1,32 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
-import SecondaryButton from '../components/SecondaryButton';
 import PrimaryButton from '../components/PrimaryButton';
-import AuthPagesText from '../components/AuthPagesText';
+import SecondaryButton from '../components/SecondaryButton';
 import FormInput from '../components/FormInput';
-import isValidEmail from 'utils/validators/isValidEmail';
-import isValidPassword from 'utils/validators/isValidPassword';
+import AuthPagesText from '../components/AuthPagesText';
 
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
-import './Signup.scss';
-import { useSelector } from 'react-redux';
-import { signup } from '../store/actions';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import LoadingSpinner from 'components/LoadingSpinner';
+import { resetPassword } from '../store/actions';
+import isValidPassword from 'utils/validators/isValidPassword';
 
-const Signup = () => {
+import './ResetPassword.scss';
+import { Link } from 'react-router-dom';
+
+const ResetPassword = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { isLoading } = useSelector((state: RootState) => state.user);
 
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const tokenInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  const [isEmail, setIsEmail] = useState(false);
-  const [emailIsTouched, setEmailIsTouched] = useState(false);
-  const [emailIsInvalidMessage, setEmailIsInvalidMessage] = useState('');
+  const [isValidToken, setIsValidToken] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
+  const [isInvalidMessage, setIsInvalidMessage] = useState('');
 
   const [isPassword, setIsPassword] = useState(false);
   const [passwordIsTouched, setPasswordIsTouched] = useState(false);
@@ -40,14 +40,13 @@ const Signup = () => {
 
   const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const name = nameInputRef.current?.value || '';
-    const email = emailInputRef.current?.value;
+    const token = tokenInputRef.current?.value;
     const password = passwordInputRef.current?.value;
     const confirmPassword = confirmPasswordInputRef.current?.value;
-    if (!email || !isValidEmail(email)) {
-      if (emailIsTouched) setIsEmail(false);
-      setEmailIsTouched(true);
-      setEmailIsInvalidMessage('Please Enter a Valid E-Mail');
+    if (!token) {
+      if (isTouched) setIsValidToken(false);
+      setIsTouched(true);
+      setIsInvalidMessage('Please Enter a token');
 
       return;
     }
@@ -67,26 +66,21 @@ const Signup = () => {
 
       return;
     }
-    setEmailIsInvalidMessage('');
-    setPasswordIsInvalidMessage('');
-    setConfirmPasswordIsInvalidMessage('');
-    setEmailIsTouched(true);
-    setPasswordIsTouched(true);
-    setConfirmPasswordIsTouched(true);
-    setIsEmail(true);
-    setIsPassword(true);
-    setIsConfirmPassword(true);
+
+    setIsInvalidMessage('');
+    setIsTouched(true);
+    setIsValidToken(true);
 
     const success = await dispatch(
-      signup({ name, email, password, confirmPassword })
+      resetPassword({ token, password, confirmPassword })
     );
     if (success) {
-      navigate('/home');
+      navigate('/');
     }
   };
 
-  const emailInputClasses = `form-control__input ${
-    !isEmail && emailIsTouched ? 'form-control__input--invalid' : ''
+  const tokenInputClasses = `form-control__input ${
+    !isValidToken && isTouched ? 'form-control__input--invalid' : ''
   }`;
 
   const passwordInputClasses = `form-control__input ${
@@ -100,27 +94,29 @@ const Signup = () => {
   }`;
 
   return (
-    <div className="signup">
+    <div className="reset-password">
       <LoadingSpinner loading={isLoading} />
       <AuthPagesText
-        title="Welcome"
-        text="Welcome to react training App! signup and try its nice features"
+        title="Reset Your Password"
+        text="Enter the token received on your email"
       />
-      <form className="auth-content__form" onSubmit={formSubmitHandler}>
-        <FormInput id="name" type="text" label="Name" ref={nameInputRef} />
-
+      <form
+        className="auth-content__form"
+        onSubmit={formSubmitHandler}
+        noValidate
+      >
         <FormInput
-          id="email"
-          type="email"
-          label="E-Mail"
-          isInvalidMessage={emailIsInvalidMessage}
-          ref={emailInputRef}
-          className={emailInputClasses}
+          id="token"
+          type="text"
+          label="Your token"
+          isInvalidMessage={isInvalidMessage}
+          ref={tokenInputRef}
+          className={tokenInputClasses}
         />
         <FormInput
           id="password"
           type="password"
-          label="Password"
+          label="New Password"
           isInvalidMessage={passwordIsInvalidMessage}
           ref={passwordInputRef}
           className={passwordInputClasses}
@@ -134,16 +130,17 @@ const Signup = () => {
           ref={confirmPasswordInputRef}
           className={confirmPasswordInputClasses}
         />
+        <PrimaryButton text="SEND" type="submit" />
 
-        <PrimaryButton text="Signup" type="submit" />
+        <div className="form-control">
+          <Link className="link auth-content__link" to="/auth/forgot-password">
+            Didn't receive a token?
+          </Link>
+        </div>
       </form>
-      <SecondaryButton
-        text="Already have an account?"
-        link="/auth"
-        toPage="Login"
-      />
+      <SecondaryButton text="Or" link="/auth" toPage="Login" />
     </div>
   );
 };
 
-export default Signup;
+export default ResetPassword;

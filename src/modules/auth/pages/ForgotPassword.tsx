@@ -6,15 +6,25 @@ import FormInput from '../components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
 
 import './ForgotPassword.scss';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from 'store';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LoadingSpinner from 'components/LoadingSpinner';
+import { forgotPassword } from '../store/actions';
 
 const ForgotPassword = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const { isLoading } = useSelector((state: RootState) => state.user);
+
   const emailInputRef = useRef<HTMLInputElement>(null);
 
   const [isEmail, setIsEmail] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const [isInvalidMessage, setIsInvalidMessage] = useState('');
 
-  const formSubmitHandler: FormEventHandler = (event: FormEvent) => {
+  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
     event.preventDefault();
     const email = emailInputRef.current?.value;
     if (!email || !isValidEmail(email)) {
@@ -28,6 +38,11 @@ const ForgotPassword = () => {
     setIsInvalidMessage('');
     setIsTouched(true);
     setIsEmail(true);
+
+    const success = await dispatch(forgotPassword({ email }));
+    if (success) {
+      navigate('/auth/reset-password');
+    }
   };
 
   const emailInputClasses = `form-control__input ${
@@ -36,6 +51,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password">
+      <LoadingSpinner loading={isLoading} />
       <AuthPagesText
         title="Forgot your password?"
         text="Enter your email to send recovery link to you"
