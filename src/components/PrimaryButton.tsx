@@ -1,3 +1,5 @@
+import './Button.scss';
+
 type ButtonTypes = 'submit' | 'button' | 'reset' | undefined;
 
 const PrimaryButton = (props: { text: string; type: ButtonTypes }) => {

@@ -2,9 +2,9 @@ import { FormEvent, FormEventHandler, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
-import FormInput from '../components/FormInput';
+import PrimaryButton from 'components/PrimaryButton';
+import SecondaryButton from 'components/SecondaryButton';
+import FormInput from 'components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
 import LoadingSpinner from 'components/LoadingSpinner';
 

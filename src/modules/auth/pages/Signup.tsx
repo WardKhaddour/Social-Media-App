@@ -1,8 +1,8 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
-import SecondaryButton from '../components/SecondaryButton';
-import PrimaryButton from '../components/PrimaryButton';
+import SecondaryButton from 'components/SecondaryButton';
+import PrimaryButton from 'components/PrimaryButton';
 import AuthPagesText from '../components/AuthPagesText';
-import FormInput from '../components/FormInput';
+import FormInput from 'components/FormInput';
 import isValidEmail from 'utils/validators/isValidEmail';
 import isValidPassword from 'utils/validators/isValidPassword';
 
@@ -81,7 +81,7 @@ const Signup = () => {
       signup({ name, email, password, confirmPassword })
     );
     if (success) {
-      navigate('/home');
+      navigate('/auth/confirm-email');
     }
   };
 

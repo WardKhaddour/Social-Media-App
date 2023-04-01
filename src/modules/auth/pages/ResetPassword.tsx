@@ -1,7 +1,7 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
-import FormInput from '../components/FormInput';
+import PrimaryButton from 'components/PrimaryButton';
+import SecondaryButton from 'components/SecondaryButton';
+import FormInput from 'components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
 
 import { useDispatch } from 'react-redux';
@@ -43,7 +43,7 @@ const ResetPassword = () => {
     const token = tokenInputRef.current?.value;
     const password = passwordInputRef.current?.value;
     const confirmPassword = confirmPasswordInputRef.current?.value;
-    if (!token) {
+    if (!token || token.length < 32) {
       if (isTouched) setIsValidToken(false);
       setIsTouched(true);
       setIsInvalidMessage('Please Enter a token');

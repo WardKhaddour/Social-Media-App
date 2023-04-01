@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from 'routes';
 import store from 'store';
 import { notificationActions } from 'store/notification';
 let baseURL = '';
@@ -22,15 +23,21 @@ axiosInstance.interceptors.response.use(
     return res;
   },
   err => {
-    if (err.config.url === '/user/' || err.config.url === '/user') {
+    const url = err.config.url;
+    const { message } = err.response.data;
+
+    if (url === '/user' && message !== 'Please confirm your email first') {
       return Promise.reject(err.message);
     }
-    const { message } = err.response.data;
+
     store.dispatch(notificationActions.showNotification());
     store.dispatch(
       notificationActions.setNotificationContent({ message, success: false })
     );
-    return Promise.reject(err.message);
+    if (message === 'Please confirm your email first') {
+      router.navigate('/auth/confirm-email');
+    }
+    return Promise.reject(err);
   }
 );
 

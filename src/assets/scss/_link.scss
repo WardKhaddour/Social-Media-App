@@ -6,6 +6,7 @@
   transition: all 0.2s;
   position: relative;
   align-self: end;
+  cursor: pointer;
   &:hover,
   &:focus {
     &::after {

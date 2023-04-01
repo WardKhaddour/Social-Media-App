@@ -1,4 +1,5 @@
 import { Ref, forwardRef } from 'react';
+import './FormInput.scss';
 
 type FormInputProps = {
   isInvalidMessage?: string;
