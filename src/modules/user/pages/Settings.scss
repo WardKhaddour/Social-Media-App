@@ -1,0 +1,26 @@
+@import "assets/scss/main.scss";
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3rem 8rem;
+  width: 40%;
+  &__separator {
+    width: 100%;
+    height: 5px;
+    background: $color-primary;
+    margin: 3rem 0;
+  }
+
+  &__heading {
+    text-align: start;
+    margin: 1rem 0;
+  }
+
+  &__update {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

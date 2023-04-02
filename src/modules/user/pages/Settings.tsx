@@ -1,12 +1,14 @@
+import UpdateUserData from '../components/UpdateUserData';
+import UpdatePassword from '../components/UpdatePassword';
+
+import './Settings.scss';
+
 const Settings = () => {
   return (
     <div className="settings">
-      <section className="settings__update-data">
-        <form className="update-data__form">
-          <input type="text" />
-        </form>
-      </section>
-      <section className="settings__update-password"></section>
+      <UpdateUserData />
+      <div className="settings__separator"></div>
+      <UpdatePassword />
     </div>
   );
 };

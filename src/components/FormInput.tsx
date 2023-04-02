@@ -7,6 +7,7 @@ type FormInputProps = {
   label: string;
   id: string;
   type?: string;
+  value?: string;
 };
 
 const FormInput = forwardRef(
@@ -21,6 +22,7 @@ const FormInput = forwardRef(
           className={props.className || 'form-control__input'}
           type={props.type || 'text'}
           id={props.id}
+          value={props.value || ''}
         />
         <label className="form-control__label" htmlFor={props.id}>
           {props.label}
