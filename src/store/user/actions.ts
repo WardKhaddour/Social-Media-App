@@ -18,7 +18,7 @@ export const getUserData = (): ThunkAction<
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
     } catch (err: any) {
-      const { user } = err.response.data.data;
+      const user = err?.response?.data?.data?.user;
       if (user)
         dispatch(userActions.setUserData({ ...user, isAuthenticated: false }));
 
