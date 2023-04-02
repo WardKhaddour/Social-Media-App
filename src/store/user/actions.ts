@@ -4,6 +4,16 @@ import { userActions } from './index';
 import Services from './Services';
 import { AnyAction } from 'redux';
 
+interface UpdateUserData {
+  name?: string;
+  email: string;
+}
+interface UpdateUserPassword {
+  currentPassword: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export const getUserData = (): ThunkAction<
   Promise<any>,
   RootState,
@@ -22,6 +32,46 @@ export const getUserData = (): ThunkAction<
       if (user)
         dispatch(userActions.setUserData({ ...user, isAuthenticated: false }));
 
+      return false;
+    } finally {
+      dispatch(userActions.setIsLoading(false));
+    }
+  };
+};
+
+export const updateUserData = (
+  userData: UpdateUserData
+): ThunkAction<Promise<any>, RootState, unknown, AnyAction> => {
+  return async dispatch => {
+    dispatch(userActions.setIsLoading(true));
+    try {
+      const data = await Services.updateUserData(userData);
+      const { user } = data.data;
+      console.log(user);
+
+      dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
+    } catch (err) {
+      return false;
+    } finally {
+      dispatch(userActions.setIsLoading(false));
+    }
+  };
+};
+
+export const updateUserPassword = (
+  userData: UpdateUserPassword
+): ThunkAction<Promise<any>, RootState, unknown, AnyAction> => {
+  return async dispatch => {
+    dispatch(userActions.setIsLoading(true));
+    try {
+      const data = await Services.updateUserPassword(userData);
+      const { user } = data.data;
+      console.log(user);
+
+      dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
+
+      return true;
+    } catch (err) {
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));

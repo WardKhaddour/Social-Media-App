@@ -1,8 +1,9 @@
 @import "assets/scss/main.scss";
 
 .backdrop {
-  position: absolute;
-  height: 100vh;
+  position: fixed;
+  min-height: 100vh;
+  height: 100%;
   width: 100vw;
   z-index: 1;
   &::after {
