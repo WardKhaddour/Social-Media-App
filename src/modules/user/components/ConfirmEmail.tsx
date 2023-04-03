@@ -1,21 +1,18 @@
 import { FormEvent, FormEventHandler, useRef, useState } from 'react';
 import PrimaryButton from 'components/PrimaryButton';
-import SecondaryButton from 'components/SecondaryButton';
 import FormInput from 'components/FormInput';
-import AuthPagesText from '../components/AuthPagesText';
 
-import './ConfirmEmail.scss';
+// import './ConfirmEmail.scss';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LoadingSpinner from 'components/LoadingSpinner';
-import { confirmEmail, resendConfirmEmailToken } from '../store/actions';
+import {
+  confirmEmail,
+  resendConfirmEmailToken,
+} from '../../auth/store/actions';
 
 const ConfirmEmail = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const { isLoading } = useSelector((state: RootState) => state.user);
   const { email } = useSelector((state: RootState) => state.user.user);
 
   const tokenInputRef = useRef<HTMLInputElement>(null);
@@ -39,10 +36,7 @@ const ConfirmEmail = () => {
     setIsTouched(true);
     setIsToken(true);
 
-    const success = await dispatch(confirmEmail({ token }));
-    if (success) {
-      navigate('/home');
-    }
+    await dispatch(confirmEmail({ token }));
   };
 
   const resendTokenHandler = async () => {
@@ -54,17 +48,9 @@ const ConfirmEmail = () => {
   }`;
 
   return (
-    <div className="confirm-email">
-      <LoadingSpinner loading={isLoading} />
-      <AuthPagesText
-        title="Please confirm your email"
-        text="Enter the Token sent to your email"
-      />
-      <form
-        className="auth-content__form"
-        onSubmit={formSubmitHandler}
-        noValidate
-      >
+    <section className="settings__confirm-email">
+      <h2 className="heading-primary settings__heading">Confirm your E-Mail</h2>
+      <form className="settings__form" onSubmit={formSubmitHandler} noValidate>
         <FormInput
           id="token"
           type="text"
@@ -81,12 +67,11 @@ const ConfirmEmail = () => {
             onClick={resendTokenHandler}
             type="button"
           >
-            Didn't receive a token?
+            Resend token?
           </button>
         </div>
       </form>
-      <SecondaryButton text="Or" link="/auth" toPage="Login" />
-    </div>
+    </section>
   );
 };
 

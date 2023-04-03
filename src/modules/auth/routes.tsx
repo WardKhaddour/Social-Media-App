@@ -3,7 +3,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
-import ConfirmEmail from './pages/ConfirmEmail';
 
 const routes: RouteObject[] = [
   {
@@ -15,10 +14,7 @@ const routes: RouteObject[] = [
     path: 'signup',
     element: <Signup />,
   },
-  {
-    path: 'confirm-email',
-    element: <ConfirmEmail />,
-  },
+
   {
     path: 'forgot-password',
     element: <ForgotPassword />,

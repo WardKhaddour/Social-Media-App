@@ -87,14 +87,7 @@ export const deleteUser = (userData: {
     try {
       await Services.deleteUser(userData);
 
-      dispatch(
-        userActions.setUserData({
-          name: '',
-          email: '',
-          photo: '',
-          isAuthenticated: false,
-        })
-      );
+      dispatch(userActions.reset());
     } catch (err) {
       return false;
     } finally {

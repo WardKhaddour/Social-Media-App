@@ -6,11 +6,18 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import LoadingSpinner from 'components/LoadingSpinner';
 import DeleteUser from '../components/DeleteUser';
+import ConfirmEmail from '../components/ConfirmEmail';
 
 const Settings = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
+
+  const { emailIsConfirmed } = useSelector(
+    (state: RootState) => state.user.user
+  );
   return (
     <div className="settings">
+      {!emailIsConfirmed && <ConfirmEmail />}
+      {!emailIsConfirmed && <div className="settings__separator"></div>}
       <LoadingSpinner loading={isLoading} />
       <UpdateUserData />
       <div className="settings__separator"></div>

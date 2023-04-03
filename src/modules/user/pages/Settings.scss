@@ -20,7 +20,8 @@
 
   &__update-data,
   &__update-password,
-  &__delete-account {
+  &__delete-account,
+  &__confirm-email {
     width: 100%;
     display: flex;
     flex-direction: column;
