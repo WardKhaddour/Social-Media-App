@@ -81,7 +81,7 @@ const Signup = () => {
       signup({ name, email, password, confirmPassword })
     );
     if (success) {
-      navigate('/');
+      navigate('/auth/upload-photo');
     }
   };
 

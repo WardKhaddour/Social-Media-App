@@ -34,7 +34,7 @@ const userSlice = createSlice({
     },
 
     setUserData(state, action: PayloadAction<UserData>) {
-      state.user = { ...action.payload };
+      state.user = { ...state.user, ...action.payload };
     },
 
     reset(state) {

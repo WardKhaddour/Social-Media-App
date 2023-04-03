@@ -6,7 +6,8 @@ import { AnyAction } from 'redux';
 
 interface UpdateUserData {
   name?: string;
-  email: string;
+  email?: string;
+  photo?: File;
 }
 interface UpdateUserPassword {
   currentPassword: string;
@@ -40,7 +41,7 @@ export const getUserData = (): ThunkAction<
 };
 
 export const updateUserData = (
-  userData: UpdateUserData
+  userData: UpdateUserData | FormData
 ): ThunkAction<Promise<any>, RootState, unknown, AnyAction> => {
   return async dispatch => {
     dispatch(userActions.setIsLoading(true));

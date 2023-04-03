@@ -1,11 +1,12 @@
 @import "assets/scss/main.scss";
 
 .settings {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   padding: 3rem 8rem;
-  width: 40%;
+  width: 100%;
+  column-gap: 10%;
+
   &__separator {
     width: 100%;
     height: 5px;
@@ -25,5 +26,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    grid-column: 1;
+  }
+
+  &__update-photo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2;
   }
 }

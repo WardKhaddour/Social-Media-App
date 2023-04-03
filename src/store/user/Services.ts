@@ -6,8 +6,20 @@ class Services {
     const res = await axiosInstance.get(USER);
     return res.data;
   }
-  static async updateUserData(payload: { name?: string; email: string }) {
-    const res = await axiosInstance.patch(USER, payload);
+  static async updateUserData(
+    payload:
+      | {
+          name?: string;
+          email?: string;
+          photo?: File;
+        }
+      | FormData
+  ) {
+    const res = await axiosInstance.patch(USER, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return res.data;
   }
 

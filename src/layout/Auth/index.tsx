@@ -1,18 +1,11 @@
-import { useRoutes, Navigate } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import routes from 'modules/auth/routes';
 import logo from 'assets/img/logo.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 
 import './index.scss';
 
 const AuthModuleLayout = () => {
   const element = useRoutes(routes);
-  const { user } = useSelector((state: RootState) => state.user);
-
-  if (user.isAuthenticated) {
-    return <Navigate to="/home" />;
-  }
 
   return (
     <section className="auth-layout">
