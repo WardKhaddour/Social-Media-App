@@ -20,6 +20,13 @@ class Services {
     return res.data;
   }
 
+  static async deleteUser(payload: { password: string }) {
+    const res = await axiosInstance.delete(USER, {
+      data: payload,
+    });
+    return res.data;
+  }
+
   static async logout() {
     const res = await axiosInstance.post(LOGOUT);
     return res.data;

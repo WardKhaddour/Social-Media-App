@@ -5,6 +5,7 @@ import './Settings.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import LoadingSpinner from 'components/LoadingSpinner';
+import DeleteUser from '../components/DeleteUser';
 
 const Settings = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
@@ -14,6 +15,8 @@ const Settings = () => {
       <UpdateUserData />
       <div className="settings__separator"></div>
       <UpdatePassword />
+      <div className="settings__separator"></div>
+      <DeleteUser />
     </div>
   );
 };

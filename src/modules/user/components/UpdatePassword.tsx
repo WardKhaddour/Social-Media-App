@@ -99,7 +99,7 @@ const UpdatePassword = () => {
   }`;
 
   return (
-    <section className="settings__update">
+    <section className="settings__update-password">
       <h2 className="heading-primary settings__heading">
         Update Your Password
       </h2>

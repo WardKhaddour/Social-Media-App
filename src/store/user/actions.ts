@@ -79,6 +79,30 @@ export const updateUserPassword = (
   };
 };
 
+export const deleteUser = (userData: {
+  password: string;
+}): ThunkAction<Promise<any>, RootState, unknown, AnyAction> => {
+  return async dispatch => {
+    dispatch(userActions.setIsLoading(true));
+    try {
+      await Services.deleteUser(userData);
+
+      dispatch(
+        userActions.setUserData({
+          name: '',
+          email: '',
+          photo: '',
+          isAuthenticated: false,
+        })
+      );
+    } catch (err) {
+      return false;
+    } finally {
+      dispatch(userActions.setIsLoading(false));
+    }
+  };
+};
+
 export const logout = (): ThunkAction<
   Promise<any>,
   RootState,

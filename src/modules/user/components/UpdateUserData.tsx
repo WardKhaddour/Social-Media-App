@@ -53,7 +53,7 @@ const UpdateUserData = () => {
   }`;
 
   return (
-    <section className="settings__update">
+    <section className="settings__update-data">
       <h2 className="heading-primary settings__heading"> Update Your Data</h2>
       <form className="settings__form" onSubmit={formSubmitHandler}>
         <FormInput
