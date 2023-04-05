@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { forgotPassword } from '../store/actions';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,7 @@ const ForgotPassword = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
 
   const emailInputRef = useRef<HTMLInputElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [isEmail, setIsEmail] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
@@ -39,7 +41,10 @@ const ForgotPassword = () => {
     setIsTouched(true);
     setIsEmail(true);
 
-    const success = await dispatch(forgotPassword({ email }));
+    const recaptchaToken = recaptchaRef.current?.getValue() || '';
+    recaptchaRef.current?.reset();
+
+    const success = await dispatch(forgotPassword({ email, recaptchaToken }));
     if (success) {
       navigate('/auth/reset-password');
     }
@@ -69,7 +74,11 @@ const ForgotPassword = () => {
           ref={emailInputRef}
           className={emailInputClasses}
         />
-
+        <ReCAPTCHA
+          className="recaptcha"
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+          ref={recaptchaRef}
+        />
         <PrimaryButton text="SEND" type="submit" />
       </form>
       <SecondaryButton text="Or" link="/auth" toPage="Login" />

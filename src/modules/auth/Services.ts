@@ -9,7 +9,11 @@ import {
 } from './endpoints';
 
 class Services {
-  static async login(payload: { email: string; password: string }) {
+  static async login(payload: {
+    email: string;
+    password: string;
+    recaptchaToken: string;
+  }) {
     const res = await axiosInstance.post(LOGIN, payload);
     return res.data;
   }

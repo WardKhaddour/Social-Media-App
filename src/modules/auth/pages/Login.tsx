@@ -12,7 +12,7 @@ import isValidEmail from 'utils/validators/isValidEmail';
 import isValidPassword from 'utils/validators/isValidPassword';
 import { login } from '../store/actions';
 import { AppDispatch, RootState } from 'store';
-
+import ReCAPTCHA from 'react-google-recaptcha';
 import './Login.scss';
 
 const Login = () => {
@@ -23,6 +23,8 @@ const Login = () => {
 
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [isEmail, setIsEmail] = useState(false);
   const [emailIsTouched, setEmailIsTouched] = useState(false);
@@ -59,7 +61,10 @@ const Login = () => {
     setIsEmail(true);
     setIsPassword(true);
 
-    const success = await dispatch(login({ email, password }));
+    const recaptchaToken = recaptchaRef.current?.getValue() || '';
+    recaptchaRef.current?.reset();
+
+    const success = await dispatch(login({ email, password, recaptchaToken }));
     if (success) {
       navigate('/home');
     }
@@ -102,6 +107,11 @@ const Login = () => {
           isInvalidMessage={passwordIsInvalidMessage}
           ref={passwordInputRef}
           className={passwordInputClasses}
+        />
+        <ReCAPTCHA
+          className="recaptcha"
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+          ref={recaptchaRef}
         />
         <PrimaryButton text="Login" type="submit" />
         <div className="form-control">

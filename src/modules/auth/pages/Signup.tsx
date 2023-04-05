@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { signup } from '../store/actions';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Signup = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,7 @@ const Signup = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [isEmail, setIsEmail] = useState(false);
   const [emailIsTouched, setEmailIsTouched] = useState(false);
@@ -76,9 +78,11 @@ const Signup = () => {
     setIsEmail(true);
     setIsPassword(true);
     setIsConfirmPassword(true);
+    const recaptchaToken = recaptchaRef.current?.getValue() || '';
+    recaptchaRef.current?.reset();
 
     const success = await dispatch(
-      signup({ name, email, password, confirmPassword })
+      signup({ name, email, password, confirmPassword, recaptchaToken })
     );
     if (success) {
       navigate('/auth/upload-photo');
@@ -134,7 +138,11 @@ const Signup = () => {
           ref={confirmPasswordInputRef}
           className={confirmPasswordInputClasses}
         />
-
+        <ReCAPTCHA
+          className="recaptcha"
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+          ref={recaptchaRef}
+        />
         <PrimaryButton text="Signup" type="submit" />
       </form>
       <SecondaryButton

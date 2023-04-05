@@ -9,6 +9,7 @@ type AuthAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 interface UserLoginData {
   email: string;
   password: string;
+  recaptchaToken: string;
 }
 
 interface UserSignupData {
@@ -16,6 +17,7 @@ interface UserSignupData {
   email: string;
   password: string;
   confirmPassword: string;
+  recaptchaToken: string;
 }
 
 interface ResetPasswordData {
@@ -35,7 +37,6 @@ export const login = (userData: UserLoginData): AuthAction<boolean> => {
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -54,7 +55,6 @@ export const signup = (userData: UserSignupData): AuthAction<boolean> => {
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -64,6 +64,7 @@ export const signup = (userData: UserSignupData): AuthAction<boolean> => {
 
 export const forgotPassword = (userData: {
   email: string;
+  recaptchaToken: string;
 }): AuthAction<boolean> => {
   return async dispatch => {
     dispatch(userActions.setIsLoading(true));
@@ -72,7 +73,6 @@ export const forgotPassword = (userData: {
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -93,7 +93,6 @@ export const resetPassword = (
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -114,7 +113,6 @@ export const confirmEmail = (userData: {
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -135,7 +133,6 @@ export const resendConfirmEmailToken = (userData: {
 
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
@@ -152,7 +149,6 @@ export const resendResetPasswordToken = (userData: {
       await Services.resendConfirmEmailToken(userData);
       return true;
     } catch (err) {
-      console.log(err);
       return false;
     } finally {
       dispatch(userActions.setIsLoading(false));
