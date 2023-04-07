@@ -1,106 +1,63 @@
-import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useDispatch, useSelector } from 'react-redux';
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+
 import SecondaryButton from 'components/SecondaryButton';
 import PrimaryButton from 'components/PrimaryButton';
-import AuthPagesText from '../components/AuthPagesText';
 import FormInput from 'components/FormInput';
+import LoadingSpinner from 'components/LoadingSpinner';
+import AuthPagesText from '../components/AuthPagesText';
+
 import isValidEmail from 'utils/validators/isValidEmail';
 import isValidPassword from 'utils/validators/isValidPassword';
 
-import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
-import './Signup.scss';
-import { useSelector } from 'react-redux';
 import { signup } from '../store/actions';
-import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from 'components/LoadingSpinner';
-import ReCAPTCHA from 'react-google-recaptcha';
+
+import './Signup.scss';
+
+interface Inputs {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const Signup = () => {
+  const methods = useForm<Inputs>();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { isLoading } = useSelector((state: RootState) => state.user);
 
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const [isEmail, setIsEmail] = useState(false);
-  const [emailIsTouched, setEmailIsTouched] = useState(false);
-  const [emailIsInvalidMessage, setEmailIsInvalidMessage] = useState('');
-
-  const [isPassword, setIsPassword] = useState(false);
-  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
-  const [passwordIsInvalidMessage, setPasswordIsInvalidMessage] = useState('');
-
-  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
-  const [confirmPasswordIsTouched, setConfirmPasswordIsTouched] =
-    useState(false);
-  const [confirmPasswordIsInvalidMessage, setConfirmPasswordIsInvalidMessage] =
-    useState('');
-
-  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
-    event.preventDefault();
-    const name = nameInputRef.current?.value || '';
-    const email = emailInputRef.current?.value;
-    const password = passwordInputRef.current?.value;
-    const confirmPassword = confirmPasswordInputRef.current?.value;
-    if (!email || !isValidEmail(email)) {
-      if (emailIsTouched) setIsEmail(false);
-      setEmailIsTouched(true);
-      setEmailIsInvalidMessage('Please Enter a Valid E-Mail');
-
-      return;
-    }
-
-    if (!password || !isValidPassword(password)) {
-      if (passwordIsTouched) setIsPassword(false);
-      setPasswordIsTouched(true);
-      setPasswordIsInvalidMessage('Password should be at least 6 characters ');
-
-      return;
-    }
-
-    if (confirmPassword !== password) {
-      if (confirmPasswordIsTouched) setIsConfirmPassword(false);
-      setConfirmPasswordIsTouched(true);
-      setConfirmPasswordIsInvalidMessage('Passwords not matched');
-
-      return;
-    }
-    setEmailIsInvalidMessage('');
-    setPasswordIsInvalidMessage('');
-    setConfirmPasswordIsInvalidMessage('');
-    setEmailIsTouched(true);
-    setPasswordIsTouched(true);
-    setConfirmPasswordIsTouched(true);
-    setIsEmail(true);
-    setIsPassword(true);
-    setIsConfirmPassword(true);
+  const formSubmitHandler: SubmitHandler<Inputs> = async data => {
     const recaptchaToken = recaptchaRef.current?.getValue() || '';
     recaptchaRef.current?.reset();
 
-    const success = await dispatch(
-      signup({ name, email, password, confirmPassword, recaptchaToken })
-    );
+    const success = await dispatch(signup({ ...data, recaptchaToken }));
     if (success) {
       navigate('/auth/upload-photo');
     }
   };
 
   const emailInputClasses = `form-control__input ${
-    !isEmail && emailIsTouched ? 'form-control__input--invalid' : ''
+    errors.email?.message ? 'form-control__input--invalid' : ''
   }`;
 
   const passwordInputClasses = `form-control__input ${
-    !isPassword && passwordIsTouched ? 'form-control__input--invalid' : ''
+    errors.password?.message ? 'form-control__input--invalid' : ''
   }`;
 
   const confirmPasswordInputClasses = `form-control__input ${
-    !isConfirmPassword && passwordIsTouched
-      ? 'form-control__input--invalid'
-      : ''
+    errors.confirmPassword?.message ? 'form-control__input--invalid' : ''
   }`;
 
   return (
@@ -110,41 +67,62 @@ const Signup = () => {
         title="Welcome"
         text="Welcome to react training App! signup and try its nice features"
       />
-      <form className="auth-content__form" onSubmit={formSubmitHandler}>
-        <FormInput id="name" type="text" label="Name" ref={nameInputRef} />
+      <FormProvider {...methods}>
+        <form
+          className="auth-content__form"
+          onSubmit={handleSubmit(formSubmitHandler)}
+        >
+          <FormInput id="name" type="text" label="Name" />
 
-        <FormInput
-          id="email"
-          type="email"
-          label="E-Mail"
-          isInvalidMessage={emailIsInvalidMessage}
-          ref={emailInputRef}
-          className={emailInputClasses}
-        />
-        <FormInput
-          id="password"
-          type="password"
-          label="Password"
-          isInvalidMessage={passwordIsInvalidMessage}
-          ref={passwordInputRef}
-          className={passwordInputClasses}
-        />
+          <FormInput
+            id="email"
+            type="email"
+            label="E-Mail"
+            isInvalidMessage={errors.email?.message}
+            className={emailInputClasses}
+            validations={{
+              required: 'E-Mail is required',
+              validate: val =>
+                !isValidEmail(val) ? 'Please provide a valid email ' : true,
+            }}
+          />
+          <FormInput
+            id="password"
+            type="password"
+            label="New Password"
+            isInvalidMessage={errors.password?.message}
+            className={passwordInputClasses}
+            validations={{
+              required: 'Password is required',
+              validate: val =>
+                !isValidPassword(val)
+                  ? 'Password should be at least 6 characters long'
+                  : true,
+            }}
+          />
 
-        <FormInput
-          id="confirm-password"
-          type="password"
-          label="Confirm Password"
-          isInvalidMessage={confirmPasswordIsInvalidMessage}
-          ref={confirmPasswordInputRef}
-          className={confirmPasswordInputClasses}
-        />
-        <ReCAPTCHA
-          className="recaptcha"
-          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
-          ref={recaptchaRef}
-        />
-        <PrimaryButton text="Signup" type="submit" />
-      </form>
+          <FormInput
+            id="confirmPassword"
+            type="password"
+            label="Confirm Password"
+            validations={{
+              required: 'Confirm Password is required',
+              validate: val =>
+                val !== methods.getValues('password')
+                  ? 'Passwords does not match'
+                  : true,
+            }}
+            isInvalidMessage={errors.confirmPassword?.message}
+            className={confirmPasswordInputClasses}
+          />
+          <ReCAPTCHA
+            className="recaptcha"
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+            ref={recaptchaRef}
+          />
+          <PrimaryButton text="Signup" type="submit" />
+        </form>
+      </FormProvider>
       <SecondaryButton
         text="Already have an account?"
         link="/auth"

@@ -1,57 +1,49 @@
-import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+
 import isValidEmail from 'utils/validators/isValidEmail';
+import { AppDispatch, RootState } from 'store';
+import LoadingSpinner from 'components/LoadingSpinner';
 import PrimaryButton from 'components/PrimaryButton';
 import SecondaryButton from 'components/SecondaryButton';
 import FormInput from 'components/FormInput';
 import AuthPagesText from '../components/AuthPagesText';
+import { forgotPassword } from '../store/actions';
 
 import './ForgotPassword.scss';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from 'store';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import LoadingSpinner from 'components/LoadingSpinner';
-import { forgotPassword } from '../store/actions';
-import ReCAPTCHA from 'react-google-recaptcha';
+
+interface Inputs {
+  email: string;
+}
 
 const ForgotPassword = () => {
+  const methods = useForm<Inputs>();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
   const { isLoading } = useSelector((state: RootState) => state.user);
 
-  const emailInputRef = useRef<HTMLInputElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const [isEmail, setIsEmail] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
-  const [isInvalidMessage, setIsInvalidMessage] = useState('');
-
-  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
-    event.preventDefault();
-    const email = emailInputRef.current?.value;
-    if (!email || !isValidEmail(email)) {
-      if (isTouched) setIsEmail(false);
-      setIsTouched(true);
-      setIsInvalidMessage('Please Enter a Valid E-Mail');
-
-      return;
-    }
-
-    setIsInvalidMessage('');
-    setIsTouched(true);
-    setIsEmail(true);
-
+  const formSubmitHandler: SubmitHandler<Inputs> = async data => {
     const recaptchaToken = recaptchaRef.current?.getValue() || '';
     recaptchaRef.current?.reset();
 
-    const success = await dispatch(forgotPassword({ email, recaptchaToken }));
+    const success = await dispatch(forgotPassword({ ...data, recaptchaToken }));
     if (success) {
       navigate('/auth/reset-password');
     }
   };
 
   const emailInputClasses = `form-control__input ${
-    !isEmail && isTouched ? 'form-control__input--invalid' : ''
+    errors.email?.message ? 'form-control__input--invalid' : ''
   }`;
 
   return (
@@ -61,26 +53,32 @@ const ForgotPassword = () => {
         title="Forgot your password?"
         text="Enter your email to send recovery link to you"
       />
-      <form
-        className="auth-content__form"
-        onSubmit={formSubmitHandler}
-        noValidate
-      >
-        <FormInput
-          id="email"
-          type="email"
-          label="E-Mail"
-          isInvalidMessage={isInvalidMessage}
-          ref={emailInputRef}
-          className={emailInputClasses}
-        />
-        <ReCAPTCHA
-          className="recaptcha"
-          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
-          ref={recaptchaRef}
-        />
-        <PrimaryButton text="SEND" type="submit" />
-      </form>
+      <FormProvider {...methods}>
+        <form
+          className="auth-content__form"
+          onSubmit={handleSubmit(formSubmitHandler)}
+          noValidate
+        >
+          <FormInput
+            id="email"
+            type="email"
+            label="E-Mail"
+            validations={{
+              required: 'E-Mail is required',
+              validate: val =>
+                !isValidEmail(val) ? 'Please Provide a valid email' : true,
+            }}
+            isInvalidMessage={errors.email?.message}
+            className={emailInputClasses}
+          />
+          <ReCAPTCHA
+            className="recaptcha"
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+            ref={recaptchaRef}
+          />
+          <PrimaryButton text="SEND" type="submit" />
+        </form>
+      </FormProvider>
       <SecondaryButton text="Or" link="/auth" toPage="Login" />
     </div>
   );

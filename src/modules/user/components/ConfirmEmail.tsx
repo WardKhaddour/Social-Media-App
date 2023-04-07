@@ -1,8 +1,6 @@
-import { FormEvent, FormEventHandler, useRef, useState } from 'react';
 import PrimaryButton from 'components/PrimaryButton';
 import FormInput from 'components/FormInput';
 
-// import './ConfirmEmail.scss';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import { useSelector } from 'react-redux';
@@ -10,33 +8,23 @@ import {
   confirmEmail,
   resendConfirmEmailToken,
 } from '../../auth/store/actions';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+
+interface Inputs {
+  token: string;
+}
 
 const ConfirmEmail = () => {
+  const methods = useForm<Inputs>();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
   const dispatch = useDispatch<AppDispatch>();
   const { email } = useSelector((state: RootState) => state.user.user);
 
-  const tokenInputRef = useRef<HTMLInputElement>(null);
-
-  const [isToken, setIsToken] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
-  const [isInvalidMessage, setIsInvalidMessage] = useState('');
-
-  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
-    event.preventDefault();
-    const token = tokenInputRef.current?.value;
-    if (!token || token.length < 32) {
-      if (isTouched) setIsToken(false);
-      setIsTouched(true);
-      setIsInvalidMessage('Please Enter a Valid Token');
-
-      return;
-    }
-
-    setIsInvalidMessage('');
-    setIsTouched(true);
-    setIsToken(true);
-
-    await dispatch(confirmEmail({ token }));
+  const formSubmitHandler: SubmitHandler<Inputs> = async data => {
+    await dispatch(confirmEmail(data));
   };
 
   const resendTokenHandler = async () => {
@@ -44,33 +32,43 @@ const ConfirmEmail = () => {
   };
 
   const tokenInputClasses = `form-control__input ${
-    !isToken && isTouched ? 'form-control__input--invalid' : ''
+    errors.token?.message ? 'form-control__input--invalid' : ''
   }`;
 
   return (
     <section className="settings__confirm-email">
       <h2 className="heading-primary settings__heading">Confirm your E-Mail</h2>
-      <form className="settings__form" onSubmit={formSubmitHandler} noValidate>
-        <FormInput
-          id="token"
-          type="text"
-          label="Your Confirm Token"
-          isInvalidMessage={isInvalidMessage}
-          ref={tokenInputRef}
-          className={tokenInputClasses}
-        />
+      <FormProvider {...methods}>
+        <form
+          className="settings__form"
+          onSubmit={handleSubmit(formSubmitHandler)}
+          noValidate
+        >
+          <FormInput
+            id="token"
+            type="text"
+            label="Your Confirm Token"
+            isInvalidMessage={errors.token?.message}
+            className={tokenInputClasses}
+            validations={{
+              required: 'Token is required',
+              validate: val =>
+                val.length < 32 ? 'Please provide a valid token' : true,
+            }}
+          />
 
-        <PrimaryButton text="SEND" type="submit" />
-        <div className="form-control">
-          <button
-            className="link auth-content__link"
-            onClick={resendTokenHandler}
-            type="button"
-          >
-            Resend token?
-          </button>
-        </div>
-      </form>
+          <PrimaryButton text="SEND" type="submit" />
+          <div className="form-control">
+            <button
+              className="link auth-content__link"
+              onClick={resendTokenHandler}
+              type="button"
+            >
+              Resend token?
+            </button>
+          </div>
+        </form>
+      </FormProvider>
     </section>
   );
 };

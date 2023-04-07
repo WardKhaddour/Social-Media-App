@@ -1,96 +1,54 @@
-import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+
+import isValidPassword from 'utils/validators/isValidPassword';
+
 import PrimaryButton from 'components/PrimaryButton';
 import SecondaryButton from 'components/SecondaryButton';
 import FormInput from 'components/FormInput';
+import LoadingSpinner from 'components/LoadingSpinner';
 import AuthPagesText from '../components/AuthPagesText';
 
-import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import LoadingSpinner from 'components/LoadingSpinner';
+
 import { resetPassword } from '../store/actions';
-import isValidPassword from 'utils/validators/isValidPassword';
 
 import './ResetPassword.scss';
-import { Link } from 'react-router-dom';
+interface Inputs {
+  token: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const ResetPassword = () => {
+  const methods = useForm<Inputs>();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { isLoading } = useSelector((state: RootState) => state.user);
 
-  const tokenInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
-
-  const [isValidToken, setIsValidToken] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
-  const [isInvalidMessage, setIsInvalidMessage] = useState('');
-
-  const [isPassword, setIsPassword] = useState(false);
-  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
-  const [passwordIsInvalidMessage, setPasswordIsInvalidMessage] = useState('');
-
-  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
-  const [confirmPasswordIsTouched, setConfirmPasswordIsTouched] =
-    useState(false);
-  const [confirmPasswordIsInvalidMessage, setConfirmPasswordIsInvalidMessage] =
-    useState('');
-
-  const formSubmitHandler: FormEventHandler = async (event: FormEvent) => {
-    event.preventDefault();
-    const token = tokenInputRef.current?.value;
-    const password = passwordInputRef.current?.value;
-    const confirmPassword = confirmPasswordInputRef.current?.value;
-    if (!token || token.length < 32) {
-      if (isTouched) setIsValidToken(false);
-      setIsTouched(true);
-      setIsInvalidMessage('Please Enter a token');
-
-      return;
-    }
-
-    if (!password || !isValidPassword(password)) {
-      if (passwordIsTouched) setIsPassword(false);
-      setPasswordIsTouched(true);
-      setPasswordIsInvalidMessage('Password should be at least 6 characters ');
-
-      return;
-    }
-
-    if (confirmPassword !== password) {
-      if (confirmPasswordIsTouched) setIsConfirmPassword(false);
-      setConfirmPasswordIsTouched(true);
-      setConfirmPasswordIsInvalidMessage('Passwords not matched');
-
-      return;
-    }
-
-    setIsInvalidMessage('');
-    setIsTouched(true);
-    setIsValidToken(true);
-
-    const success = await dispatch(
-      resetPassword({ token, password, confirmPassword })
-    );
+  const formSubmitHandler: SubmitHandler<Inputs> = async data => {
+    const success = await dispatch(resetPassword(data));
     if (success) {
       navigate('/');
     }
   };
 
   const tokenInputClasses = `form-control__input ${
-    !isValidToken && isTouched ? 'form-control__input--invalid' : ''
+    errors.token?.message ? 'form-control__input--invalid' : ''
   }`;
 
   const passwordInputClasses = `form-control__input ${
-    !isPassword && passwordIsTouched ? 'form-control__input--invalid' : ''
+    errors.password?.message ? 'form-control__input--invalid' : ''
   }`;
 
   const confirmPasswordInputClasses = `form-control__input ${
-    !isConfirmPassword && passwordIsTouched
-      ? 'form-control__input--invalid'
-      : ''
+    errors.confirmPassword?.message ? 'form-control__input--invalid' : ''
   }`;
 
   return (
@@ -100,44 +58,60 @@ const ResetPassword = () => {
         title="Reset Your Password"
         text="Enter the token received on your email"
       />
-      <form
-        className="auth-content__form"
-        onSubmit={formSubmitHandler}
-        noValidate
-      >
-        <FormInput
-          id="token"
-          type="text"
-          label="Your token"
-          isInvalidMessage={isInvalidMessage}
-          ref={tokenInputRef}
-          className={tokenInputClasses}
-        />
-        <FormInput
-          id="password"
-          type="password"
-          label="New Password"
-          isInvalidMessage={passwordIsInvalidMessage}
-          ref={passwordInputRef}
-          className={passwordInputClasses}
-        />
+      <FormProvider {...methods}>
+        <form
+          className="auth-content__form"
+          onSubmit={handleSubmit(formSubmitHandler)}
+          noValidate
+        >
+          <FormInput
+            id="token"
+            type="text"
+            label="Your token"
+            validations={{
+              validate: val => (val.length < 32 ? 'Token is too short' : true),
+            }}
+            className={tokenInputClasses}
+          />
+          <FormInput
+            id="password"
+            type="password"
+            label="New Password"
+            className={passwordInputClasses}
+            validations={{
+              required: 'Password is required',
+              validate: val =>
+                !isValidPassword(val)
+                  ? 'Password should be at least 6 characters long'
+                  : true,
+            }}
+          />
 
-        <FormInput
-          id="confirm-password"
-          type="password"
-          label="Confirm Password"
-          isInvalidMessage={confirmPasswordIsInvalidMessage}
-          ref={confirmPasswordInputRef}
-          className={confirmPasswordInputClasses}
-        />
-        <PrimaryButton text="SEND" type="submit" />
+          <FormInput
+            id="confirmPassword"
+            type="password"
+            label="Confirm Password"
+            className={confirmPasswordInputClasses}
+            validations={{
+              required: 'Confirm Password is required',
+              validate: val =>
+                val !== methods.getValues('password')
+                  ? 'Passwords does not match'
+                  : true,
+            }}
+          />
+          <PrimaryButton text="SEND" type="submit" />
 
-        <div className="form-control">
-          <Link className="link auth-content__link" to="/auth/forgot-password">
-            Didn't receive a token?
-          </Link>
-        </div>
-      </form>
+          <div className="form-control">
+            <Link
+              className="link auth-content__link"
+              to="/auth/forgot-password"
+            >
+              Didn't receive a token?
+            </Link>
+          </div>
+        </form>
+      </FormProvider>
       <SecondaryButton text="Or" link="/auth" toPage="Login" />
     </div>
   );
