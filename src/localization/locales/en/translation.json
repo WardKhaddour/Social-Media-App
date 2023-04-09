@@ -1,0 +1,27 @@
+{
+  "title": {},
+  "msg": {
+    "welcome": "Welcome",
+    "loginMsg": "Welcome again to react training App! login and try its nice features"
+  },
+  "label": {
+    "email": "E-Mail",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "name": "Name",
+    "noAccount": "doesn't have an account?"
+  },
+  "action": {
+    "login": "Login",
+    "signup": "Signup",
+    "forgotPassword": "Forgot Your Password?"
+  },
+  "validateMsg": {
+    "emailRequired": "E-Mail is required",
+    "emailInvalid": "Please provide a valid email",
+    "passwordRequired": "Password is required",
+    "shortPassword": "Password should be at least 6 characters long"
+  }
+}

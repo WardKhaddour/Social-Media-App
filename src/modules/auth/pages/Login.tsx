@@ -25,7 +25,7 @@ interface Inputs {
 }
 
 const Login = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -59,11 +59,7 @@ const Login = () => {
   return (
     <div className="login">
       <LoadingSpinner loading={isLoading} />
-      <AuthPagesText
-        title={t('welcome')}
-        text="Welcome again to react training App! 
-          login and try its nice features"
-      />
+      <AuthPagesText title={t('msg.welcome')} text={t('msg.loginMsg')} />
       <FormProvider {...methods}>
         <form
           className="auth-content__form"
@@ -73,11 +69,11 @@ const Login = () => {
           <FormInput
             id="email"
             type="email"
-            label="E-Mail"
+            label={t('label.email')}
             isInvalidMessage={errors.email?.message}
             className={emailInputClasses}
             validations={{
-              required: 'E-Mail is required',
+              required: t('validateMsg.emailRequired'),
               validate: val =>
                 !isValidEmail(val) ? 'Please provide a valid email' : true,
             }}
@@ -85,38 +81,37 @@ const Login = () => {
           <FormInput
             id="password"
             type="password"
-            label="Password"
+            label={t('label.password')}
             isInvalidMessage={errors.password?.message}
             className={passwordInputClasses}
             validations={{
-              required: 'Password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
           />
           <ReCAPTCHA
             className="recaptcha"
             sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
             ref={recaptchaRef}
+            hl={i18n.language}
           />
-          <PrimaryButton text="Login" type="submit" />
+          <PrimaryButton text={t('action.login')} type="submit" />
           <div className="form-control">
             <Link
               className="link auth-content__link"
               to="/auth/forgot-password"
             >
-              Forgot your password?
+              {t('action.forgotPassword')}
             </Link>
           </div>
         </form>
       </FormProvider>
 
       <SecondaryButton
-        text="doesn't have an account?"
+        text={t('label.noAccount')}
         link="/auth/signup"
-        toPage="Signup"
+        toPage={t('action.signup')}
       />
     </div>
   );
