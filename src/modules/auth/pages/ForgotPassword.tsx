@@ -14,12 +14,14 @@ import AuthPagesText from '../components/AuthPagesText';
 import { forgotPassword } from '../store/actions';
 
 import './ForgotPassword.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   email: string;
 }
 
 const ForgotPassword = () => {
+  const { t, i18n } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -50,8 +52,8 @@ const ForgotPassword = () => {
     <div className="forgot-password">
       <LoadingSpinner loading={isLoading} />
       <AuthPagesText
-        title="Forgot your password?"
-        text="Enter your email to send recovery link to you"
+        title={t('action.forgotPassword')}
+        text={t('msg.enterEmailFP')}
       />
       <FormProvider {...methods}>
         <form
@@ -62,11 +64,11 @@ const ForgotPassword = () => {
           <FormInput
             id="email"
             type="email"
-            label="E-Mail"
+            label={t('label.email')}
             validations={{
-              required: 'E-Mail is required',
+              required: t('validateMsg.emailRequired'),
               validate: val =>
-                !isValidEmail(val) ? 'Please Provide a valid email' : true,
+                !isValidEmail(val) ? t('validateMsg.emailInvalid') : true,
             }}
             isInvalidMessage={errors.email?.message}
             className={emailInputClasses}
@@ -75,11 +77,16 @@ const ForgotPassword = () => {
             className="recaptcha"
             sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
             ref={recaptchaRef}
+            hl={i18n.language}
           />
-          <PrimaryButton text="SEND" type="submit" />
+          <PrimaryButton text={t('action.send')} type="submit" />
         </form>
       </FormProvider>
-      <SecondaryButton text="Or" link="/auth" toPage="Login" />
+      <SecondaryButton
+        text={t('msg.or')}
+        link="/auth"
+        toPage={t('action.login')}
+      />
     </div>
   );
 };

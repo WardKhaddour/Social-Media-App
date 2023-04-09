@@ -2,7 +2,9 @@
   "title": {},
   "msg": {
     "welcome": "Welcome",
-    "loginMsg": "Welcome again to react training App! login and try its nice features"
+    "loginMsg": "Welcome again to react training App! login and try its nice features",
+    "enterEmailFP": "Enter your email to send recovery token to you",
+    "or": "Or"
   },
   "label": {
     "email": "E-Mail",
@@ -16,7 +18,8 @@
   "action": {
     "login": "Login",
     "signup": "Signup",
-    "forgotPassword": "Forgot Your Password?"
+    "forgotPassword": "Forgot Your Password?",
+    "send": "SEND"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",

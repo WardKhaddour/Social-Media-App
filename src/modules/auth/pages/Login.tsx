@@ -75,7 +75,7 @@ const Login = () => {
             validations={{
               required: t('validateMsg.emailRequired'),
               validate: val =>
-                !isValidEmail(val) ? 'Please provide a valid email' : true,
+                !isValidEmail(val) ? t('validateMsg.emailInvalid') : true,
             }}
           />
           <FormInput
