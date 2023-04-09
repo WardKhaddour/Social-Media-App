@@ -2,12 +2,13 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from 'store';
 import AppLink from 'components/AppLink';
-import logo from 'assets/img/logo.svg';
+// import logo from 'assets/img/logo.svg';
 import { homeLayoutActions } from '../store';
 import { logout } from 'store/user/actions';
 import { ReactComponent as IconLogout } from 'assets/icons/logout.svg';
 import './Header.scss';
 import { MouseEventHandler } from 'react';
+import ToggleLanguage from './ToggleLanguage';
 
 const AuthenticatedHeader = (props: { name: string; photo: string }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -80,8 +81,11 @@ const Header = (props: { onClick: MouseEventHandler<HTMLElement> }) => {
   return (
     <header className="header" onClick={props.onClick}>
       <nav className="header__nav">
-        <div className="header__logo">
-          <img src={logo} alt="" />
+        <div className="header__logo-lang">
+          {/* <div className="header__logo">
+            <img src={logo} alt="" />
+          </div> */}
+          <ToggleLanguage />
         </div>
         {content}
       </nav>

@@ -1,0 +1,53 @@
+@import "assets/scss/main.scss";
+
+.toggle-language {
+  position: relative;
+  &__btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    color: $color-white;
+    fill: currentColor;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 1rem;
+    border-radius: 5px;
+    &:hover,
+    &:focus-visible {
+      background-color: $color-white;
+      color: $color-primary;
+    }
+  }
+
+  &__icon {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+  }
+
+  &__list {
+    width: 6rem;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    // left: 0rem;
+    background-color: $color-primary;
+    border-radius: 5px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.2s;
+    &--shown {
+      height: auto;
+    }
+
+    &--item {
+      padding: 1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      &:hover {
+        color: $color-primary;
+        background-color: $color-white;
+      }
+    }
+  }
+}

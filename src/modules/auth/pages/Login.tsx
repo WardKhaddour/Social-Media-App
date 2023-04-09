@@ -17,6 +17,7 @@ import { login } from '../store/actions';
 import { AppDispatch, RootState } from 'store';
 
 import './Login.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   email: string;
@@ -24,6 +25,7 @@ interface Inputs {
 }
 
 const Login = () => {
+  const { t } = useTranslation();
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -47,18 +49,18 @@ const Login = () => {
   };
 
   const emailInputClasses = `form-control__input ${
-    errors.email?.message ? 'form-control__input--invalid':''
+    errors.email?.message ? 'form-control__input--invalid' : ''
   }`;
 
   const passwordInputClasses = `form-control__input ${
-    errors.password?.message ? 'form-control__input--invalid':''
+    errors.password?.message ? 'form-control__input--invalid' : ''
   }`;
 
   return (
     <div className="login">
       <LoadingSpinner loading={isLoading} />
       <AuthPagesText
-        title="Welcome"
+        title={t('welcome')}
         text="Welcome again to react training App! 
           login and try its nice features"
       />
