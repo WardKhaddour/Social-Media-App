@@ -3,8 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from 'store';
 import './UploadPhoto.scss';
+import { useTranslation } from 'react-i18next';
+import PrimaryButton from './PrimaryButton';
 
 const UploadPhoto = forwardRef<HTMLInputElement>((_, ref) => {
+  const { t } = useTranslation('translation', { useSuspense: true });
+
   const userPhoto = useSelector((state: RootState) => state.user.user.photo);
   const [selectedPhoto, setSelectedPhoto] = useState(userPhoto);
 
@@ -46,14 +50,17 @@ const UploadPhoto = forwardRef<HTMLInputElement>((_, ref) => {
           crossOrigin="anonymous"
           className="photo-preview__photo"
           src={selectedPhoto}
-          alt="Your Uploaded File"
+          alt={t('msg.uploadPhotoAlt')}
         />
       </div>
       <div className="form-control">
+        <button type="button" className="btn btn-secondary">
+          <label htmlFor="photo">{t('action.choosePhoto')}</label>
+        </button>
         <input
           ref={ref}
           onChange={selectPhotoHandler}
-          className="form-control__input"
+          className="form-control__input form-control__input--file"
           id="photo"
           type="file"
           accept="photo/*"

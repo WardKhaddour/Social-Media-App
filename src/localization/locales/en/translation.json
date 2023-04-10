@@ -6,7 +6,10 @@
     "signupMsg": "Welcome to react training App! signup and try its nice features",
     "enterEmailFP": "Enter your email to send recovery token to you",
     "or": "Or",
-    "resetPassword": "Enter the token received on your email, and your new password"
+    "resetPassword": "Enter the token received on your email, and your new password",
+    "uploadPhoto": "Upload Photo",
+    "uploadPhotoMsg": "Upload your photo, or just skip and continue to use the app",
+    "uploadPhotoAlt": "Your Uploaded File"
   },
   "label": {
     "email": "E-Mail",
@@ -25,7 +28,11 @@
     "forgotPassword": "Forgot Your Password?",
     "send": "SEND",
     "resetPassword": "Reset Your Password",
-    "noReceivedToken": "Didn't Receive a Token?"
+    "noReceivedToken": "Didn't Receive a Token?",
+    "upload": "Upload",
+    "skip": "Skip",
+    "choosePhoto": "Choose Photo",
+    "save": "Save"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",

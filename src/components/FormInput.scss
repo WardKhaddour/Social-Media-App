@@ -31,6 +31,10 @@
       color: $color-primary;
     }
 
+    &--file {
+      display: none;
+    }
+
     &--invalid {
       background-color: $color-error-opacity;
     }

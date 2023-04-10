@@ -11,8 +11,10 @@ import { useDispatch } from 'react-redux';
 import { updateUserData } from 'store/user/actions';
 import './UploadUserPhoto.scss';
 import { userActions } from 'store/user';
+import { useTranslation } from 'react-i18next';
 
 const UploadUserPhoto = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch<AppDispatch>();
@@ -43,12 +45,12 @@ const UploadUserPhoto = () => {
     <div className="upload-user-photo">
       <LoadingSpinner loading={isLoading} />
       <AuthPagesText
-        title="Upload Photo"
-        text="Upload your photo, or just skip and continue to use the app"
+        title={t('msg.uploadPhoto')}
+        text={t('msg.uploadPhotoMsg')}
       />
       <form className="auth-content__form" onSubmit={formSubmitHandler}>
         <UploadPhoto ref={imageInputRef} />
-        <PrimaryButton text="Upload" type="submit" />
+        <PrimaryButton text={t('action.save')} type="submit" />
 
         <div className="form-control">
           <button
@@ -56,7 +58,7 @@ const UploadUserPhoto = () => {
             onClick={skipPhotoUploadHandler}
             type="button"
           >
-            Skip
+            {t('action.skip')}
           </button>
         </div>
       </form>
