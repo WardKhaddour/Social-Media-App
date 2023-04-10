@@ -4,7 +4,8 @@
     "welcome": "Welcome",
     "loginMsg": "Welcome again to react training App! login and try its nice features",
     "enterEmailFP": "Enter your email to send recovery token to you",
-    "or": "Or"
+    "or": "Or",
+    "resetPassword": "Enter the token received on your email, and your new password"
   },
   "label": {
     "email": "E-Mail",
@@ -13,18 +14,24 @@
     "currentPassword": "Current Password",
     "newPassword": "New Password",
     "name": "Name",
-    "noAccount": "doesn't have an account?"
+    "noAccount": "doesn't have an account?",
+    "token": "Your Token"
   },
   "action": {
     "login": "Login",
     "signup": "Signup",
     "forgotPassword": "Forgot Your Password?",
-    "send": "SEND"
+    "send": "SEND",
+    "resetPassword": "Reset Your Password",
+    "noReceivedToken": "Didn't Receive a Token?"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",
     "emailInvalid": "Please provide a valid email",
     "passwordRequired": "Password is required",
-    "shortPassword": "Password should be at least 6 characters long"
+    "confirmPasswordRequired": "Confirm Password is required",
+    "shortPassword": "Password should be at least 6 characters long",
+    "noMatchedPasswords": "Passwords dosen't match",
+    "tokenRequired": "Token is required"
   }
 }

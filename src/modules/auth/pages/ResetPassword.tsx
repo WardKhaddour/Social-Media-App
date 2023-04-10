@@ -15,6 +15,7 @@ import { AppDispatch, RootState } from 'store';
 import { resetPassword } from '../store/actions';
 
 import './ResetPassword.scss';
+import { useTranslation } from 'react-i18next';
 interface Inputs {
   token: string;
   password: string;
@@ -22,6 +23,7 @@ interface Inputs {
 }
 
 const ResetPassword = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -55,8 +57,8 @@ const ResetPassword = () => {
     <div className="reset-password">
       <LoadingSpinner loading={isLoading} />
       <AuthPagesText
-        title="Reset Your Password"
-        text="Enter the token received on your email"
+        title={t('action.resetPassword')}
+        text={t('msg.resetPassword')}
       />
       <FormProvider {...methods}>
         <form
@@ -67,52 +69,57 @@ const ResetPassword = () => {
           <FormInput
             id="token"
             type="text"
-            label="Your token"
+            label={t('label.token')}
             validations={{
-              validate: val => (val.length < 32 ? 'Token is too short' : true),
+              required: t('validateMsg.tokenRequired'),
             }}
+            isInvalidMessage={errors.token?.message}
             className={tokenInputClasses}
           />
           <FormInput
             id="password"
             type="password"
-            label="New Password"
+            label={t('label.newPassword')}
             className={passwordInputClasses}
             validations={{
-              required: 'Password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
+            isInvalidMessage={errors.password?.message}
           />
 
           <FormInput
             id="confirmPassword"
             type="password"
-            label="Confirm Password"
+            label={t('label.confirmPassword')}
             className={confirmPasswordInputClasses}
             validations={{
-              required: 'Confirm Password is required',
+              required: t('validateMsg.confirmPasswordRequired'),
               validate: val =>
                 val !== methods.getValues('password')
-                  ? 'Passwords does not match'
+                  ? t('validateMsg.noMatchedPasswords')
                   : true,
             }}
+            isInvalidMessage={errors.confirmPassword?.message}
           />
-          <PrimaryButton text="SEND" type="submit" />
+          <PrimaryButton text={t('action.send')} type="submit" />
 
           <div className="form-control">
             <Link
               className="link auth-content__link"
               to="/auth/forgot-password"
             >
-              Didn't receive a token?
+              {t('action.noReceivedToken')}
             </Link>
           </div>
         </form>
       </FormProvider>
-      <SecondaryButton text="Or" link="/auth" toPage="Login" />
+      <SecondaryButton
+        text={t('msg.or')}
+        link="/auth"
+        toPage={t('action.login')}
+      />
     </div>
   );
 };
