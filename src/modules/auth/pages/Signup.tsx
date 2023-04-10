@@ -17,6 +17,7 @@ import { AppDispatch, RootState } from 'store';
 import { signup } from '../store/actions';
 
 import './Signup.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   name: string;
@@ -26,6 +27,7 @@ interface Inputs {
 }
 
 const Signup = () => {
+  const { i18n, t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -63,70 +65,66 @@ const Signup = () => {
   return (
     <div className="signup">
       <LoadingSpinner loading={isLoading} />
-      <AuthPagesText
-        title="Welcome"
-        text="Welcome to react training App! signup and try its nice features"
-      />
+      <AuthPagesText title={t('msg.welcome')} text={t('msg.signupMsg')} />
       <FormProvider {...methods}>
         <form
           className="auth-content__form"
           onSubmit={handleSubmit(formSubmitHandler)}
         >
-          <FormInput id="name" type="text" label="Name" />
+          <FormInput id="name" type="text" label={t('label.name')} />
 
           <FormInput
             id="email"
             type="email"
-            label="E-Mail"
+            label={t('label.email')}
             isInvalidMessage={errors.email?.message}
             className={emailInputClasses}
             validations={{
-              required: 'E-Mail is required',
+              required: t('validateMsg.emailRequired'),
               validate: val =>
-                !isValidEmail(val) ? 'Please provide a valid email ' : true,
+                !isValidEmail(val) ? t('validateMsg.emailInvalid') : true,
             }}
           />
           <FormInput
             id="password"
             type="password"
-            label="New Password"
+            label={t('label.password')}
             isInvalidMessage={errors.password?.message}
             className={passwordInputClasses}
             validations={{
-              required: 'Password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
           />
 
           <FormInput
             id="confirmPassword"
             type="password"
-            label="Confirm Password"
+            label={t('label.confirmPassword')}
+            className={confirmPasswordInputClasses}
             validations={{
-              required: 'Confirm Password is required',
+              required: t('validateMsg.confirmPasswordRequired'),
               validate: val =>
                 val !== methods.getValues('password')
-                  ? 'Passwords does not match'
+                  ? t('validateMsg.noMatchedPasswords')
                   : true,
             }}
             isInvalidMessage={errors.confirmPassword?.message}
-            className={confirmPasswordInputClasses}
           />
           <ReCAPTCHA
             className="recaptcha"
             sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
             ref={recaptchaRef}
+            hl={i18n.language}
           />
-          <PrimaryButton text="Signup" type="submit" />
+          <PrimaryButton text={t('action.signup')} type="submit" />
         </form>
       </FormProvider>
       <SecondaryButton
-        text="Already have an account?"
+        text={t('label.haveAccount')}
         link="/auth"
-        toPage="Login"
+        toPage={t('action.login')}
       />
     </div>
   );

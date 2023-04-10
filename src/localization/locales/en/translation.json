@@ -3,6 +3,7 @@
   "msg": {
     "welcome": "Welcome",
     "loginMsg": "Welcome again to react training App! login and try its nice features",
+    "signupMsg": "Welcome to react training App! signup and try its nice features",
     "enterEmailFP": "Enter your email to send recovery token to you",
     "or": "Or",
     "resetPassword": "Enter the token received on your email, and your new password"
@@ -15,6 +16,7 @@
     "newPassword": "New Password",
     "name": "Name",
     "noAccount": "doesn't have an account?",
+    "haveAccount": "Already have an account?",
     "token": "Your Token"
   },
   "action": {
@@ -31,7 +33,7 @@
     "passwordRequired": "Password is required",
     "confirmPasswordRequired": "Confirm Password is required",
     "shortPassword": "Password should be at least 6 characters long",
-    "noMatchedPasswords": "Passwords dosen't match",
+    "noMatchedPasswords": "Passwords doesn't match",
     "tokenRequired": "Token is required"
   }
 }
