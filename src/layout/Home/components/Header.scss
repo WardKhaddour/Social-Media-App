@@ -16,6 +16,7 @@
     align-items: center;
     margin-right: 1rem;
     z-index: 2;
+    position: relative;
   }
 
   &__user-photo {
@@ -38,20 +39,19 @@
     position: absolute;
     top: 100%;
     right: 0%;
-    width: 20%;
-    height: 10rem;
+    width: 0;
     justify-content: flex-end;
-    padding: 1rem;
+    padding: 0;
     border-radius: 5px;
     background-color: $color-white;
     color: $color-primary;
-    transform: translateY(-100%);
     transition: all 0.2s;
-    opacity: 0;
-    animation: closeUserList 0.3s forwards;
-
+    height: 0;
+    width: 100%;
+    overflow: hidden;
     &--shown {
-      animation: openUserList 0.3s forwards;
+      height: 10rem;
+      padding: 1rem;
     }
   }
 
@@ -80,7 +80,6 @@
   }
 
   &__nav {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -108,27 +107,5 @@
   &__logo-lang {
     display: flex;
     align-items: center;
-  }
-}
-
-@keyframes openUserList {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes closeUserList {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-100%);
   }
 }

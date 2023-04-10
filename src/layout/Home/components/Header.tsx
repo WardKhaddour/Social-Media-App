@@ -33,19 +33,19 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
 
   return (
     <>
-      <ul className={optionsClasses}>
-        <li className="header__user-option" onClick={logoutHandler}>
-          <span className="header__user-option--label">Logout</span>
-          <span className="header__user-option--icon">
-            <IconLogout />
-          </span>
-        </li>
-      </ul>
       <div className="header__user">
         <span className="header__user-name">{props.name}</span>
         <span className="header__user-photo" onClick={toggleOptions}>
           <img crossOrigin="anonymous" src={props.photo} alt={props.name} />
         </span>
+        <ul className={optionsClasses}>
+          <li className="header__user-option" onClick={logoutHandler}>
+            <span className="header__user-option--label">Logout</span>
+            <span className="header__user-option--icon">
+              <IconLogout />
+            </span>
+          </li>
+        </ul>
       </div>
     </>
   );

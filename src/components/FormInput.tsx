@@ -49,6 +49,7 @@ const FormInput = (props: FormInputProps) => {
           id={props.id}
           defaultValue={props.value}
           {...register(props.id, props.validations)}
+          dir="auto"
         />
         {isPassword && (
           <button
