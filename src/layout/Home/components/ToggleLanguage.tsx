@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './ToggleLanguage.scss';
 import { MouseEvent, useState } from 'react';
+import langHelper from 'utils/language/LangHelper';
 
 const LanguagesList = ({
   languages,
@@ -47,7 +48,7 @@ const ToggleLanguage = () => {
   const setLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
     setLanguagesListShown(false);
-    localStorage.setItem('language', lang);
+    langHelper.setLangLocalStorage(lang);
   };
 
   return (

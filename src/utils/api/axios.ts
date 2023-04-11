@@ -1,7 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 import router from 'routes';
 import store from 'store';
 import { notificationActions } from 'store/notification';
+import langHelper from 'utils/language/LangHelper';
+
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -11,7 +13,21 @@ if (process.env.NODE_ENV === 'development') {
 const axiosInstance = axios.create({
   baseURL,
   withCredentials: true,
+  headers: {
+    lang: langHelper.getLang(),
+  },
 });
+
+axiosInstance.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    config.headers = { ...config.headers } as RawAxiosRequestHeaders;
+    config.headers.lang = langHelper.getLang();
+    return config;
+  },
+  err => {
+    console.log(err);
+  }
+);
 
 axiosInstance.interceptors.response.use(
   res => {
