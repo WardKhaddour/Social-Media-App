@@ -14,7 +14,7 @@ import { userActions } from 'store/user';
 import { useTranslation } from 'react-i18next';
 
 const UploadUserPhoto = () => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch<AppDispatch>();

@@ -6,7 +6,7 @@ import './UploadPhoto.scss';
 import { useTranslation } from 'react-i18next';
 
 const UploadPhoto = forwardRef<HTMLInputElement>((_, ref) => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
 
   const userPhoto = useSelector((state: RootState) => state.user.user.photo);
   const [selectedPhoto, setSelectedPhoto] = useState(userPhoto);

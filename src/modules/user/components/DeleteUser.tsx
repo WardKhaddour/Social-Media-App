@@ -13,7 +13,7 @@ interface Inputs {
 }
 
 const DeleteUser = () => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   const methods = useForm<Inputs>();
   const {
     handleSubmit,

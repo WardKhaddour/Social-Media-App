@@ -12,7 +12,7 @@ import ToggleLanguage from './ToggleLanguage';
 import { useTranslation } from 'react-i18next';
 
 const AuthenticatedHeader = (props: { name: string; photo: string }) => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const { isOptionsShown } = useSelector(
     (state: RootState) => state.homeLayout
@@ -56,7 +56,7 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
 };
 
 const UnAuthenticatedHeader = () => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   return (
     <div className="header__actions">
       <AppLink

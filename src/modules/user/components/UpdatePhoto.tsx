@@ -8,7 +8,7 @@ import { updateUserData } from 'store/user/actions';
 import { useTranslation } from 'react-i18next';
 
 const UpdatePhoto = () => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const imageInputRef = useRef<HTMLInputElement>(null);
 

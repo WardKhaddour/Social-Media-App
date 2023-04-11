@@ -7,7 +7,7 @@ import './Sidebar.scss';
 import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
-  const { t } = useTranslation('translation', { useSuspense: true });
+  const { t } = useTranslation();
   const { user } = useSelector((state: RootState) => state.user);
 
   const sideBarClasses = user.isAuthenticated ? 'sidebar' : 'sidebar--hidden';

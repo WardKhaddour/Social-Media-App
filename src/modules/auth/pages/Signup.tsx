@@ -27,7 +27,7 @@ interface Inputs {
 }
 
 const Signup = () => {
-  const { i18n, t } = useTranslation('translation', { useSuspense: true });
+  const { i18n, t } = useTranslation();
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
