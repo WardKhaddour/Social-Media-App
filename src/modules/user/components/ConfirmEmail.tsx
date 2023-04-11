@@ -9,12 +9,14 @@ import {
   resendConfirmEmailToken,
 } from '../../auth/store/actions';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   token: string;
 }
 
 const ConfirmEmail = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -37,7 +39,9 @@ const ConfirmEmail = () => {
 
   return (
     <section className="settings__confirm-email">
-      <h2 className="heading-primary settings__heading">Confirm your E-Mail</h2>
+      <h2 className="heading-primary settings__heading">
+        {t('msg.confirmEmail')}
+      </h2>
       <FormProvider {...methods}>
         <form
           className="settings__form"
@@ -47,24 +51,22 @@ const ConfirmEmail = () => {
           <FormInput
             id="token"
             type="text"
-            label="Your Confirm Token"
+            label={t('label.confirmToken')}
             isInvalidMessage={errors.token?.message}
             className={tokenInputClasses}
             validations={{
-              required: 'Token is required',
-              validate: val =>
-                val.length < 32 ? 'Please provide a valid token' : true,
+              required: t('validateMsg.tokenRequired'),
             }}
           />
 
-          <PrimaryButton text="SEND" type="submit" />
+          <PrimaryButton text={t('action.confirm')} type="submit" />
           <div className="form-control">
             <button
               className="link auth-content__link"
               onClick={resendTokenHandler}
               type="button"
             >
-              Resend token?
+              {t('action.resendToken')}
             </button>
           </div>
         </form>

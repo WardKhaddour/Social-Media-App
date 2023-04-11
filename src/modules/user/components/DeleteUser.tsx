@@ -7,11 +7,13 @@ import { deleteUser } from 'store/user/actions';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 
+import { useTranslation } from 'react-i18next';
 interface Inputs {
   password: string;
 }
 
 const DeleteUser = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -32,27 +34,27 @@ const DeleteUser = () => {
   }`;
   return (
     <section className="settings__delete-account">
-      <h2 className="heading-primary settings__heading">Delete My Account</h2>
+      <h2 className="heading-primary settings__heading">
+        {t('msg.deleteAccount')}
+      </h2>
       <FormProvider {...methods}>
         <form
           className="settings__form"
           onSubmit={handleSubmit(formSubmitHandler)}
         >
           <FormInput
-            type="password"
-            label="Your Password"
             id="password"
+            type="password"
+            label={t('label.password')}
             isInvalidMessage={errors.password?.message}
             className={passwordInputClasses}
             validations={{
-              required: 'Password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
           />
-          <PrimaryButton text="Delete" type="submit" />
+          <PrimaryButton text={t('action.delete')} type="submit" />
         </form>
       </FormProvider>
     </section>

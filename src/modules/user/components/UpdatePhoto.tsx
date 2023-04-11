@@ -5,8 +5,10 @@ import UploadPhoto from 'components/UploadPhoto';
 import PrimaryButton from 'components/PrimaryButton';
 import { useDispatch } from 'react-redux';
 import { updateUserData } from 'store/user/actions';
+import { useTranslation } from 'react-i18next';
 
 const UpdatePhoto = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const dispatch = useDispatch<AppDispatch>();
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -25,7 +27,7 @@ const UpdatePhoto = () => {
     <div className="settings__update-photo">
       <form className="settings__form" onSubmit={formSubmitHandler}>
         <UploadPhoto ref={imageInputRef} />
-        <PrimaryButton text="Upload" type="submit" />
+        <PrimaryButton text={t('action.upload')} type="submit" />
       </form>
     </div>
   );

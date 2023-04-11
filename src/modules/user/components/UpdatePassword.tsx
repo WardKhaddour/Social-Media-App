@@ -5,6 +5,7 @@ import { AppDispatch } from 'store';
 import isValidPassword from 'utils/validators/isValidPassword';
 import { updateUserPassword } from 'store/user/actions';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   currentPassword: string;
@@ -13,6 +14,7 @@ interface Inputs {
 }
 
 const UpdatePassword = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -42,7 +44,7 @@ const UpdatePassword = () => {
   return (
     <section className="settings__update-password">
       <h2 className="heading-primary settings__heading">
-        Update Your Password
+        {t('msg.updatePassword')}
       </h2>
       <FormProvider {...methods}>
         <form
@@ -51,47 +53,43 @@ const UpdatePassword = () => {
         >
           <FormInput
             type="password"
-            label="Current Password"
+            label={t('label.currentPassword')}
             id="currentPassword"
             isInvalidMessage={errors.currentPassword?.message}
             className={currentPasswordInputClasses}
             validations={{
-              required: 'Current password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
           />
           <FormInput
             type="password"
-            label="New Password"
+            label={t('label.newPassword')}
             id="password"
             isInvalidMessage={errors.password?.message}
             className={passwordInputClasses}
             validations={{
-              required: 'New password is required',
+              required: t('validateMsg.passwordRequired'),
               validate: val =>
-                !isValidPassword(val)
-                  ? 'Password should be at least 6 characters long'
-                  : true,
+                !isValidPassword(val) ? t('validateMsg.shortPassword') : true,
             }}
           />
           <FormInput
-            type="password"
-            label="Confirm Password"
             id="confirmPassword"
-            isInvalidMessage={errors.confirmPassword?.message}
+            type="password"
+            label={t('label.confirmPassword')}
             className={confirmPasswordInputClasses}
             validations={{
-              required: 'Confirm Password is required',
+              required: t('validateMsg.confirmPasswordRequired'),
               validate: val =>
                 val !== methods.getValues('password')
-                  ? 'Passwords does not match'
+                  ? t('validateMsg.noMatchedPasswords')
                   : true,
             }}
+            isInvalidMessage={errors.confirmPassword?.message}
           />
-          <PrimaryButton text="Save" type="submit" />
+          <PrimaryButton text={t('action.save')} type="submit" />
         </form>
       </FormProvider>
     </section>

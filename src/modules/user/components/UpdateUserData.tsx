@@ -7,6 +7,7 @@ import { updateUserData } from 'store/user/actions';
 import FormInput from 'components/FormInput';
 import PrimaryButton from 'components/PrimaryButton';
 import isValidEmail from 'utils/validators/isValidEmail';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   name: string;
@@ -14,6 +15,7 @@ interface Inputs {
 }
 
 const UpdateUserData = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const methods = useForm<Inputs>();
   const {
     handleSubmit,
@@ -38,27 +40,35 @@ const UpdateUserData = () => {
 
   return (
     <section className="settings__update-data">
-      <h2 className="heading-primary settings__heading"> Update Your Data</h2>
+      <h2 className="heading-primary settings__heading">
+        {' '}
+        {t('msg.updateData')}
+      </h2>
       <FormProvider {...methods}>
         <form
           className="settings__form"
           onSubmit={handleSubmit(formSubmitHandler)}
         >
-          <FormInput label="Name" id="name" value={user.name} />
           <FormInput
-            label="E-Mail"
+            id="name"
+            type="text"
+            label={t('label.name')}
+            value={user.name}
+          />
+          <FormInput
             id="email"
             type="email"
             value={user.email}
-            className={emailInputClasses}
+            label={t('label.email')}
             isInvalidMessage={errors.email?.message}
+            className={emailInputClasses}
             validations={{
-              required: 'E-Mail is required',
+              required: t('validateMsg.emailRequired'),
               validate: val =>
-                !isValidEmail(val) ? 'Please provide a valid email ' : true,
+                !isValidEmail(val) ? t('validateMsg.emailInvalid') : true,
             }}
           />
-          <PrimaryButton text="Save" type="submit" />
+          <PrimaryButton text={t('action.save')} type="submit" />
         </form>
       </FormProvider>
     </section>

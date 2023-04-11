@@ -9,7 +9,11 @@
     "resetPassword": "Enter the token received on your email, and your new password",
     "uploadPhoto": "Upload Photo",
     "uploadPhotoMsg": "Upload your photo, or just skip and continue to use the app",
-    "uploadPhotoAlt": "Your Uploaded File"
+    "uploadPhotoAlt": "Your Uploaded File",
+    "updateData": "Update My Data",
+    "updatePassword": "Update My Password",
+    "deleteAccount": "Delete My Account",
+    "confirmEmail": "Confirm My E-Mail"
   },
   "label": {
     "email": "E-Mail",
@@ -21,7 +25,8 @@
     "noAccount": "doesn't have an account?",
     "haveAccount": "Already have an account?",
     "token": "Your Token",
-    "settings":"Settings"
+    "settings": "Settings",
+    "confirmToken": "Confirm Token"
   },
   "action": {
     "login": "Login",
@@ -34,7 +39,10 @@
     "upload": "Upload",
     "skip": "Skip",
     "choosePhoto": "Choose Photo",
-    "save": "Save"
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "resendToken": "Resend Token"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",

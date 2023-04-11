@@ -9,7 +9,11 @@
     "resetPassword": "أدخل الرمز الذي استلمته على بريدك الاكتروني، وكلمة المرور الجديدة",
     "uploadPhoto": "إضافة صورة",
     "uploadPhotoMsg": "قم بإضافة صورة، أو قم بتخطي للبدء باستخدام التطبيق",
-    "uploadPhotoAlt": "الملف الذي أضفته"
+    "uploadPhotoAlt": "الملف الذي أضفته",
+    "updateData": "تعديل بياناتي",
+    "updatePassword": "تغيير كلمة المرور",
+    "deleteAccount": "حذف حسابي",
+    "confirmEmail": "تأكيد بريدي الالكتروني"
   },
   "label": {
     "email": "البريد الالكتروني",
@@ -21,7 +25,8 @@
     "noAccount": "ليس لديك حساب؟",
     "haveAccount": "لديك حساب بالفعل",
     "token": "الرمز الخاص بك",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "confirmToken": "رمز التأكيد"
   },
   "action": {
     "login": "تسجيل الدخول",
@@ -34,7 +39,10 @@
     "upload": "إضافة",
     "skip": "تخطي",
     "choosePhoto": "اختيار صورة",
-    "save": "حفظ"
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "resendToken": "إعادة إرسال الرمز"
   },
   "validateMsg": {
     "emailRequired": "البريد الاكتروني مطلوب",
