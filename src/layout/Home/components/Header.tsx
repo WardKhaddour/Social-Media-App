@@ -9,8 +9,10 @@ import { ReactComponent as IconLogout } from 'assets/icons/logout.svg';
 import './Header.scss';
 import { MouseEventHandler } from 'react';
 import ToggleLanguage from './ToggleLanguage';
+import { useTranslation } from 'react-i18next';
 
 const AuthenticatedHeader = (props: { name: string; photo: string }) => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const dispatch = useDispatch<AppDispatch>();
   const { isOptionsShown } = useSelector(
     (state: RootState) => state.homeLayout
@@ -40,7 +42,9 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
         </span>
         <ul className={optionsClasses}>
           <li className="header__user-option" onClick={logoutHandler}>
-            <span className="header__user-option--label">Logout</span>
+            <span className="header__user-option--label">
+              {t('action.logout')}
+            </span>
             <span className="header__user-option--icon">
               <IconLogout />
             </span>

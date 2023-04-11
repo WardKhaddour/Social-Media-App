@@ -1,0 +1,45 @@
+.rtl {
+  .header {
+    &__user-options {
+      right: auto;
+      left: 0;
+    }
+  }
+
+  .sidebar {
+    right: -23%;
+    left: auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    &__list-item {
+      &::after {
+        top: 50%;
+        left: auto;
+        right: -1rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+    }
+  }
+
+  @keyframes showSideBar {
+    from {
+      right: -23%;
+    }
+    to {
+      right: 0;
+    }
+  }
+  @keyframes hideSideBar {
+    from {
+      right: 0;
+    }
+    to {
+      right: -23%;
+    }
+  }
+}

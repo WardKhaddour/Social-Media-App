@@ -25,6 +25,7 @@
   "action": {
     "login": "Login",
     "signup": "Signup",
+    "logout": "Logout",
     "forgotPassword": "Forgot Your Password?",
     "send": "SEND",
     "resetPassword": "Reset Your Password",

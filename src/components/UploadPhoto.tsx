@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import './UploadPhoto.scss';
 import { useTranslation } from 'react-i18next';
-import PrimaryButton from './PrimaryButton';
 
 const UploadPhoto = forwardRef<HTMLInputElement>((_, ref) => {
   const { t } = useTranslation('translation', { useSuspense: true });
