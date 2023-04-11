@@ -13,6 +13,11 @@
     border-bottom-right-radius: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    animation: hideSideBarRTL 0.5s forwards;
+    &:hover {
+      animation: showSideBarRTL 0.5s 0.5s forwards;
+    }
+
     &__list-item {
       &::after {
         top: 50%;
@@ -26,20 +31,24 @@
     }
   }
 
-  @keyframes showSideBar {
+  @keyframes showSideBarRTL {
     from {
       right: -23%;
+      left: auto;
     }
     to {
       right: 0;
+      left: auto;
     }
   }
-  @keyframes hideSideBar {
+  @keyframes hideSideBarRTL {
     from {
       right: 0;
+      left: auto;
     }
     to {
       right: -23%;
+      left: auto;
     }
   }
 }

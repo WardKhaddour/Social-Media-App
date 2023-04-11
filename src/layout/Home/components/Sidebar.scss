@@ -9,6 +9,7 @@
   top: 50%;
   transform: translateY(-50%);
   left: -23%;
+  right: auto;
   z-index: 2;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -107,16 +108,20 @@
 @keyframes showSideBar {
   from {
     left: -23%;
+    right: auto;
   }
   to {
     left: 0;
+    right: auto;
   }
 }
 @keyframes hideSideBar {
   from {
     left: 0;
+    right: auto;
   }
   to {
     left: -23%;
+    right: auto;
   }
 }
