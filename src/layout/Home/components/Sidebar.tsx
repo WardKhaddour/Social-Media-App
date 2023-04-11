@@ -4,20 +4,20 @@ import { RootState } from 'store';
 import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
 
 import './Sidebar.scss';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   const { user } = useSelector((state: RootState) => state.user);
 
-  const sideBarClasses = user.isAuthenticated
-    ? 'sidebar'
-    : 'sidebar--hidden';
+  const sideBarClasses = user.isAuthenticated ? 'sidebar' : 'sidebar--hidden';
 
   return (
     <section className={sideBarClasses}>
       <ul className="sidebar__list">
         <Link className="sidebar__list-item" to="/settings">
           <span className="sidebar__list-item--label">
-            Settings
+            {t('label.settings')}
           </span>
           <span className="sidebar__list-item--icon">
             <IconSettings />

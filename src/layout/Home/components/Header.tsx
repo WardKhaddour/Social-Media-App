@@ -56,17 +56,18 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
 };
 
 const UnAuthenticatedHeader = () => {
+  const { t } = useTranslation('translation', { useSuspense: true });
   return (
     <div className="header__actions">
       <AppLink
         className="header__action"
-        toPage="Signup"
+        toPage={t('action.signup')}
         isPrimary={false}
         link="/auth/signup"
       />
       <AppLink
         className="header__action"
-        toPage="Login"
+        toPage={t('action.login')}
         isPrimary={true}
         link="/auth/"
       />

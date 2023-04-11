@@ -20,7 +20,8 @@
     "name": "Name",
     "noAccount": "doesn't have an account?",
     "haveAccount": "Already have an account?",
-    "token": "Your Token"
+    "token": "Your Token",
+    "settings":"Settings"
   },
   "action": {
     "login": "Login",
