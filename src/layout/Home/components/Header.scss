@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .header {
   background-color: $color-primary;
@@ -19,11 +19,16 @@
     position: relative;
   }
 
+  &__user-name {
+    @include respond(xs) {
+      display: none;
+    }
+  }
   &__user-photo {
     display: inline-block;
     width: 6rem;
     height: 6rem;
-    margin-left: 2rem;
+    margin: 0 2rem;
     clip-path: circle(50%);
     cursor: pointer;
     img {

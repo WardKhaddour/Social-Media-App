@@ -13,7 +13,8 @@
     "updateData": "Update My Data",
     "updatePassword": "Update My Password",
     "deleteAccount": "Delete My Account",
-    "confirmEmail": "Confirm My E-Mail"
+    "confirmEmail": "Confirm My E-Mail",
+    "updatePhoto": "Update My Photo"
   },
   "label": {
     "email": "E-Mail",

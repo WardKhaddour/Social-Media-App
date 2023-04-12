@@ -13,7 +13,8 @@
     "updateData": "تعديل بياناتي",
     "updatePassword": "تغيير كلمة المرور",
     "deleteAccount": "حذف حسابي",
-    "confirmEmail": "تأكيد بريدي الالكتروني"
+    "confirmEmail": "تأكيد بريدي الالكتروني",
+    "updatePhoto": "تغيير صورتي الشخصية"
   },
   "label": {
     "email": "البريد الالكتروني",

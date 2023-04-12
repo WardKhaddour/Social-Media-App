@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .settings {
   display: grid;
@@ -6,6 +6,20 @@
   padding: 3rem 8rem;
   width: 100%;
   column-gap: 10%;
+
+  .section-photo {
+    @include respond(md) {
+      grid-row: 1;
+    }
+  }
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+
+  @include respond(xs) {
+    padding: 3rem;
+  }
 
   &__separator {
     width: 100%;
@@ -33,6 +47,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    grid-column: 2;
+    // grid-column: 2;
+
+    @include respond(md) {
+      grid-row: 1 / 2;
+      grid-column: 1;
+    }
   }
 }

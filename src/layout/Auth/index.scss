@@ -1,12 +1,9 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .auth-layout {
   display: flex;
   min-height: 100vh;
   height: 100vh;
-
-  // @include respond() {
-  // }
 
   &__logo {
     background: $color-primary;
@@ -15,6 +12,10 @@
     justify-content: center;
     align-items: center;
     position: sticky;
+
+    @include respond(md) {
+      display: none;
+    }
   }
 
   &__content {
@@ -43,13 +44,17 @@
     position: relative;
     // height: fit-content;
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: -3rem;
       left: 0;
       height: 2px;
       background-color: $color-primary;
       width: 100%;
+    }
+
+    @include respond(xs) {
+      width: 90%;
     }
   }
 

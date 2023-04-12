@@ -23,8 +23,29 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     animation: hideSideBarRTL 0.5s forwards;
+    @include respond(md) {
+      animation: hideSideBarRTL_SM 0.5s forwards;
+    }
+
+    &--hover__effect {
+      @media (hover: none) {
+        top: 0;
+        transform: translateY(0);
+        height: 100%;
+        animation: showSideBarRTL 0.5s 0.5s forwards;
+        transition: all 0.5s;
+
+        @include respond(sm) {
+          animation: showSideBarRTL_Sm 0.5s forwards;
+        }
+      }
+    }
+
     &:hover {
       animation: showSideBarRTL 0.5s 0.5s forwards;
+      @include respond(md) {
+        animation: showSideBarRTL_SM 0.5s forwards;
+      }
     }
 
     &__list-item {
@@ -57,6 +78,27 @@
     }
     to {
       right: -23%;
+      left: auto;
+    }
+  }
+
+  @keyframes showSideBarRTL_SM {
+    from {
+      right: -65%;
+      left: auto;
+    }
+    to {
+      right: 0;
+      left: auto;
+    }
+  }
+  @keyframes hideSideBarRTL_SM {
+    from {
+      right: 0;
+      left: auto;
+    }
+    to {
+      right: -65%;
       left: auto;
     }
   }

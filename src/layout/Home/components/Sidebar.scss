@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .sidebar {
   position: fixed;
@@ -17,6 +17,12 @@
   animation: hideSideBar 0.5s forwards;
   cursor: pointer;
 
+  @include respond(sm) {
+    left: -65%;
+    width: 70%;
+    animation: hideSideBarSm 0.5s forwards;
+  }
+
   &--hidden {
     display: none;
   }
@@ -27,10 +33,35 @@
     height: 100%;
     animation: showSideBar 0.5s 0.5s forwards;
     transition: all 0.5s;
-    // left: 0;
+
+    @include respond(sm) {
+      animation: showSideBarSm 0.5s forwards;
+    }
   }
   &:hover > .sidebar__list {
     visibility: visible;
+  }
+
+  // Show Sidebar on click for touch devices
+
+  &--hover__effect {
+    @media (hover: none) {
+      top: 0;
+      transform: translateY(0);
+      height: 100%;
+      animation: showSideBar 0.5s 0.5s forwards;
+      transition: all 0.5s;
+
+      @include respond(sm) {
+        animation: showSideBarSm 0.5s forwards;
+      }
+    }
+  }
+
+  &--hover__effect > .sidebar__list {
+    @media (hover: none) {
+      visibility: visible;
+    }
   }
 
   &__list {
@@ -72,7 +103,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: -1rem;
@@ -122,6 +153,27 @@
   }
   to {
     left: -23%;
+    right: auto;
+  }
+}
+
+@keyframes showSideBarSm {
+  from {
+    left: -65%;
+    right: auto;
+  }
+  to {
+    left: 0;
+    right: auto;
+  }
+}
+@keyframes hideSideBarSm {
+  from {
+    left: 0;
+    right: auto;
+  }
+  to {
+    left: -65%;
     right: auto;
   }
 }

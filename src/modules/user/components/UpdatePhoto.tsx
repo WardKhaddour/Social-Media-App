@@ -25,6 +25,9 @@ const UpdatePhoto = () => {
 
   return (
     <div className="settings__update-photo">
+      <h2 className="heading-primary settings__heading">
+        {t('msg.updatePhoto')}
+      </h2>
       <form className="settings__form" onSubmit={formSubmitHandler}>
         <UploadPhoto ref={imageInputRef} />
         <PrimaryButton text={t('action.upload')} type="submit" />
