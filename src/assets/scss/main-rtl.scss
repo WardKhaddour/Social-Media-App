@@ -5,6 +5,15 @@
       left: 0;
     }
   }
+  .notification {
+    left: 0;
+    right: auto;
+    transform: none;
+    transform: translateX(-100%);
+    &--shown {
+      transform: translateX(0);
+    }
+  }
 
   .sidebar {
     right: -23%;
