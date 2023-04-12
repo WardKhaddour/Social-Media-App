@@ -16,7 +16,7 @@ interface UserData {
 const initialState: IState = {
   isLoading: false,
   user: {
-    isAuthenticated: false,
+    isAuthenticated: true,
     email: '',
     name: '',
     photo: '',
