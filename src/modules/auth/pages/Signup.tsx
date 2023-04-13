@@ -41,7 +41,7 @@ const Signup = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const formSubmitHandler: SubmitHandler<Inputs> = async data => {
-    const recaptchaToken = recaptchaRef.current?.getValue() || '';
+    const recaptchaToken = recaptchaRef.current?.execute() || '';
     recaptchaRef.current?.reset();
 
     const success = await dispatch(signup({ ...data, recaptchaToken }));
@@ -116,6 +116,8 @@ const Signup = () => {
             className="recaptcha"
             sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
             ref={recaptchaRef}
+            size="invisible"
+            badge={`${i18n.language === 'ar' ? 'bottomleft' : 'bottomright'}`}
             hl={i18n.language}
           />
           <PrimaryButton text={t('action.signup')} type="submit" />
