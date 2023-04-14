@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   currentPassword: string;
-  password: string;
+  newPassword: string;
   confirmPassword: string;
 }
 
@@ -22,11 +22,17 @@ const UpdatePassword = () => {
   } = methods;
   const dispatch = useDispatch<AppDispatch>();
   const formSubmitHandler: SubmitHandler<Inputs> = async data => {
-    const success = await dispatch(updateUserPassword(data));
+    const success = await dispatch(
+      updateUserPassword({
+        currentPassword: data.currentPassword,
+        password: data.newPassword,
+        confirmPassword: data.confirmPassword,
+      })
+    );
 
     if (success) {
       methods.setValue('currentPassword', '');
-      methods.setValue('password', '');
+      methods.setValue('newPassword', '');
       methods.setValue('confirmPassword', '');
     }
   };
@@ -35,7 +41,7 @@ const UpdatePassword = () => {
     errors.currentPassword?.message ? 'form-control__input--invalid' : ''
   }`;
   const passwordInputClasses = `form-control__input ${
-    errors.password?.message ? 'form-control__input--invalid' : ''
+    errors.newPassword?.message ? 'form-control__input--invalid' : ''
   }`;
   const confirmPasswordInputClasses = `form-control__input ${
     errors.confirmPassword?.message ? 'form-control__input--invalid' : ''
@@ -66,8 +72,8 @@ const UpdatePassword = () => {
           <FormInput
             type="password"
             label={t('label.newPassword')}
-            id="password"
-            isInvalidMessage={errors.password?.message}
+            id="newPassword"
+            isInvalidMessage={errors.newPassword?.message}
             className={passwordInputClasses}
             validations={{
               required: t('validateMsg.passwordRequired'),
@@ -83,7 +89,7 @@ const UpdatePassword = () => {
             validations={{
               required: t('validateMsg.confirmPasswordRequired'),
               validate: val =>
-                val !== methods.getValues('password')
+                val !== methods.getValues('newPassword')
                   ? t('validateMsg.noMatchedPasswords')
                   : true,
             }}
