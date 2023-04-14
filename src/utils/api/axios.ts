@@ -32,6 +32,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   res => {
     const { message } = res.data;
+    if (!message) {
+      return res;
+    }
     store.dispatch(notificationActions.showNotification());
     store.dispatch(
       notificationActions.setNotificationContent({ message, success: true })
@@ -41,7 +44,9 @@ axiosInstance.interceptors.response.use(
   err => {
     const url = err.config.url;
     const { message } = err.response.data;
-
+    if (!message) {
+      return Promise.reject(err);
+    }
     if (url === '/user' && message !== 'Please confirm your email first') {
       return Promise.reject(err.message);
     }
