@@ -2,10 +2,13 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from 'store';
 import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
+import { ReactComponent as IconHome } from 'assets/icons/home.svg';
+import { ReactComponent as IconSaved } from 'assets/icons/saved.svg';
 
 import './Sidebar.scss';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import SideBarLink from './SidebarLink';
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -16,6 +19,27 @@ const Sidebar = () => {
     setSideBarShown(prevState => !prevState);
   };
 
+  const sideBarLinks = [
+    {
+      id: 1,
+      label: t('label.home'),
+      icon: IconHome,
+      toPage: '/',
+    },
+    {
+      id: 2,
+      label: t('label.settings'),
+      icon: IconSettings,
+      toPage: '/settings',
+    },
+    {
+      id: 3,
+      label: t('label.saved'),
+      icon: IconSaved,
+      toPage: '/saved',
+    },
+  ];
+
   const sideBarClasses = `sidebar ${
     user.isAuthenticated ? '' : 'sidebar--hidden'
   } ${sideBarShown ? 'sidebar--hover__effect' : ''}`;
@@ -23,14 +47,9 @@ const Sidebar = () => {
   return (
     <section className={sideBarClasses} onClick={toggleSideBar}>
       <ul className="sidebar__list">
-        <Link className="sidebar__list-item" to="/settings">
-          <span className="sidebar__list-item--label">
-            {t('label.settings')}
-          </span>
-          <span className="sidebar__list-item--icon">
-            <IconSettings />
-          </span>
-        </Link>
+        {sideBarLinks.map(link => (
+          <SideBarLink key={link.id} {...link} />
+        ))}
       </ul>
     </section>
   );

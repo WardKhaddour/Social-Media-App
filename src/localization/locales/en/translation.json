@@ -27,6 +27,8 @@
     "haveAccount": "Already have an account?",
     "token": "Your Token",
     "settings": "Settings",
+    "home": "Home",
+    "saved": "Saved Items",
     "confirmToken": "Confirm Token"
   },
   "action": {
