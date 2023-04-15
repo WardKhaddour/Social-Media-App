@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
-import userRoutes from './routes';
+import homeRoutes from './routes';
 
 const ModuleLayout = () => {
-  const elements = useRoutes(userRoutes);
+  const elements = useRoutes(homeRoutes);
   return <>{elements}</>;
 };
 

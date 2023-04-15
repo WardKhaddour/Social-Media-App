@@ -9,17 +9,17 @@ import RestrictAuthenticated from '../../middlewares/RestrictAuthenticated';
 const routes: RouteObject[] = [
   {
     path: '/*',
+    element: <HomeModuleLayout />,
+    children: HomeModuleRoutes,
+  },
+  {
+    path: '/*',
     element: (
       <RestrictAuthenticated>
         <UserModuleLayout />
       </RestrictAuthenticated>
     ),
     children: UserModuleRoutes,
-  },
-  {
-    path: '/*',
-    element: <HomeModuleLayout />,
-    children: HomeModuleRoutes,
   },
 ];
 

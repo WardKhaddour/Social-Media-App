@@ -3,7 +3,7 @@ import Settings from './pages/Settings';
 
 const routes: RouteObject[] = [
   {
-    path: '/settings',
+    path: 'settings',
     element: <Settings />,
   },
 ];

@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom';
-import routes from 'modules/auth/routes';
+import routes from './routes';
 import logo from 'assets/img/logo.svg';
 
 import './index.scss';

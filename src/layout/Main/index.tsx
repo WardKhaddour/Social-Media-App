@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom';
-import routes from 'modules/user/routes';
+import routes from './routes';
 
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';

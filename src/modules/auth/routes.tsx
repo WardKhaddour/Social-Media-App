@@ -7,7 +7,7 @@ import UploadUserPhoto from './pages/UploadUserPhoto';
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: '*',
     element: <Login />,
     index: true,
   },
