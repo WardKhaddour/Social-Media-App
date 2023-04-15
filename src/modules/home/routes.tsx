@@ -1,10 +1,10 @@
 import { RouteObject } from 'react-router-dom';
-import Settings from './pages/Settings';
+import HomePage from './pages/Home';
 
 const routes: RouteObject[] = [
   {
-    path: '/settings',
-    element: <Settings />,
+    path: '/*',
+    element: <HomePage />,
   },
 ];
 
