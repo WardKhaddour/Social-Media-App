@@ -4,10 +4,7 @@ import FormInput from 'components/FormInput';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import { useSelector } from 'react-redux';
-import {
-  confirmEmail,
-  resendConfirmEmailToken,
-} from '../../auth/store/actions';
+import { confirmEmail, resendConfirmEmailToken } from '../store/actions';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 

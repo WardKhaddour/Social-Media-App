@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from 'store';
 import AppLink from 'components/AppLink';
 // import logo from 'assets/img/logo.svg';
-import { homeLayoutActions } from '../store';
-import { logout } from 'store/user/actions';
+import { mainLayoutActions } from '../store';
+import { logout } from 'modules/user/store/actions';
 import { ReactComponent as IconLogout } from 'assets/icons/logout.svg';
 import './Header.scss';
 import { MouseEventHandler } from 'react';
@@ -15,13 +15,13 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const { isOptionsShown } = useSelector(
-    (state: RootState) => state.homeLayout
+    (state: RootState) => state.mainLayout
   );
   // const [isOptionsShown, setIsOptionsShown] = useState(false);
 
   const toggleOptions = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.stopPropagation();
-    dispatch(homeLayoutActions.toggleIsOptionsShown());
+    dispatch(mainLayoutActions.toggleIsOptionsShown());
     // setIsOptionsShown(prevState => !prevState);
   };
 

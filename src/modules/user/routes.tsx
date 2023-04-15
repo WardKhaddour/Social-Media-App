@@ -1,13 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import Settings from '../user/pages/Settings';
-import RestrictAuthenticated from '../../middlewares/RestrinctAuthenticated';
+import Settings from './pages/Settings';
+import RestrictAuthenticated from '../../middlewares/RestrictAuthenticated';
 
 const routes: RouteObject[] = [
-  {
-    path: '/',
-    element: <div>Hello</div>,
-    index: true,
-  },
   {
     path: '/settings',
     element: (

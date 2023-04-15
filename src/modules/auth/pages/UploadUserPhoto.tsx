@@ -8,7 +8,7 @@ import UploadPhoto from 'components/UploadPhoto';
 import PrimaryButton from 'components/PrimaryButton';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateUserData } from 'store/user/actions';
+import { updateUserPhoto } from 'store/user/actions';
 import './UploadUserPhoto.scss';
 import { userActions } from 'store/user';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,7 @@ const UploadUserPhoto = () => {
     const photo = imageInputRef.current?.files[0];
     const formData = new FormData();
     formData.append('photo', photo);
-    const success = await dispatch(updateUserData(formData));
+    const success = await dispatch(updateUserPhoto(formData));
     if (success) {
       navigate('/');
     }

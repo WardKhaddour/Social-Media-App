@@ -44,7 +44,7 @@ const Login = () => {
 
     const success = await dispatch(login({ ...data, recaptchaToken }));
     if (success) {
-      navigate('/home');
+      navigate('/');
     }
   };
 

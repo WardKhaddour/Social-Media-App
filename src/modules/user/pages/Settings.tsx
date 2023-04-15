@@ -1,13 +1,13 @@
-import UpdateUserData from '../components/UpdateUserData';
-import UpdatePassword from '../components/UpdatePassword';
-
-import './Settings.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import LoadingSpinner from 'components/LoadingSpinner';
-import DeleteUser from '../components/DeleteUser';
 import ConfirmEmail from '../components/ConfirmEmail';
+
+import UpdateUserData from '../components/UpdateUserData';
+import UpdatePassword from '../components/UpdatePassword';
+import DeleteUser from '../components/DeleteUser';
 import UpdatePhoto from '../components/UpdatePhoto';
+import './Settings.scss';
 
 const Settings = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);

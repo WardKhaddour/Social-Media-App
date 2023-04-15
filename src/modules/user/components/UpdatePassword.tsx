@@ -3,7 +3,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
 import isValidPassword from 'utils/validators/isValidPassword';
-import { updateUserPassword } from 'store/user/actions';
+import { updateUserPassword } from '../store/actions';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 

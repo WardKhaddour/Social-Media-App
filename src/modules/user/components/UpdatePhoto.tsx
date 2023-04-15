@@ -4,7 +4,7 @@ import UploadPhoto from 'components/UploadPhoto';
 
 import PrimaryButton from 'components/PrimaryButton';
 import { useDispatch } from 'react-redux';
-import { updateUserData } from 'store/user/actions';
+import { updateUserPhoto } from 'store/user/actions';
 import { useTranslation } from 'react-i18next';
 
 const UpdatePhoto = () => {
@@ -20,7 +20,7 @@ const UpdatePhoto = () => {
     const photo = imageInputRef.current?.files[0];
     const formData = new FormData();
     formData.append('photo', photo);
-    await dispatch(updateUserData(formData));
+    await dispatch(updateUserPhoto(formData));
   };
 
   return (

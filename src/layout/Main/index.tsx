@@ -1,25 +1,25 @@
 import { useRoutes } from 'react-router-dom';
-import routes from 'modules/home/routes';
+import routes from 'modules/user/routes';
 
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import './index.scss';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
-import { homeLayoutActions } from './store';
+import { mainLayoutActions } from './store';
 
-const HomeModuleLayout = () => {
+const MainModuleLayout = () => {
   const element = useRoutes(routes);
   const dispatch = useDispatch<AppDispatch>();
 
   const hideUserOptions = () => {
-    dispatch(homeLayoutActions.hideOptions());
+    dispatch(mainLayoutActions.hideOptions());
   };
 
   return (
     <>
       <Header onClick={hideUserOptions} />
-      <main onClick={hideUserOptions} className="home-layout">
+      <main onClick={hideUserOptions} className="main-layout">
         <Sidebar />
         <div className="content">{element}</div>
       </main>
@@ -27,4 +27,4 @@ const HomeModuleLayout = () => {
   );
 };
 
-export default HomeModuleLayout;
+export default MainModuleLayout;

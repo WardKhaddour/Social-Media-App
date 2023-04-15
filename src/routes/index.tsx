@@ -1,8 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import NotFound from '../modules/NotFound';
-import AuthModuleLayout from '../layout/Auth';
-import AuthModuleRoutes from '../modules/auth/routes';
-import HomeModuleLayout from '../layout/Home';
+import AuthLayout from '../layout/Auth';
+import MainLayout from '../layout/Main';
 import RestrictUnAuthenticated from '../middlewares/RestrictUnauthenticated';
 
 const router = createBrowserRouter([
@@ -10,15 +8,13 @@ const router = createBrowserRouter([
     path: '/auth/*',
     element: (
       <RestrictUnAuthenticated>
-        <AuthModuleLayout />
+        <AuthLayout />
       </RestrictUnAuthenticated>
     ),
-    errorElement: <NotFound />,
-    children: AuthModuleRoutes,
   },
   {
     path: '/*',
-    element: <HomeModuleLayout />,
+    element: <MainLayout />,
   },
 ]);
 

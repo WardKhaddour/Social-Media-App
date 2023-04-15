@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const homeLayoutSlice = createSlice({
-  name: 'home',
+const mainLayoutSlice = createSlice({
+  name: 'main',
   initialState: {
     isOptionsShown: false,
   },
@@ -18,5 +18,5 @@ const homeLayoutSlice = createSlice({
   },
 });
 
-export const homeLayoutActions = homeLayoutSlice.actions;
-export default homeLayoutSlice.reducer;
+export const mainLayoutActions = mainLayoutSlice.actions;
+export default mainLayoutSlice.reducer;

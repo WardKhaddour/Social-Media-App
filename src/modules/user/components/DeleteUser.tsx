@@ -3,7 +3,7 @@ import FormInput from 'components/FormInput';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
 import isValidPassword from 'utils/validators/isValidPassword';
-import { deleteUser } from 'store/user/actions';
+import { deleteUser } from '../store/actions';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 

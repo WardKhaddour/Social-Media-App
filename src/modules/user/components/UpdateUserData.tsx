@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 
 import { AppDispatch, RootState } from 'store';
-import { updateUserData } from 'store/user/actions';
+import { updateUserData } from '../store/actions';
 
 import FormInput from 'components/FormInput';
 import PrimaryButton from 'components/PrimaryButton';

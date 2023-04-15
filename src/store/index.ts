@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './user';
 import notificationSlice from './notification';
-import homeLayoutSlice from 'layout/Home/store';
+import mainLayoutSlice from 'layout/Main/store';
 
 const store = configureStore({
   reducer: {
     user: userSlice,
     notification: notificationSlice,
-    homeLayout: homeLayoutSlice,
+    mainLayout: mainLayoutSlice,
   },
 });
 
