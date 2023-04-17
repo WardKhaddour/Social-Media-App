@@ -1,0 +1,28 @@
+@import 'assets/scss/main.scss';
+
+.categories {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  margin: 2rem;
+
+  &__header {
+    margin: 1rem 3rem;
+
+    font-size: 2rem;
+    text-align: start;
+  }
+
+  &__link {
+    color: $color-black;
+    font-size: 1.6rem;
+    font-weight: bold;
+    transition: all 0.2s;
+    &:hover,
+    &:focus-visible,
+    &:active {
+      color: $color-primary;
+    }
+  }
+}

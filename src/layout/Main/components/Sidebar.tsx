@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { RootState } from 'store';
 import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
 import { ReactComponent as IconHome } from 'assets/icons/home.svg';

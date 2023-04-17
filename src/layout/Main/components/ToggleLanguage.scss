@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .toggle-language {
   position: relative;
@@ -38,6 +38,7 @@
     transition: height 0.2s;
     &--shown {
       height: auto;
+      z-index: 2;
     }
 
     &--item {

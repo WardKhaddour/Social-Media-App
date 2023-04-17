@@ -1,0 +1,13 @@
+@import 'assets/scss/main.scss';
+
+.home__nav {
+  &--list {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: space-around;
+  }
+}
