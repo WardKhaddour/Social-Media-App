@@ -1,7 +1,14 @@
+@import 'assets/scss/main.scss';
+
 .home {
   &__posts {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: flex-start;
     margin: 4rem;
+
+    @include respond(md) {
+      grid-template-columns: 100%;
+    }
   }
 }

@@ -6,6 +6,8 @@ const HomeNav = ({ className }: { className: string }) => {
     <nav className={className}>
       <ul className="home__nav--list">
         <NavItem name="Most Popular" />
+        <NavItem name="Recommended Users" />
+        <NavItem name="Categories" />
       </ul>
     </nav>
   );

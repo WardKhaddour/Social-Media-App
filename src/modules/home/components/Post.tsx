@@ -1,4 +1,7 @@
 import calcTimestamp from 'utils/date/calcTimestamp';
+import { ReactComponent as IconSave } from 'assets/icons/save.svg';
+import { ReactComponent as IconIgnore } from 'assets/icons/hide.svg';
+
 import './Post.scss';
 interface PostProps {
   author: string;
@@ -24,8 +27,12 @@ const Post = (props: PostProps) => {
       <div className="post__card--footer">
         <span className="post__card--category">Programming</span>
         <div className="post__card--actions">
-          <button type="button">Save</button>
-          <button type="button">Mute</button>
+          <button type="button">
+            <IconSave className="post__card--actions__icon" />
+          </button>
+          <button type="button">
+            <IconIgnore className="post__card--actions__icon" />
+          </button>
         </div>
       </div>
     </div>

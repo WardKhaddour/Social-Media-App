@@ -1,7 +1,12 @@
+@import 'assets/scss/main.scss';
 .home {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: minmax(5rem, 8rem);
+
+  @include respond(md-1) {
+    grid-template-columns: 1fr;
+  }
 
   &__nav {
     grid-column: 1 / span 2;
@@ -14,5 +19,9 @@
     right: 0;
     height: fit-content;
     position: sticky;
+
+    @include respond(md-1) {
+      display: none;
+    }
   }
 }

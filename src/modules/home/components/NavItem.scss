@@ -1,5 +1,6 @@
 @import 'assets/scss/main.scss';
 .nav__item {
+  min-width: fit-content;
   background-color: $color-white;
   padding: 1rem 2rem;
   font-size: 1.8rem;
