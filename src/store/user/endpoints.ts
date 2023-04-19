@@ -1,1 +1,2 @@
-export const USER = '/user/is-auth';
+export const USER = '/user';
+export const IS_AUTH = '/user/is-auth';
