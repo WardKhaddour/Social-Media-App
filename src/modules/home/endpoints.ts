@@ -10,3 +10,7 @@ export const CATEGORIES = '/category';
 export const CATEGORY = (categoryId: string) => `/category/${categoryId}`;
 
 export const MOST_POPULAR_USERS = '/user/most-popular';
+
+export const LIKE_POST = (postId: string) => `post/${postId}/like`;
+
+export const POST_COMMENT = (postId: string) => `post/${postId}/comment`;
