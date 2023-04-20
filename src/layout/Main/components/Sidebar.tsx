@@ -24,31 +24,34 @@ const Sidebar = () => {
       label: t('label.home'),
       icon: IconHome,
       toPage: '/',
+      view: true,
     },
     {
       id: 2,
       label: t('label.settings'),
       icon: IconSettings,
       toPage: '/settings',
+      view: user.isAuthenticated,
     },
     {
       id: 3,
       label: t('label.saved'),
       icon: IconSaved,
       toPage: '/saved',
+      view: user.isAuthenticated,
     },
   ];
 
-  const sideBarClasses = `sidebar ${
-    user.isAuthenticated ? '' : 'sidebar--hidden'
-  } ${sideBarShown ? 'sidebar--hover__effect' : ''}`;
+  const sideBarClasses = `sidebar  ${
+    sideBarShown ? 'sidebar--hover__effect' : ''
+  }`;
 
   return (
     <section className={sideBarClasses} onClick={toggleSideBar}>
       <ul className="sidebar__list">
-        {sideBarLinks.map(link => (
-          <SideBarLink key={link.id} {...link} />
-        ))}
+        {sideBarLinks.map(link =>
+          link.view ? <SideBarLink key={link.id} {...link} /> : null
+        )}
       </ul>
     </section>
   );
