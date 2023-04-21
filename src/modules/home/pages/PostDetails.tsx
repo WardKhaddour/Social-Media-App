@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import NavItem from '../components/NavItem';
 
 import { ReactComponent as IconLike } from 'assets/icons/like.svg';
+import { ReactComponent as IconLikeFilled } from 'assets/icons/like_filled.svg';
 import { ReactComponent as IconComment } from 'assets/icons/comment.svg';
 import { ReactComponent as IconSave } from 'assets/icons/save.svg';
 
@@ -109,7 +110,11 @@ const PostDetails = () => {
         <section className="post__action">
           <div className="post__action--like">
             <button className="post__action--button" onClick={handleAddLike}>
-              <IconLike className="post__action--icon" />
+              {post?.isLiked ? (
+                <IconLikeFilled className="post__action--icon post__action--icon-filled" />
+              ) : (
+                <IconLike className="post__action--icon " />
+              )}
             </button>
             <span>{post?.likesNum}</span>
           </div>

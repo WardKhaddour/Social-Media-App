@@ -13,6 +13,7 @@ export interface IPOST {
   category: { _id: string; name: string }[];
   likesNum: number;
   commentsNum: number;
+  isLiked?: boolean;
 }
 export interface IUSERS {
   _id: string;
@@ -58,9 +59,14 @@ export const getPost = (postId: string): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {
-      const res = await Services.getPost(postId);
+      const [postRes, likeRes] = await Promise.all([
+        Services.getPost(postId),
+        Services.checkLiked(postId),
+      ]);
 
-      const { post }: { post: IPOST } = res.data;
+      const { post }: { post: IPOST } = postRes.data;
+      const { isLiked }: { isLiked: boolean } = likeRes.data;
+      post.isLiked = isLiked;
       console.log(post);
 
       dispatch(homeActions.setCurrentPost(post));
