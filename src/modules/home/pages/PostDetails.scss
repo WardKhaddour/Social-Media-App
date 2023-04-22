@@ -17,6 +17,16 @@
 
   &__author {
     font-size: 2.2rem;
+
+    &--name {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      &:hover,
+      &:focus-visible {
+        color: $color-primary;
+      }
+    }
   }
 
   &__categories {

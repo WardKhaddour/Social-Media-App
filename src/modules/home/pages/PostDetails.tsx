@@ -8,7 +8,7 @@ import {
   getPost,
   savePost,
 } from '../store/actions';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NavItem from '../components/NavItem';
 
 import { ReactComponent as IconLike } from 'assets/icons/like.svg';
@@ -66,7 +66,9 @@ const PostDetails = () => {
       <h2 className="post__title">{post?.title}</h2>
       <h3 className="post__author">
         <span>By&nbsp;</span>
-        <span>{post?.author.name}</span>
+        <Link className="post__author--name" to={`/user/${post?.author._id}`}>
+          <span>{post?.author.name}</span>
+        </Link>
       </h3>
       <section className="post__date">
         <span>At&nbsp;</span>

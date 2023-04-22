@@ -6,6 +6,7 @@ export interface IState {
 }
 
 interface UserData {
+  _id: string;
   isAuthenticated: boolean;
   email: string;
   name: string;
@@ -16,6 +17,7 @@ interface UserData {
 const initialState: IState = {
   isLoading: false,
   user: {
+    _id: '',
     isAuthenticated: false,
     email: '',
     name: '',
@@ -39,6 +41,7 @@ const userSlice = createSlice({
 
     reset(state) {
       state.user = {
+        _id: '',
         name: '',
         email: '',
         photo: '',

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './PopularUser.scss';
 
 interface PopularUserInterface {
@@ -21,9 +22,9 @@ const PopularUser = (props: PopularUserInterface) => {
         <button type="button" className="popular-user__follow">
           Follow
         </button>
-        <button type="button" className="popular-user__view">
+        <Link to={`user/${props._id}`} className="popular-user__view">
           View
-        </button>
+        </Link>
       </div>
     </li>
   );

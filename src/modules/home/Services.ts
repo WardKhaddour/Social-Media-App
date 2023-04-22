@@ -7,6 +7,8 @@ import {
   LIKE_POST,
   SAVE_POST,
   POST_COMMENT,
+  USER_DETAILS,
+  FOLLOW_USER,
 } from './endpoints';
 import { axiosInstance } from 'utils/api/axios';
 
@@ -40,10 +42,6 @@ class Services {
     const res = await axiosInstance.post(LIKE_POST(postId));
     return res.data;
   }
-  static async checkLiked(postId: string) {
-    const res = await axiosInstance.get(LIKE_POST(postId));
-    return res.data;
-  }
 
   static async savePost(postId: string) {
     const res = await axiosInstance.post(SAVE_POST(postId));
@@ -58,6 +56,16 @@ class Services {
     const res = await axiosInstance.post(POST_COMMENT(postId), {
       content: comment,
     });
+    return res.data;
+  }
+
+  static async getUserDetails(userId: string) {
+    const res = await axiosInstance.get(USER_DETAILS(userId));
+    return res.data;
+  }
+
+  static async followUser(userId: string) {
+    const res = await axiosInstance.patch(FOLLOW_USER(userId));
     return res.data;
   }
 }

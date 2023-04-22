@@ -41,8 +41,6 @@ export const updateUserPhoto = (
     try {
       const data = await Services.updateUserPhoto(userData);
       const { user } = data.data;
-      console.log(user);
-
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
     } catch (err) {
       return false;

@@ -1,4 +1,10 @@
-import { IPOST, IUSERS, ICATEGORIES, ICOMMENT } from './actions';
+import {
+  IPOST,
+  IUSERS,
+  ICATEGORIES,
+  ICOMMENT,
+  IUSERS_DETAILS,
+} from './actions';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface HOME_STATE {
@@ -8,6 +14,7 @@ interface HOME_STATE {
   categories: ICATEGORIES[];
   currentPost?: IPOST;
   commentsOnPost?: ICOMMENT[];
+  userProfileDetails?: IUSERS_DETAILS;
 }
 
 const initialState: HOME_STATE = {
@@ -17,6 +24,7 @@ const initialState: HOME_STATE = {
   categories: [],
   currentPost: undefined,
   commentsOnPost: undefined,
+  userProfileDetails: undefined,
 };
 
 const homeSlice = createSlice({
@@ -41,6 +49,9 @@ const homeSlice = createSlice({
     },
     setCommentsOnPost(state, action: PayloadAction<any>) {
       state.commentsOnPost = action.payload;
+    },
+    setUserProfileDetails(state, action: PayloadAction<any>) {
+      state.userProfileDetails = action.payload;
     },
   },
 });

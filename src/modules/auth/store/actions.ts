@@ -50,7 +50,6 @@ export const signup = (userData: UserSignupData): AuthAction<boolean> => {
     try {
       const res = await Services.signup(userData);
       const { user } = res.data;
-      console.log(user);
       dispatch(userActions.setUserData({ ...user, isAuthenticated: false }));
 
       return true;

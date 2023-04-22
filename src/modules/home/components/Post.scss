@@ -92,6 +92,10 @@
     &__icon {
       width: 100%;
       height: 100%;
+
+      &--filled {
+        fill: $color-primary;
+      }
     }
 
     button {

@@ -65,7 +65,6 @@ export const updateUserData = (
     try {
       const data = await Services.updateUserData(userData);
       const { user } = data.data;
-      console.log(user);
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
     } catch (err) {
@@ -84,7 +83,6 @@ export const updateUserPassword = (
     try {
       const data = await Services.updateUserPassword(userData);
       const { user } = data.data;
-      console.log(user);
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
 

@@ -20,13 +20,11 @@ const UploadPhoto = forwardRef<HTMLInputElement>((_, ref) => {
     }
 
     const reader = new FileReader();
-    const url = reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(files[0]);
 
     reader.onloadend = function () {
       setSelectedPhoto(reader.result?.toString() || '');
     };
-
-    console.log(url);
   };
 
   const removePhoto = () => {

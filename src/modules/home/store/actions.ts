@@ -40,6 +40,18 @@ export interface ICOMMENT {
   };
 }
 
+export interface IUSERS_DETAILS {
+  _id: string;
+  name: string;
+  email: string;
+  photo: string;
+  followersNum: number;
+  followingNum: number;
+  posts: IPOST[];
+  bio: string;
+  isFollowing?: boolean;
+}
+
 type HomeAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 
 export const getAllPosts = (): HomeAction<void> => {
@@ -145,5 +157,27 @@ export const addComment = (
     } finally {
       dispatch(homeActions.setIsLoading(false));
     }
+  };
+};
+
+export const getUserDetails = (userId: string): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+    try {
+      const res = await Services.getUserDetails(userId);
+      const { user } = res.data;
+      dispatch(homeActions.setUserProfileDetails(user));
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
+
+export const followUser = (userId: string): HomeAction<void> => {
+  return async dispatch => {
+    try {
+      await Services.followUser(userId);
+    } catch (err) {}
   };
 };

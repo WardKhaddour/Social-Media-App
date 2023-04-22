@@ -1,5 +1,6 @@
 import calcTimestamp from 'utils/date/calcTimestamp';
 import { ReactComponent as IconSave } from 'assets/icons/save.svg';
+import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
 import { ReactComponent as IconIgnore } from 'assets/icons/hide.svg';
 
 import './Post.scss';
@@ -12,11 +13,11 @@ interface PostProps {
   attachment?: string;
   publishedAt: string;
   category: { _id: string; name: string }[];
+  isSaved?: boolean;
 }
 
 const Post = (props: PostProps) => {
   const publishedDate = calcTimestamp(new Date(props.publishedAt));
-  props.category.forEach(cat => console.log(cat));
 
   return (
     <Link to={`/post/${props._id}`} className="post__card">
@@ -38,7 +39,11 @@ const Post = (props: PostProps) => {
         </div>
         <div className="post__card--actions">
           <button type="button">
-            <IconSave className="post__card--actions__icon" />
+            {props.isSaved ? (
+              <IconSaveFilled className="post__card--actions__icon post__card--actions__icon--filled" />
+            ) : (
+              <IconSave className="post__card--actions__icon" />
+            )}
           </button>
           <button type="button">
             <IconIgnore className="post__card--actions__icon" />
