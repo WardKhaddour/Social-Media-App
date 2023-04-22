@@ -14,6 +14,7 @@ export interface IPOST {
   likesNum: number;
   commentsNum: number;
   isLiked?: boolean;
+  isSaved?: boolean;
 }
 export interface IUSERS {
   _id: string;
@@ -31,6 +32,7 @@ export interface ICOMMENT {
   _id: string;
   content: string;
   addedAt: string;
+  post: string;
   user: {
     _id: string;
     name: string;
@@ -59,15 +61,10 @@ export const getPost = (postId: string): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {
-      const [postRes, likeRes] = await Promise.all([
-        Services.getPost(postId),
-        Services.checkLiked(postId),
-      ]);
+      const res = await Services.getPost(postId);
 
-      const { post }: { post: IPOST } = postRes.data;
-      const { isLiked }: { isLiked: boolean } = likeRes.data;
-      post.isLiked = isLiked;
-      console.log(post);
+      const { post }: { post: IPOST } = res.data;
+      // post.isLiked = res.data.isLiked;
 
       dispatch(homeActions.setCurrentPost(post));
     } catch (err) {
@@ -130,7 +127,6 @@ export const getCommentsOnPost = (postId: string): HomeAction<void> => {
       const res = await Services.getCommentsOnPost(postId);
       const { comments }: { comments: ICOMMENT[] } = res.data;
       dispatch(homeActions.setCommentsOnPost(comments));
-      console.log(comments);
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));

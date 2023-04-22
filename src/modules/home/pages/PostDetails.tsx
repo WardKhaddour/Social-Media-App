@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import {
-  addComment,
   addLike,
   getCommentsOnPost,
   getPost,
@@ -16,29 +15,20 @@ import { ReactComponent as IconLike } from 'assets/icons/like.svg';
 import { ReactComponent as IconLikeFilled } from 'assets/icons/like_filled.svg';
 import { ReactComponent as IconComment } from 'assets/icons/comment.svg';
 import { ReactComponent as IconSave } from 'assets/icons/save.svg';
+import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
 
+import PostComments from '../components/PostComments';
 import './PostDetails.scss';
-import CommentItem from '../components/CommentItem';
-import FormInput from 'components/FormInput';
-import PrimaryButton from 'components/PrimaryButton';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 const PostDetails = () => {
-  const methods = useForm<{ comment: string }>();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = methods;
   const [postsLoading, setPostsLoading] = useState(true);
   const [commentsShown, setCommentsShown] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const { postId } = useParams();
-  const {
-    currentPost: post,
-    commentsOnPost: comments,
-    isLoading,
-  } = useSelector((state: RootState) => state.home);
+  const { currentPost: post, commentsOnPost: comments } = useSelector(
+    (state: RootState) => state.home
+  );
   const { isAuthenticated } = useSelector(
     (state: RootState) => state.user.user
   );
@@ -63,24 +53,13 @@ const PostDetails = () => {
   const toggleComments = async () => {
     setCommentsShown(prevState => !prevState);
 
-    if (!comments || comments.length === 0)
+    if (!comments || comments.length === 0 || comments[0].post !== postId)
       await dispatch(getCommentsOnPost(postId!));
-  };
-
-  const addCommentHandler: SubmitHandler<{ comment: string }> = async data => {
-    await dispatch(addComment(postId!, data.comment));
-    methods.reset({
-      comment: '',
-    });
   };
 
   const handleSavePost = async () => {
     await dispatch(savePost(postId!));
   };
-
-  const commentInputClasses = `form-control__input ${
-    errors.comment?.message ? 'form-control__input--invalid' : ''
-  }`;
 
   return (
     <div className="post">
@@ -125,44 +104,16 @@ const PostDetails = () => {
             <span>{post?.commentsNum}</span>
           </div>
           <button className="post__action--button" onClick={handleSavePost}>
-            <IconSave className="post__action--icon" />
+            {post?.isSaved ? (
+              <IconSaveFilled className="post__action--icon post__action--icon-filled" />
+            ) : (
+              <IconSave className="post__action--icon " />
+            )}
           </button>
         </section>
       )}
 
-      {isAuthenticated && commentsShown && (
-        <section className="post_comments">
-          {isLoading && <LoadingSpinner loading={isLoading} />}
-          {!isLoading && (
-            <>
-              <h2 className="post__comments--title">Comments</h2>
-              {comments?.map(comment => (
-                <CommentItem key={comment._id} comment={comment} />
-              ))}
-              {isAuthenticated && (
-                <FormProvider {...methods}>
-                  <form
-                    onSubmit={handleSubmit(addCommentHandler)}
-                    className="post__comments--add-commnt"
-                  >
-                    <FormInput
-                      id="comment"
-                      type="text"
-                      label="Add New Comment"
-                      isInvalidMessage={errors.comment?.message}
-                      className={commentInputClasses}
-                      validations={{
-                        required: 'Please type comment',
-                      }}
-                    />
-                    <PrimaryButton type="submit" text="Add" />
-                  </form>
-                </FormProvider>
-              )}
-            </>
-          )}
-        </section>
-      )}
+      {isAuthenticated && commentsShown && <PostComments postId={postId!} />}
     </div>
   );
 };
