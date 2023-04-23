@@ -50,3 +50,19 @@
     clip-path: circle();
   }
 }
+
+.upload-photo {
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    & > * {
+      margin-bottom: 2rem;
+      &:not(:first-child) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+      }
+    }
+  }
+}

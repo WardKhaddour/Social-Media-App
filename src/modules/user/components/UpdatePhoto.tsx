@@ -6,6 +6,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { useDispatch } from 'react-redux';
 import { updateUserPhoto } from 'store/user/actions';
 import { useTranslation } from 'react-i18next';
+import { deleteUserPhoto } from '../store/actions';
 
 const UpdatePhoto = () => {
   const { t } = useTranslation();
@@ -23,13 +24,21 @@ const UpdatePhoto = () => {
     await dispatch(updateUserPhoto(formData));
   };
 
+  const deletePhotoHandler = async () => {
+    await dispatch(deleteUserPhoto());
+  };
+
   return (
     <div className="settings__update-photo">
       <h2 className="heading-primary settings__heading">
         {t('msg.updatePhoto')}
       </h2>
       <form className="settings__form" onSubmit={formSubmitHandler}>
-        <UploadPhoto ref={imageInputRef} />
+        <UploadPhoto
+          ref={imageInputRef}
+          withDeleteOptions={true}
+          deletePhotoHandler={deletePhotoHandler}
+        />
         <PrimaryButton text={t('action.upload')} type="submit" />
       </form>
     </div>

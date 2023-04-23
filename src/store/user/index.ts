@@ -12,6 +12,7 @@ interface UserData {
   name: string;
   photo: string;
   emailIsConfirmed: boolean;
+  hasPhoto: boolean;
 }
 
 const initialState: IState = {
@@ -23,6 +24,7 @@ const initialState: IState = {
     name: '',
     photo: '',
     emailIsConfirmed: false,
+    hasPhoto: false,
   },
 };
 
@@ -36,7 +38,7 @@ const userSlice = createSlice({
     },
 
     setUserData(state, action: PayloadAction<UserData>) {
-      state.user = { ...state.user, ...action.payload };
+      state.user = action.payload;
     },
 
     reset(state) {
@@ -47,6 +49,7 @@ const userSlice = createSlice({
         photo: '',
         isAuthenticated: false,
         emailIsConfirmed: false,
+        hasPhoto: false,
       };
     },
   },

@@ -75,14 +75,33 @@ export const updateUserData = (
   };
 };
 
+export const deleteUserPhoto = (): UserAction<any> => {
+  return async dispatch => {
+    dispatch(userActions.setIsLoading(true));
+    try {
+      const res = await Services.deleteUserPhoto();
+      const { user } = res.data;
+      dispatch(
+        userActions.setUserData({
+          ...user,
+          isAuthenticated: true,
+        })
+      );
+    } catch (err) {
+    } finally {
+      dispatch(userActions.setIsLoading(false));
+    }
+  };
+};
+
 export const updateUserPassword = (
   userData: UpdateUserPassword
 ): UserAction<any> => {
   return async dispatch => {
     dispatch(userActions.setIsLoading(true));
     try {
-      const data = await Services.updateUserPassword(userData);
-      const { user } = data.data;
+      const res = await Services.updateUserPassword(userData);
+      const { user } = res.data;
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
 

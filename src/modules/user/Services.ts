@@ -5,6 +5,7 @@ import {
   USER,
   CONFIRM_EMAIL,
   RESEND_CONFIRM_TOKEN,
+  DELETE_PHOTO,
 } from './endpoints';
 
 class Services {
@@ -32,6 +33,11 @@ class Services {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return res.data;
+  }
+
+  static async deleteUserPhoto() {
+    const res = await axiosInstance.patch(DELETE_PHOTO);
     return res.data;
   }
 
