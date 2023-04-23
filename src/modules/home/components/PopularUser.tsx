@@ -19,9 +19,6 @@ const PopularUser = (props: PopularUserInterface) => {
       </div>
       <div className="popular-user__bio">{props.bio}</div>
       <div className="popular-user__actions">
-        <button type="button" className="popular-user__follow">
-          Follow
-        </button>
         <Link to={`user/${props._id}`} className="popular-user__view">
           View
         </Link>

@@ -65,12 +65,21 @@ const UserProfile = () => {
         )}
       </div>
       <div className="user-profile__posts">
-        <h4 className="user-profile__posts--title">{user?.name} Posts</h4>
-        <div className="user-profile__posts--content">
-          {user?.posts.map(post => (
-            <Post key={post._id} {...post} />
-          ))}
-        </div>
+        {(!user?.posts || !user?.posts.length) && (
+          <p className="user-profile__posts--title">
+            {user?.name} Haven't posted yet !
+          </p>
+        )}
+        {user?.posts && user.posts.length > 0 && (
+          <>
+            <h4 className="user-profile__posts--title">{user?.name} Posts</h4>
+            <div className="user-profile__posts--content">
+              {user?.posts.map(post => (
+                <Post key={post._id} {...post} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
