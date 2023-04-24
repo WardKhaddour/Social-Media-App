@@ -9,6 +9,7 @@ import {
   POST_COMMENT,
   USER_DETAILS,
   FOLLOW_USER,
+  SAVED_POSTS,
 } from './endpoints';
 import { axiosInstance } from 'utils/api/axios';
 
@@ -45,6 +46,11 @@ class Services {
 
   static async savePost(postId: string) {
     const res = await axiosInstance.post(SAVE_POST(postId));
+    return res.data;
+  }
+
+  static async getSavedPosts() {
+    const res = await axiosInstance.get(SAVED_POSTS);
     return res.data;
   }
 

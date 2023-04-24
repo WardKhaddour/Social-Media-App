@@ -106,7 +106,7 @@ const UploadPhoto = forwardRef<HTMLInputElement, PropsType>(
           </div>
           {withDeleteOptions && user.hasPhoto && (
             <div className="form-control" onClick={handleDeletePhoto}>
-              <PrimaryButton text="Delete" type="button" />
+              <PrimaryButton text={t('action.delete')} type="button" />
             </div>
           )}
         </div>

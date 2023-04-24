@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import PostDetails from './pages/PostDetails';
 import UserProfile from './pages/UserProfile';
 import Me from './pages/Me';
+import SavedItems from './pages/SavedItems';
 
 const routes: RouteObject[] = [
   {
@@ -21,6 +22,10 @@ const routes: RouteObject[] = [
   {
     path: 'me',
     element: <Me />,
+  },
+  {
+    path: 'saved',
+    element: <SavedItems />,
   },
 ];
 

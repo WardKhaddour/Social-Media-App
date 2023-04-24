@@ -1,0 +1,10 @@
+.saved-items {
+  padding: 3rem 4rem;
+  &__heading {
+    text-align: start;
+    margin-bottom: 4rem;
+  }
+  &__posts {
+    width: 50%;
+  }
+}

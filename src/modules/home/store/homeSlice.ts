@@ -10,6 +10,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface HOME_STATE {
   isLoading: boolean;
   posts: IPOST[];
+  savedPosts: IPOST[];
   popularUsers: IUSERS[];
   categories: ICATEGORIES[];
   currentPost?: IPOST;
@@ -20,6 +21,7 @@ interface HOME_STATE {
 const initialState: HOME_STATE = {
   isLoading: false,
   posts: [],
+  savedPosts: [],
   popularUsers: [],
   categories: [],
   currentPost: undefined,
@@ -37,6 +39,10 @@ const homeSlice = createSlice({
 
     setPosts(state, action: PayloadAction<any>) {
       state.posts = action.payload;
+    },
+
+    setSavedPosts(state, action: PayloadAction<any>) {
+      state.savedPosts = action.payload;
     },
     setPopularUsers(state, action: PayloadAction<any>) {
       state.popularUsers = action.payload;

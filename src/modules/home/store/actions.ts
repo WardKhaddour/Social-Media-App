@@ -181,3 +181,18 @@ export const followUser = (userId: string): HomeAction<void> => {
     } catch (err) {}
   };
 };
+
+export const getSavedPosts = (): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+
+    try {
+      const res = await Services.getSavedPosts();
+      const { posts } = res.data;
+      dispatch(homeActions.setSavedPosts(posts));
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
