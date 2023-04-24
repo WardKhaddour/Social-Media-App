@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import './PopularUser.scss';
 
 interface PopularUserInterface {
@@ -9,6 +11,8 @@ interface PopularUserInterface {
 }
 
 const PopularUser = (props: PopularUserInterface) => {
+  const { t } = useTranslation();
+
   return (
     <li className="popular-user">
       <div className="popular-user__info">
@@ -20,7 +24,7 @@ const PopularUser = (props: PopularUserInterface) => {
       <div className="popular-user__bio">{props.bio}</div>
       <div className="popular-user__actions">
         <Link to={`user/${props._id}`} className="popular-user__view">
-          View
+          {t('action.view')}
         </Link>
       </div>
     </li>

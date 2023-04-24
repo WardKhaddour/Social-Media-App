@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import { addComment } from '../store/actions';
 import FormInput from 'components/FormInput';
+import { useTranslation } from 'react-i18next';
+
 
 const PostComments = ({ postId }: { postId: string }) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch<AppDispatch>();
   const methods = useForm<{ comment: string }>();
   const {
@@ -36,8 +40,8 @@ const PostComments = ({ postId }: { postId: string }) => {
   }`;
 
   return (
-    <section className="post_comments">
-      <h2 className="post__comments--title">Comments</h2>
+    <section className="post__comments" dir="auto">
+      <h2 className="post__comments--title">{t('label.comments')}</h2>
       {comments &&
         comments.map(comment => (
           <CommentItem key={comment._id} comment={comment} />
@@ -51,14 +55,14 @@ const PostComments = ({ postId }: { postId: string }) => {
             <FormInput
               id="comment"
               type="text"
-              label="Add New Comment"
+              label={t('label.addComment')}
               isInvalidMessage={errors.comment?.message}
               className={commentInputClasses}
               validations={{
-                required: 'Please type comment',
+                required: t('validateMsg.emptyComment'),
               }}
             />
-            <PrimaryButton type="submit" text="Add" />
+            <PrimaryButton type="submit" text={t('action.add')} />
           </form>
         </FormProvider>
       )}

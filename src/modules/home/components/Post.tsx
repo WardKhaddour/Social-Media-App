@@ -20,7 +20,7 @@ const Post = (props: PostProps) => {
   const publishedDate = calcTimestamp(new Date(props.publishedAt));
 
   return (
-    <Link to={`/post/${props._id}`} className="post__card">
+    <Link to={`/post/${props._id}`} className="post__card" dir="auto">
       <div className="post__card--header">
         <h2 className="post__card--author">{props.author.name}</h2>
         <h6 className="post__card--date">{publishedDate}</h6>

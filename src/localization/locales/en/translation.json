@@ -14,7 +14,8 @@
     "updatePassword": "Update My Password",
     "deleteAccount": "Delete My Account",
     "confirmEmail": "Confirm My E-Mail",
-    "updatePhoto": "Update My Photo"
+    "updatePhoto": "Update My Photo",
+    "userNoPosts": "{{name}} Haven't posted yet !"
   },
   "label": {
     "email": "E-Mail",
@@ -29,7 +30,16 @@
     "settings": "Settings",
     "home": "Home",
     "saved": "Saved Items",
-    "confirmToken": "Confirm Token"
+    "confirmToken": "Confirm Token",
+    "recommendedUsers": "Recommended Users",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "mostPopular": "Most Popular",
+    "comments": "Comments",
+    "addComment": "Add New Comment",
+    "followers": "Followers: {{num}}",
+    "following": "Following: {{num}}",
+    "userPosts": "{{name}} posts"
   },
   "action": {
     "login": "Login",
@@ -45,7 +55,12 @@
     "save": "Save",
     "delete": "Delete",
     "confirm": "Confirm",
-    "resendToken": "Resend Token"
+    "resendToken": "Resend Token",
+    "add": "Add",
+    "seeAll": "See All",
+    "view": "View",
+    "follow": "Follow",
+    "unfollow": "Unfollow"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",
@@ -54,6 +69,7 @@
     "confirmPasswordRequired": "Confirm Password is required",
     "shortPassword": "Password should be at least 6 characters long",
     "noMatchedPasswords": "Passwords doesn't match",
-    "tokenRequired": "Token is required"
+    "tokenRequired": "Token is required",
+    "emptyComment": "Please type comment"
   }
 }

@@ -14,7 +14,8 @@
     "updatePassword": "تغيير كلمة المرور",
     "deleteAccount": "حذف حسابي",
     "confirmEmail": "تأكيد بريدي الالكتروني",
-    "updatePhoto": "تغيير صورتي الشخصية"
+    "updatePhoto": "تغيير صورتي الشخصية",
+    "userNoPosts": "{{name}} لم ينشر بعد !"
   },
   "label": {
     "email": "البريد الالكتروني",
@@ -29,7 +30,16 @@
     "settings": "الإعدادات",
     "home": "الصفحة الرئيسية",
     "saved": "العناصر المحفوظة",
-    "confirmToken": "رمز التأكيد"
+    "confirmToken": "رمز التأكيد",
+    "recommendedUsers": "مستخدمون موصى بهم ",
+    "categories": "الفئات",
+    "allCategories": "كل الفئات",
+    "mostPopular": "الأكثر شيوعاً",
+    "comments": "التعليقات",
+    "addComment": "إضافة تعليق",
+    "followers": "المتابعين: {{num}}",
+    "following": "يتابع: {{num}}",
+    "userPosts": "منشورات {{name}}"
   },
   "action": {
     "login": "تسجيل الدخول",
@@ -45,7 +55,12 @@
     "save": "حفظ",
     "delete": "حذف",
     "confirm": "تأكيد",
-    "resendToken": "إعادة إرسال الرمز"
+    "resendToken": "إعادة إرسال الرمز",
+    "add": "إضافة",
+    "seeAll": "عرض الكل",
+    "view": "عرض",
+    "follow": "متابعة",
+    "unfollow": "الغاء المتابعة"
   },
   "validateMsg": {
     "emailRequired": "البريد الاكتروني مطلوب",
@@ -54,6 +69,7 @@
     "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
     "shortPassword": "كلمة المرور يجب ان تكون 6 أحرف على الأقل",
     "noMatchedPasswords": "كلمتا المرور غير متطابقتين",
-    "tokenRequired": "الرمز مطلوب"
+    "tokenRequired": "الرمز مطلوب",
+    "emptyComment": "الرجاء كتابة تعليق"
   }
 }

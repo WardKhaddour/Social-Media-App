@@ -4,20 +4,21 @@ import './MostPopularUsers.scss';
 import PopularUser from './PopularUser';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useTranslation } from 'react-i18next';
 
 const MostPopularUsers = ({ className }: { className: string }) => {
   const { popularUsers } = useSelector((state: RootState) => state.home);
-
+  const { t } = useTranslation();
   return (
     <>
-      <h2 className={`${className}__header`}>Recommended Users</h2>
+      <h2 className={`${className}__header`}>{t('label.recommendedUsers')}</h2>
       <ul className={className}>
         {popularUsers.map(user => (
           <PopularUser key={user._id} {...user} />
         ))}
       </ul>
       <Link className={`${className}__link`} to="all-users">
-        See All
+        {t('action.seeAll')}
       </Link>
     </>
   );

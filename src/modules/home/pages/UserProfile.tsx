@@ -7,8 +7,10 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import Post from '../components/Post';
 
 import './UserProfile.scss';
+import { useTranslation } from 'react-i18next';
 
 const UserProfile = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -39,17 +41,25 @@ const UserProfile = () => {
   return (
     <section className="user-profile">
       <div className="user-profile__details">
-        <h2 className="user-profile__details--name">{user?.name}</h2>
-        <h3 className="user-profile__details--bio">{user?.bio}</h3>
+        <h2 className="user-profile__details--name" dir="auto">
+          {user?.name}
+        </h2>
+        <h3 className="user-profile__details--bio" dir="auto">
+          {user?.bio}
+        </h3>
         <div className="user-profile__details--photo">
           <img crossOrigin="anonymous" src={user?.photo} alt={user?.name} />
         </div>
         <p className="user-profile__details--statics">
           <span className="user-profile__details--followers">
-            Followers :{user?.followersNum}
+            {t('label.followers', {
+              num: user?.followersNum,
+            })}
           </span>
           <span className="user-profile__details--following">
-            Following :{user?.followingNum}
+            {t('label.following', {
+              num: user?.followingNum,
+            })}
           </span>
         </p>
         {isAuthenticated && user?._id !== _id && (
@@ -59,7 +69,7 @@ const UserProfile = () => {
               type="button"
               className="user-profile__details--actions--follow"
             >
-              {user?.isFollowing ? 'Unfollow' : 'Follow'}
+              {user?.isFollowing ? t('action.unfollow') : t('action.follow')}
             </button>
           </div>
         )}
@@ -67,12 +77,18 @@ const UserProfile = () => {
       <div className="user-profile__posts">
         {(!user?.posts || !user?.posts.length) && (
           <p className="user-profile__posts--title">
-            {user?.name} Haven't posted yet !
+            {t('msg.userNoPosts', {
+              name: user?.name,
+            })}
           </p>
         )}
         {user?.posts && user.posts.length > 0 && (
           <>
-            <h4 className="user-profile__posts--title">{user?.name} Posts</h4>
+            <h4 className="user-profile__posts--title">
+              {t('label.userPosts', {
+                name: user?.name,
+              })}
+            </h4>
             <div className="user-profile__posts--content">
               {user?.posts.map(post => (
                 <Post key={post._id} {...post} />

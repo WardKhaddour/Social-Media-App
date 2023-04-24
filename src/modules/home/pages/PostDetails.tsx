@@ -62,7 +62,7 @@ const PostDetails = () => {
   };
 
   return (
-    <div className="post">
+    <div className="post" dir="auto">
       <h2 className="post__title">{post?.title}</h2>
       <h3 className="post__author">
         <span>By&nbsp;</span>

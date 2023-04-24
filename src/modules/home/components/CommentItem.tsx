@@ -6,7 +6,7 @@ const CommentItem = ({ comment }: { comment: ICOMMENT }) => {
   const handleViewUserProfile = () => {};
 
   return (
-    <div className="comment">
+    <div className="comment" dir="auto">
       <div className="comment__user" onClick={handleViewUserProfile}>
         <span className="comment__user--photo">
           <img
@@ -21,7 +21,9 @@ const CommentItem = ({ comment }: { comment: ICOMMENT }) => {
         {calcTimestamp(new Date(comment.addedAt))}
       </div>
 
-      <div className="comment__content">{comment.content}</div>
+      <div className="comment__content" dir="auto">
+        {comment.content}
+      </div>
     </div>
   );
 };
