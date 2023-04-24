@@ -39,7 +39,9 @@
     "addComment": "Add New Comment",
     "followers": "Followers: {{num}}",
     "following": "Following: {{num}}",
-    "userPosts": "{{name}} posts"
+    "userPosts": "{{name}} posts",
+    "myProfile": "My Profile",
+    "updateMyProfile": "Update My Profile"
   },
   "action": {
     "login": "Login",

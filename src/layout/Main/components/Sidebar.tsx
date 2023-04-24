@@ -3,6 +3,7 @@ import { RootState } from 'store';
 import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
 import { ReactComponent as IconHome } from 'assets/icons/home.svg';
 import { ReactComponent as IconSaved } from 'assets/icons/saved.svg';
+import { ReactComponent as IconProfile } from 'assets/icons/profile.svg';
 
 import './Sidebar.scss';
 import { useTranslation } from 'react-i18next';
@@ -28,13 +29,20 @@ const Sidebar = () => {
     },
     {
       id: 2,
+      label: t('label.myProfile'),
+      icon: IconProfile,
+      toPage: '/me',
+      view: user.isAuthenticated,
+    },
+    {
+      id: 3,
       label: t('label.settings'),
       icon: IconSettings,
       toPage: '/settings',
       view: user.isAuthenticated,
     },
     {
-      id: 3,
+      id: 4,
       label: t('label.saved'),
       icon: IconSaved,
       toPage: '/saved',

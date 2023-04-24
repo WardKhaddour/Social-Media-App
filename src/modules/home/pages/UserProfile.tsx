@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from 'store';
 import { followUser, getUserDetails } from '../store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
@@ -8,27 +8,34 @@ import Post from '../components/Post';
 
 import './UserProfile.scss';
 import { useTranslation } from 'react-i18next';
+import SecondaryButton from 'components/SecondaryButton';
 
-const UserProfile = () => {
+const UserProfile = ({ id }: { id?: string }) => {
+  const { _id, isAuthenticated } = useSelector(
+    (state: RootState) => state.user.user
+  );
+
+  let { userId } = useParams();
+  userId = userId || id;
+
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-
-  const { userId } = useParams();
 
   const { userProfileDetails: user } = useSelector(
     (state: RootState) => state.home
   );
 
-  const { _id, isAuthenticated } = useSelector(
-    (state: RootState) => state.user.user
-  );
   useEffect(() => {
     if (userId !== user?._id) {
       setIsLoading(true);
       dispatch(getUserDetails(userId!)).then(() => setIsLoading(false));
     }
   }, [dispatch, userId, user?._id]);
+
+  if (userId === _id && !id) {
+    return <Navigate to="/me" />;
+  }
 
   if (isLoading) {
     return <LoadingSpinner loading={isLoading} />;
@@ -62,15 +69,26 @@ const UserProfile = () => {
             })}
           </span>
         </p>
-        {isAuthenticated && user?._id !== _id && (
+
+        {isAuthenticated && (
           <div className="user-profile__details--actions">
-            <button
-              onClick={handleToggleFollow}
-              type="button"
-              className="user-profile__details--actions--follow"
-            >
-              {user?.isFollowing ? t('action.unfollow') : t('action.follow')}
-            </button>
+            {user?._id !== _id && (
+              <button
+                onClick={handleToggleFollow}
+                type="button"
+                className="user-profile__details--actions__follow"
+              >
+                {user?.isFollowing ? t('action.unfollow') : t('action.follow')}
+              </button>
+            )}
+
+            {user?._id === _id && (
+              <SecondaryButton
+                className="user-profile__details--actions__update-profile"
+                link="/settings"
+                toPage={t('label.updateMyProfile')}
+              />
+            )}
           </div>
         )}
       </div>
@@ -82,7 +100,7 @@ const UserProfile = () => {
             })}
           </p>
         )}
-        {user?.posts && user.posts.length > 0 && (
+        {user?.posts && !!user.posts.length && (
           <>
             <h4 className="user-profile__posts--title">
               {t('label.userPosts', {

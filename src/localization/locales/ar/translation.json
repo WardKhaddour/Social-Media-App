@@ -39,7 +39,9 @@
     "addComment": "إضافة تعليق",
     "followers": "المتابعين: {{num}}",
     "following": "يتابع: {{num}}",
-    "userPosts": "منشورات {{name}}"
+    "userPosts": "منشورات {{name}}",
+    "myProfile": "صفحتي الشخصية",
+    "updateMyProfile": "تعديل حسابي"
   },
   "action": {
     "login": "تسجيل الدخول",

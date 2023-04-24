@@ -10,6 +10,7 @@ import './Header.scss';
 import { MouseEventHandler } from 'react';
 import ToggleLanguage from './ToggleLanguage';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const AuthenticatedHeader = (props: { name: string; photo: string }) => {
   const { t } = useTranslation();
@@ -36,7 +37,9 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
   return (
     <>
       <div className="header__user">
-        <span className="header__user-name">{props.name}</span>
+        <Link to="me" className="header__user-name">
+          {props.name}
+        </Link>
         <span className="header__user-photo" onClick={toggleOptions}>
           <img crossOrigin="anonymous" src={props.photo} alt={props.name} />
         </span>

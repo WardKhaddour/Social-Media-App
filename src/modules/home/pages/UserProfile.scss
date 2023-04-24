@@ -43,7 +43,7 @@
       justify-content: space-between;
     }
     &--actions {
-      &--follow {
+      &__follow {
         all: unset;
         font-size: 1.8rem;
         background-color: $color-white;
@@ -58,6 +58,11 @@
         &:active {
           background-color: $color-primary;
         }
+      }
+
+      &__update-profile {
+        align-self: flex-start;
+        margin: 1rem 0;
       }
     }
   }

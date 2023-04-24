@@ -20,6 +20,8 @@
   }
 
   &__user-name {
+    text-decoration: none;
+    color: inherit;
     @include respond(xs) {
       display: none;
     }
