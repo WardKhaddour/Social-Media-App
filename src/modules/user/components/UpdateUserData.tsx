@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 interface Inputs {
   name: string;
   email: string;
+  bio: string;
 }
 
 const UpdateUserData = () => {
@@ -30,6 +31,7 @@ const UpdateUserData = () => {
       updateUserData({
         name: data.name,
         email: data.email,
+        bio: data.bio,
       })
     );
   };
@@ -67,6 +69,12 @@ const UpdateUserData = () => {
               validate: val =>
                 !isValidEmail(val) ? t('validateMsg.emailInvalid') : true,
             }}
+          />
+          <FormInput
+            id="bio"
+            type="text"
+            label={t('label.bio')}
+            value={user.bio}
           />
           <PrimaryButton text={t('action.save')} type="submit" />
         </form>

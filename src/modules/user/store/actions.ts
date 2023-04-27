@@ -9,6 +9,7 @@ type UserAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 interface UpdateUserData {
   name?: string;
   email?: string;
+  bio?: string;
   photo?: File;
 }
 interface UpdateUserPassword {
@@ -65,7 +66,6 @@ export const updateUserData = (
     try {
       const data = await Services.updateUserData(userData);
       const { user } = data.data;
-
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
     } catch (err) {
       return false;

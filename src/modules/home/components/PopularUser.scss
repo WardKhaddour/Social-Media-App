@@ -13,9 +13,10 @@
 
   &__photo {
     display: inline-block;
-    width: 4rem;
-    height: 4rem;
+    width: 6rem;
+    height: 6rem;
     clip-path: circle(50%);
+    grid-row: 1 / -1;
     margin: 0 0.5rem;
     img {
       width: 100%;
@@ -24,17 +25,32 @@
   }
 
   &__info {
-    display: flex;
-    justify-content: flex-start;
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
+    // margin: 1rem 0;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
     align-items: center;
-    margin: 1rem 0;
-    grid-column: 1 / 1;
+    justify-content: flex-start;
+  }
+
+  &__bio,
+  &__name {
+    justify-self: flex-start;
+    text-align: start;
+    white-space: nowrap;
+    width: 100% !important;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &__bio {
     font-size: 1.4rem;
-    grid-column: 1 / 1;
-    text-align: start;
+    grid-column: 2 / 2;
   }
 
   &__actions {

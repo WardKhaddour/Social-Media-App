@@ -19,9 +19,13 @@ const PopularUser = (props: PopularUserInterface) => {
         <span className="popular-user__photo">
           <img crossOrigin="anonymous" src={props.photo} alt={props.name} />
         </span>
-        <span className="popular-user__name">{props.name}</span>
+        <span className="popular-user__name" dir="auto">
+          {props.name}
+        </span>
+        <span className="popular-user__bio" dir="auto">
+          {props.bio}
+        </span>
       </div>
-      <div className="popular-user__bio">{props.bio}</div>
       <div className="popular-user__actions">
         <Link to={`user/${props._id}`} className="popular-user__view">
           {t('action.view')}

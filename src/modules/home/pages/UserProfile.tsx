@@ -33,7 +33,7 @@ const UserProfile = ({ id }: { id?: string }) => {
     }
   }, [dispatch, userId, user?._id]);
 
-  if (userId === _id && !id) {
+  if (_id && userId === _id && !id) {
     return <Navigate to="/me" />;
   }
 

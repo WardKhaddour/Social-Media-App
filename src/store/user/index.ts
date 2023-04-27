@@ -10,6 +10,7 @@ interface UserData {
   isAuthenticated: boolean;
   email: string;
   name: string;
+  bio: string;
   photo: string;
   emailIsConfirmed: boolean;
   hasPhoto: boolean;
@@ -22,6 +23,7 @@ const initialState: IState = {
     isAuthenticated: false,
     email: '',
     name: '',
+    bio: '',
     photo: '',
     emailIsConfirmed: false,
     hasPhoto: false,
@@ -44,10 +46,11 @@ const userSlice = createSlice({
     reset(state) {
       state.user = {
         _id: '',
-        name: '',
-        email: '',
-        photo: '',
         isAuthenticated: false,
+        email: '',
+        name: '',
+        bio: '',
+        photo: '',
         emailIsConfirmed: false,
         hasPhoto: false,
       };

@@ -25,6 +25,7 @@
     "currentPassword": "Current Password",
     "newPassword": "New Password",
     "name": "Name",
+    "bio": "Bio",
     "noAccount": "doesn't have an account?",
     "haveAccount": "Already have an account?",
     "token": "Your Token",
