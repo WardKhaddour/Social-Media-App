@@ -24,6 +24,16 @@ class Services {
     return res.data;
   }
 
+  static async addNewPost(data: {
+    title: string;
+    content: string;
+    categories?: string[];
+    attachments?: File[];
+  }) {
+    const res = await axiosInstance.post(POSTS, data);
+    return res.data;
+  }
+
   static async getPostsByFollowing() {
     const res = await axiosInstance.get(FOLLOWING_POSTS);
     return res.data;

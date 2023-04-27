@@ -1,5 +1,5 @@
 import calcTimestamp from 'utils/date/calcTimestamp';
-import { ICOMMENT } from '../store/actions';
+import { ICOMMENT } from '../interfaces';
 
 import './CommentItem.scss';
 const CommentItem = ({ comment }: { comment: ICOMMENT }) => {

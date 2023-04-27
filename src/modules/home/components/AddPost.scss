@@ -1,0 +1,70 @@
+@import 'assets/scss/main';
+
+.add-post {
+  &__form {
+    width: 50%;
+    @include absoluteCenter;
+    padding: 5rem;
+    border-radius: 10px;
+    box-shadow: 1rem 2rem 2rem $color-black;
+    background-color: white;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+    overflow-y: scroll;
+    &--title {
+      font-size: 2.6rem;
+      margin: 1rem 0;
+    }
+    &--load-categories {
+      all: unset;
+      color: $color-black;
+      text-decoration: underline;
+      font-size: 1.6rem;
+      padding: 1rem;
+      margin: 1rem;
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-primary;
+      }
+    }
+
+    &--attach-file {
+      display: none;
+    }
+    &--attached-files {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+    }
+
+    &--attached-file {
+      font-size: 1.4rem;
+      margin: 2rem 1rem;
+      &__name {
+        margin: 0 1rem;
+      }
+      &__remove {
+        // margin: 0 1rem;
+        background-color: $color-primary;
+        padding: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+          background-color: $color-black;
+          color: $color-white;
+        }
+      }
+    }
+
+    button {
+      align-self: flex-start;
+    }
+  }
+}

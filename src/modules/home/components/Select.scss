@@ -1,0 +1,29 @@
+@import 'assets/scss/main';
+
+.select {
+  &__title {
+    font-size: 2rem;
+  }
+  &__list {
+    list-style: none;
+    font-size: 1.8rem;
+    &--item {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      border-radius: 5px;
+      display: inline-block;
+      background-color: $color-white;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        background-color: $color-primary;
+      }
+    }
+    .selected {
+      background-color: $color-primary;
+    }
+  }
+}

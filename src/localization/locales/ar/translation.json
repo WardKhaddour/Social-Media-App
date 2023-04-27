@@ -15,7 +15,8 @@
     "deleteAccount": "حذف حسابي",
     "confirmEmail": "تأكيد بريدي الالكتروني",
     "updatePhoto": "تغيير صورتي الشخصية",
-    "userNoPosts": "{{name}} لم ينشر بعد !"
+    "userNoPosts": "{{name}} لم ينشر بعد !",
+    "selectCategories": "اختر الفئات"
   },
   "label": {
     "email": "البريد الالكتروني",
@@ -41,7 +42,11 @@
     "following": "يتابع: {{num}}",
     "userPosts": "منشورات {{name}}",
     "myProfile": "صفحتي الشخصية",
-    "updateMyProfile": "تعديل حسابي"
+    "updateMyProfile": "تعديل حسابي",
+    "addPost": "إنشاء منشور جديد",
+    "title": "العنوان",
+    "content": "المحتوى",
+    "attachments": "المرفقات"
   },
   "action": {
     "login": "تسجيل الدخول",
@@ -62,7 +67,10 @@
     "seeAll": "عرض الكل",
     "view": "عرض",
     "follow": "متابعة",
-    "unfollow": "الغاء المتابعة"
+    "unfollow": "الغاء المتابعة",
+    "loadMoreCategories": "تحميل المزيد من الفئات",
+    "attachFiles": "ارفاق ملفات",
+    "remove": "إزالة"
   },
   "validateMsg": {
     "emailRequired": "البريد الاكتروني مطلوب",

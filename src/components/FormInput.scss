@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .form-control {
   display: flex;
@@ -14,7 +14,9 @@
   &__label {
     transition: all 0.2s;
   }
-
+  textarea {
+    resize: vertical;
+  }
   &__input {
     padding: 0.5rem 1.2rem;
     width: calc(100% - 4px);

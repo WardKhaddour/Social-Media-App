@@ -4,7 +4,7 @@ import {
   ICATEGORIES,
   ICOMMENT,
   IUSERS_DETAILS,
-} from './actions';
+} from '../interfaces';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface HOME_STATE {

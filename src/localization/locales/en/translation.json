@@ -15,7 +15,8 @@
     "deleteAccount": "Delete My Account",
     "confirmEmail": "Confirm My E-Mail",
     "updatePhoto": "Update My Photo",
-    "userNoPosts": "{{name}} Haven't posted yet !"
+    "userNoPosts": "{{name}} Haven't posted yet !",
+    "selectCategories": "Select Categories"
   },
   "label": {
     "email": "E-Mail",
@@ -41,7 +42,11 @@
     "following": "Following: {{num}}",
     "userPosts": "{{name}} posts",
     "myProfile": "My Profile",
-    "updateMyProfile": "Update My Profile"
+    "updateMyProfile": "Update My Profile",
+    "addPost": "Add New Post",
+    "title": "Title",
+    "content": "Content",
+    "attachments": "Attachments"
   },
   "action": {
     "login": "Login",
@@ -62,7 +67,10 @@
     "seeAll": "See All",
     "view": "View",
     "follow": "Follow",
-    "unfollow": "Unfollow"
+    "unfollow": "Unfollow",
+    "loadMoreCategories": "Load More Categories",
+    "attachFiles": "Attach Files",
+    "remove": "Remove"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",

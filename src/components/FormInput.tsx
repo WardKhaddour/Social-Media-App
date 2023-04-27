@@ -14,6 +14,7 @@ interface FormInputProps {
   type?: string;
   value?: string;
   validations?: RegisterOptions;
+  inputFieldType?: 'input' | 'textarea' | undefined;
 }
 
 const FormInput = (props: FormInputProps) => {
@@ -43,14 +44,26 @@ const FormInput = (props: FormInputProps) => {
         <p className="invalid__message">{props.isInvalidMessage}</p>
       )}
       <div className="form-control__input--wrapper">
-        <input
-          className={props.className || 'form-control__input'}
-          type={inputType}
-          id={props.id}
-          defaultValue={props.value}
-          {...register(props.id, props.validations)}
-          dir="auto"
-        />
+        {props.inputFieldType === 'textarea' ? (
+          <textarea
+            rows={15}
+            className={props.className || 'form-control__input'}
+            id={props.id}
+            dir="auto"
+            {...register(props.id, props.validations)}
+          >
+            {props.value}
+          </textarea>
+        ) : (
+          <input
+            className={props.className || 'form-control__input'}
+            type={inputType}
+            id={props.id}
+            defaultValue={props.value}
+            {...register(props.id, props.validations)}
+            dir="auto"
+          />
+        )}
         {isPassword && (
           <button
             type="button"

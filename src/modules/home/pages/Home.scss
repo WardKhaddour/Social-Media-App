@@ -1,14 +1,26 @@
 @import 'assets/scss/main.scss';
 
 .home {
+  padding: 4rem;
   &__posts {
     display: grid;
     grid-template-columns: 50% 50%;
     align-items: flex-start;
-    margin: 4rem;
 
     @include respond(md) {
       grid-template-columns: 100%;
+    }
+  }
+
+  &__add-post {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
+
+    &--title {
+      font-size: 2.6rem;
+      margin: 1rem 0;
     }
   }
 }
