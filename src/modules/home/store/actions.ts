@@ -7,11 +7,11 @@ import { ICOMMENT, IPOST } from '../interfaces';
 
 type HomeAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 
-export const getAllPosts = (): HomeAction<void> => {
+export const getAllPosts = (searchParams?: object): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {
-      const res = await Services.getAllPosts();
+      const res = await Services.getAllPosts(searchParams);
       const { posts }: { posts: IPOST[] } = res.data;
 
       dispatch(homeActions.setPosts(posts));

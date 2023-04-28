@@ -34,7 +34,7 @@ const UserProfile = ({ id }: { id?: string }) => {
   }, [dispatch, userId, user?._id]);
 
   if (_id && userId === _id && !id) {
-    return <Navigate to="/me" />;
+    return <Navigate to="/me" replace />;
   }
 
   if (isLoading) {

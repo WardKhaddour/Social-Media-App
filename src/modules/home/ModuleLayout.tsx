@@ -1,9 +1,5 @@
 import LoadingSpinner from 'components/LoadingSpinner';
-import {
-  getAllCategories,
-  getAllPosts,
-  mostPopularUsers,
-} from './store/actions';
+import { getAllCategories, mostPopularUsers } from './store/actions';
 import { useEffect, useState } from 'react';
 
 import { useRoutes } from 'react-router-dom';
@@ -22,7 +18,6 @@ const ModuleLayout = () => {
 
   useEffect(() => {
     Promise.all([
-      dispatch(getAllPosts()),
       dispatch(mostPopularUsers()),
       dispatch(getAllCategories()),
     ]).then(() => {

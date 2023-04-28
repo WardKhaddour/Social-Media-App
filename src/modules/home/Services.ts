@@ -14,8 +14,10 @@ import {
 import { axiosInstance } from 'utils/api/axios';
 
 class Services {
-  static async getAllPosts() {
-    const res = await axiosInstance.get(POSTS);
+  static async getAllPosts(searchParams?: object) {
+    const res = await axiosInstance.get(POSTS, {
+      params: searchParams,
+    });
     return res.data;
   }
 

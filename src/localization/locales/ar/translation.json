@@ -47,7 +47,11 @@
     "addPost": "إنشاء منشور جديد",
     "title": "العنوان",
     "content": "المحتوى",
-    "attachments": "المرفقات"
+    "attachments": "المرفقات",
+    "followingPosts": "منشورات المتابَعين",
+    "sortOptionsDate": "تاريخ النشر",
+    "sortOptionsLike": "الأكثر اعجاباً",
+    "sortOptionsComment": "الأكثر تعليقاً"
   },
   "action": {
     "login": "تسجيل الدخول",
@@ -71,7 +75,8 @@
     "unfollow": "الغاء المتابعة",
     "loadMoreCategories": "تحميل المزيد من الفئات",
     "attachFiles": "ارفاق ملفات",
-    "remove": "إزالة"
+    "remove": "إزالة",
+    "sortPosts": "ترتيب المنشورات"
   },
   "validateMsg": {
     "emailRequired": "البريد الاكتروني مطلوب",

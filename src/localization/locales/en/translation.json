@@ -47,7 +47,11 @@
     "addPost": "Add New Post",
     "title": "Title",
     "content": "Content",
-    "attachments": "Attachments"
+    "attachments": "Attachments",
+    "followingPosts": "Following Posts",
+    "sortOptionsDate": "Date",
+    "sortOptionsLike": "Most Liked",
+    "sortOptionsComment": "Most Comments"
   },
   "action": {
     "login": "Login",
@@ -71,7 +75,8 @@
     "unfollow": "Unfollow",
     "loadMoreCategories": "Load More Categories",
     "attachFiles": "Attach Files",
-    "remove": "Remove"
+    "remove": "Remove",
+    "sortPosts": "Sort Posts"
   },
   "validateMsg": {
     "emailRequired": "E-Mail is required",
