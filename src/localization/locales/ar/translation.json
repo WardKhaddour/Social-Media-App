@@ -81,6 +81,8 @@
     "shortPassword": "كلمة المرور يجب ان تكون 6 أحرف على الأقل",
     "noMatchedPasswords": "كلمتا المرور غير متطابقتين",
     "tokenRequired": "الرمز مطلوب",
-    "emptyComment": "الرجاء كتابة تعليق"
+    "emptyComment": "الرجاء كتابة تعليق",
+    "postTitleRequired": "عنوان المنشور مطلوب",
+    "postContentRequired": "محتوى المنشور مطلوب"
   }
 }

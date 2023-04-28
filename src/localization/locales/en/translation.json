@@ -81,6 +81,8 @@
     "shortPassword": "Password should be at least 6 characters long",
     "noMatchedPasswords": "Passwords doesn't match",
     "tokenRequired": "Token is required",
-    "emptyComment": "Please type comment"
+    "emptyComment": "Please type comment",
+    "postTitleRequired": "Post title is required",
+    "postContentRequired": "Post content is required"
   }
 }

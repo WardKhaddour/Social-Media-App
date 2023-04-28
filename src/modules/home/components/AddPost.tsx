@@ -21,7 +21,10 @@ const AddPost = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const methods = useForm<PostInputs>();
-
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
   const [isFormShown, setIsFormShown] = useState(false);
   const { categories } = useSelector((state: RootState) => state.home);
   const selectionRef = useRef<ISelectionRef>(null);
@@ -41,7 +44,7 @@ const AddPost = () => {
 
   const handleLoadCategories = async () => {};
 
-  const formSubmitHandler = methods.handleSubmit(async data => {
+  const formSubmitHandler = handleSubmit(async data => {
     const categories = selectionRef.current?.getSelections();
     const attachments = attachmentsRef.current?.getAttachedFiles();
     const reqData = { ...data, categories, attachments };
@@ -53,6 +56,13 @@ const AddPost = () => {
   });
 
   const backdropClasses = isFormShown ? '' : 'hidden';
+
+  const titleInputClasses = `form-control__input ${
+    errors.title?.message ? 'form-control__input--invalid' : ''
+  }`;
+  const contentInputClasses = `form-control__input ${
+    errors.content?.message ? 'form-control__input--invalid' : ''
+  }`;
 
   return (
     <>
@@ -70,11 +80,24 @@ const AddPost = () => {
               onSubmit={formSubmitHandler}
             >
               <h2 className="add-post__form--title">{t('label.addPost')}</h2>
-              <FormInput id="title" label={t('label.title')} />
+              <FormInput
+                id="title"
+                label={t('label.title')}
+                validations={{
+                  required: t('validateMsg.postTitleRequired'),
+                }}
+                isInvalidMessage={errors.title?.message}
+                className={titleInputClasses}
+              />
               <FormInput
                 id="content"
                 label={t('label.content')}
                 inputFieldType="textarea"
+                validations={{
+                  required: t('validateMsg.postContentRequired'),
+                }}
+                isInvalidMessage={errors.content?.message}
+                className={contentInputClasses}
               />
               <Select
                 title={t('msg.selectCategories')}
