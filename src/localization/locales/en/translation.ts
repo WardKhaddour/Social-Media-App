@@ -21,6 +21,7 @@ const translations = {
     updatePhoto: 'Update My Photo',
     userNoPosts: "{{name}} Haven't posted yet !",
     selectCategories: 'Select Categories',
+    noPosts: 'No Posts Available',
   },
   label: {
     email: 'E-Mail',

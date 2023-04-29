@@ -10,11 +10,15 @@ import { getAllPosts } from '../store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
 import FilterPosts from '../components/FilterPosts';
 import Pagination from '../components/Pagination';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-  const { posts, postsPagination } = useSelector(
-    (state: RootState) => state.home
-  );
+  const { t } = useTranslation();
+  const {
+    posts,
+    postsPagination,
+    isLoading: postsIsLoading,
+  } = useSelector((state: RootState) => state.home);
 
   const page = +postsPagination.page;
   const totalPages = +postsPagination.totalPages;
@@ -26,7 +30,7 @@ const Home = () => {
   const [search] = useSearchParams();
 
   const dispatch = useDispatch<AppDispatch>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(postsIsLoading);
 
   useEffect(() => {
     const searchObj = Object.fromEntries(new URLSearchParams(search));
@@ -46,7 +50,10 @@ const Home = () => {
         {posts.map(post => (
           <Post key={post._id} {...post} />
         ))}
-        <Pagination page={page} totalPages={totalPages} />
+        {!posts.length && (
+          <p className="home-posts__no-posts">{t('msg.noPosts')}</p>
+        )}
+        {!!posts.length && <Pagination page={page} totalPages={totalPages} />}
       </section>
     </>
   );
