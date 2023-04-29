@@ -7,11 +7,34 @@ import { ICOMMENT, IPOST } from '../interfaces';
 
 type HomeAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 
-export const getAllPosts = (searchParams?: object): HomeAction<void> => {
+export const getAllPosts = (
+  searchParams?: {
+    sort?: string;
+    category?: string;
+  },
+  options?: {
+    mostPopular?: boolean;
+    byFollowing?: boolean;
+  }
+): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {
-      const res = await Services.getAllPosts(searchParams);
+      let res;
+      let category: string | undefined;
+      if (searchParams?.category) {
+        category = searchParams.category;
+        delete searchParams.category;
+      }
+      if (!options && category) {
+        res = await Services.getPostsByCategory(category, searchParams);
+      } else if (!options) {
+        res = await Services.getAllPosts(searchParams);
+      } else if (options?.mostPopular) {
+        res = await Services.getMostPopularPosts(searchParams);
+      } else if (options.byFollowing) {
+        res = await Services.getPostsByFollowing(searchParams);
+      }
       const { posts }: { posts: IPOST[] } = res.data;
 
       dispatch(homeActions.setPosts(posts));

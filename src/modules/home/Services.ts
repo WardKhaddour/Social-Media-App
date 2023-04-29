@@ -10,12 +10,34 @@ import {
   USER_DETAILS,
   FOLLOW_USER,
   SAVED_POSTS,
+  MOST_POPULAR_POSTS,
+  POSTS_BY_CATEGORY,
 } from './endpoints';
 import { axiosInstance } from 'utils/api/axios';
 
 class Services {
   static async getAllPosts(searchParams?: object) {
     const res = await axiosInstance.get(POSTS, {
+      params: searchParams,
+    });
+    return res.data;
+  }
+
+  static async getMostPopularPosts(searchParams?: object) {
+    const res = await axiosInstance.get(MOST_POPULAR_POSTS, {
+      params: searchParams,
+    });
+    return res.data;
+  }
+  static async getPostsByFollowing(searchParams?: object) {
+    const res = await axiosInstance.get(FOLLOWING_POSTS, {
+      params: searchParams,
+    });
+    return res.data;
+  }
+
+  static async getPostsByCategory(category:string,searchParams?: object) {
+    const res = await axiosInstance.get(POSTS_BY_CATEGORY(category), {
       params: searchParams,
     });
     return res.data;
@@ -33,11 +55,6 @@ class Services {
     attachments?: File[];
   }) {
     const res = await axiosInstance.post(POSTS, data);
-    return res.data;
-  }
-
-  static async getPostsByFollowing() {
-    const res = await axiosInstance.get(FOLLOWING_POSTS);
     return res.data;
   }
 
