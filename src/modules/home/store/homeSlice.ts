@@ -4,12 +4,14 @@ import {
   ICATEGORIES,
   ICOMMENT,
   IUSERS_DETAILS,
+  IPostsPagination,
 } from '../interfaces';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface HOME_STATE {
   isLoading: boolean;
   posts: IPOST[];
+  postsPagination: IPostsPagination;
   savedPosts: IPOST[];
   popularUsers: IUSERS[];
   categories: ICATEGORIES[];
@@ -21,6 +23,7 @@ interface HOME_STATE {
 const initialState: HOME_STATE = {
   isLoading: false,
   posts: [],
+  postsPagination: { page: 0, totalPages: 0 },
   savedPosts: [],
   popularUsers: [],
   categories: [],
@@ -39,6 +42,10 @@ const homeSlice = createSlice({
 
     setPosts(state, action: PayloadAction<any>) {
       state.posts = action.payload;
+    },
+
+    setPostsPagination(state, action: PayloadAction<any>) {
+      state.postsPagination = action.payload;
     },
 
     setSavedPosts(state, action: PayloadAction<any>) {

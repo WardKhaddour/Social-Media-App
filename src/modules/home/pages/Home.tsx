@@ -9,10 +9,16 @@ import { useEffect, useState } from 'react';
 import { getAllPosts } from '../store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
 import FilterPosts from '../components/FilterPosts';
-// import { URLSearchParams } from 'url';
+import Pagination from '../components/Pagination';
 
 const Home = () => {
-  const { posts } = useSelector((state: RootState) => state.home);
+  const { posts, postsPagination } = useSelector(
+    (state: RootState) => state.home
+  );
+
+  const page = +postsPagination.page;
+  const totalPages = +postsPagination.totalPages;
+
   const { isAuthenticated } = useSelector(
     (state: RootState) => state.user.user
   );
@@ -36,10 +42,11 @@ const Home = () => {
       {isAuthenticated && <AddPost />}
       <hr />
       <FilterPosts />
-      <section className="home__posts">
+      <section className="home-posts">
         {posts.map(post => (
           <Post key={post._id} {...post} />
         ))}
+        <Pagination page={page} totalPages={totalPages} />
       </section>
     </>
   );

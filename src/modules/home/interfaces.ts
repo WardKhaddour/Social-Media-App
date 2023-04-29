@@ -10,6 +10,11 @@ export interface IPOST {
   isLiked?: boolean;
   isSaved?: boolean;
 }
+
+export interface IPostsPagination {
+  page: number;
+  totalPages: number;
+}
 export interface IUSERS {
   _id: string;
   name: string;

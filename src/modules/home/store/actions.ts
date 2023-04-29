@@ -35,9 +35,13 @@ export const getAllPosts = (
       } else if (options.byFollowing) {
         res = await Services.getPostsByFollowing(searchParams);
       }
-      const { posts }: { posts: IPOST[] } = res.data;
-
+      const {
+        posts,
+        totalPages,
+        page,
+      }: { posts: IPOST[]; totalPages: number; page: number } = res.data;
       dispatch(homeActions.setPosts(posts));
+      dispatch(homeActions.setPostsPagination({ page, totalPages }));
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));
