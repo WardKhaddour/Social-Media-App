@@ -47,7 +47,8 @@ const AddPost = () => {
   const formSubmitHandler = handleSubmit(async data => {
     const categories = selectionRef.current?.getSelections();
     const attachments = attachmentsRef.current?.getAttachedFiles();
-    const reqData = { ...data, categories, attachments };
+
+    const reqData = { ...data, category: categories, attachments };
     await dispatch(addNewPost(reqData));
     selectionRef.current?.clearSelections();
     attachmentsRef.current?.clearAttachedFiles();
