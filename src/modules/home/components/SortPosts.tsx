@@ -2,31 +2,40 @@ import { MouseEvent, useState } from 'react';
 import './FilterPosts.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import './SortPosts.scss';
+
 const SortPosts = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [sortAsc, setSortAsc] = useState(
-    !searchParams.get('sort')?.startsWith('-')
-  );
-  const [isOptionsShown, setIsOptionsShown] = useState(false);
 
-  const sortOptions = [
-    {
-      name: t('label.sortOptionsDate'),
-      query: 'publishedAt',
-    },
-    {
-      name: t('label.sortOptionsLike'),
-      query: 'likesNum',
-    },
-    {
-      name: t('label.sortOptionsComment'),
-      query: 'commentsNum',
-    },
-  ];
+  const [state, setState] = useState({
+    sortAcs: !searchParams.get('sort')?.startsWith('-'),
+    isOptionsShown: false,
+    sortOptions: [
+      {
+        name: t('label.sortOptionsDate'),
+        query: 'publishedAt',
+        selected: true,
+      },
+      {
+        name: t('label.sortOptionsLike'),
+        query: 'likesNum',
+        selected: false,
+      },
+      {
+        name: t('label.sortOptionsComment'),
+        query: 'commentsNum',
+        selected: false,
+      },
+    ],
+  });
 
   const toggleShowOptions = () => {
-    setIsOptionsShown(prevState => !prevState);
+    setState(prevState => ({
+      ...prevState,
+      isOptionsShown: !prevState.isOptionsShown,
+    }));
   };
 
   const toggleSortDir = () => {
@@ -35,8 +44,10 @@ const SortPosts = () => {
       if (!sort) {
         return prev;
       }
-      setSortAsc(prevState => !prevState);
-
+      setState(prevState => ({
+        ...prevState,
+        sortAcs: !prevState.sortAcs,
+      }));
       if (sort.startsWith('-')) {
         prev.set('sort', `${prev.get('sort')?.split('-')[1]}` || '');
       } else {
@@ -51,13 +62,31 @@ const SortPosts = () => {
     if (target.tagName !== 'LI' || !target.dataset.option) {
       return;
     }
+
+    setState(prevState => {
+      const newState = { ...prevState };
+      newState.isOptionsShown = !newState.isOptionsShown;
+      const selectedOptionIndex = prevState.sortOptions.findIndex(
+        option => option.query === target.dataset.option!
+      );
+      if (selectedOptionIndex !== -1) {
+        newState.sortOptions.forEach((el, index) => {
+          if (index === selectedOptionIndex) {
+            el.selected = true;
+          } else {
+            el.selected = false;
+          }
+        });
+      }
+      return newState;
+    });
     setSearchParams(prev => {
       prev.set('sort', target.dataset.option!);
       return prev;
     });
   };
 
-  const optionsClasses = isOptionsShown
+  const optionsClasses = state.isOptionsShown
     ? 'sort-posts__options sort-posts__options--shown'
     : 'sort-posts__options';
   return (
@@ -75,14 +104,15 @@ const SortPosts = () => {
           className="sort-posts__dir btn btn-secondary"
           onClick={toggleSortDir}
         >
-          {sortAsc ? <>&darr;</> : <>&uarr;</>}
+          {state.sortAcs ? <>&darr;</> : <>&uarr;</>}
         </button>
       </div>
       <ul className={optionsClasses} onClick={handleSortPosts}>
-        {sortOptions.map(option => (
+        {state.sortOptions.map(option => (
           <li
             key={option.name}
             data-option={option.query}
+            data-selected={option.selected}
             className="sort-posts__option"
           >
             {option.name}
