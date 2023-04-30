@@ -12,8 +12,8 @@ const HomeNav = ({ className }: { className: string }) => {
   return (
     <nav className={className}>
       <ul className="home__nav--list">
-        <NavItem name={t('label.recommendedUsers')} notCategory />
-        <NavItem name={t('label.allCategories')} notCategory />
+        <NavItem name={t('label.recommendedUsers')} to="/all-users" />
+        <NavItem name={t('label.allCategories')} to="/all-categories" />
 
         {categories.map(category => (
           <NavItem key={category._id} name={category.name} />

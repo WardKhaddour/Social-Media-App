@@ -21,7 +21,8 @@ const translations = {
     updatePhoto: 'تغيير صورتي الشخصية',
     userNoPosts: '{{name}} لم ينشر بعد !',
     selectCategories: 'اختر الفئات',
-    noPosts: 'لا يوجد منشورات متوفرة',
+    noPosts: 'لا يوجد منشورات متوفرة!',
+    noUsers: 'لا يوجد مستخدمين!',
   },
   label: {
     email: 'البريد الالكتروني',

@@ -12,6 +12,7 @@ import {
   SAVED_POSTS,
   MOST_POPULAR_POSTS,
   POSTS_BY_CATEGORY,
+  ALL_USERS,
 } from './endpoints';
 import { axiosInstance } from 'utils/api/axios';
 
@@ -36,7 +37,7 @@ class Services {
     return res.data;
   }
 
-  static async getPostsByCategory(category:string,searchParams?: object) {
+  static async getPostsByCategory(category: string, searchParams?: object) {
     const res = await axiosInstance.get(POSTS_BY_CATEGORY(category), {
       params: searchParams,
     });
@@ -60,6 +61,13 @@ class Services {
 
   static async getMostPopularUsers() {
     const res = await axiosInstance.get(MOST_POPULAR_USERS);
+    return res.data;
+  }
+
+  static async getAllUsers(searchParams?: object) {
+    const res = await axiosInstance.get(ALL_USERS, {
+      params: searchParams,
+    });
     return res.data;
   }
 

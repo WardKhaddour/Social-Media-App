@@ -16,28 +16,37 @@ const Home = () => {
   const { t } = useTranslation();
   const {
     posts,
-    postsPagination,
+    pagination,
     isLoading: postsIsLoading,
   } = useSelector((state: RootState) => state.home);
 
-  const page = +postsPagination.page;
-  const totalPages = +postsPagination.totalPages;
+  const page = +pagination.page;
+  const totalPages = +pagination.totalPages;
 
   const { isAuthenticated } = useSelector(
     (state: RootState) => state.user.user
   );
 
-  const [search] = useSearchParams();
+  const [search, setSearch] = useSearchParams();
 
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(postsIsLoading);
 
   useEffect(() => {
     const searchObj = Object.fromEntries(new URLSearchParams(search));
+    console.log(searchObj);
+
+    setSearch(prev => {
+      if (prev.get('sort')) {
+        return prev;
+      }
+      prev.set('sort', '-publishedAt');
+      return prev;
+    });
     dispatch(getAllPosts(searchObj)).then(() => {
       setIsLoading(false);
     });
-  }, [dispatch, search]);
+  }, [dispatch, search, setSearch]);
 
   if (isLoading) return <LoadingSpinner loading={isLoading} />;
 

@@ -11,9 +11,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface HOME_STATE {
   isLoading: boolean;
   posts: IPOST[];
-  postsPagination: IPostsPagination;
+  pagination: IPostsPagination;
   savedPosts: IPOST[];
   popularUsers: IUSERS[];
+  allUsers: IUSERS[];
   categories: ICATEGORIES[];
   currentPost?: IPOST;
   commentsOnPost?: ICOMMENT[];
@@ -23,9 +24,11 @@ interface HOME_STATE {
 const initialState: HOME_STATE = {
   isLoading: false,
   posts: [],
-  postsPagination: { page: 0, totalPages: 0 },
+  pagination: { page: 0, totalPages: 0 },
   savedPosts: [],
   popularUsers: [],
+  allUsers: [],
+
   categories: [],
   currentPost: undefined,
   commentsOnPost: undefined,
@@ -44,8 +47,8 @@ const homeSlice = createSlice({
       state.posts = action.payload;
     },
 
-    setPostsPagination(state, action: PayloadAction<any>) {
-      state.postsPagination = action.payload;
+    sePagination(state, action: PayloadAction<any>) {
+      state.pagination = action.payload;
     },
 
     setSavedPosts(state, action: PayloadAction<any>) {
@@ -53,6 +56,9 @@ const homeSlice = createSlice({
     },
     setPopularUsers(state, action: PayloadAction<any>) {
       state.popularUsers = action.payload;
+    },
+    setAllUsers(state, action: PayloadAction<any>) {
+      state.allUsers = action.payload;
     },
     setCategories(state, action: PayloadAction<any>) {
       state.categories = action.payload;

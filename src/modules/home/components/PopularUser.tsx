@@ -27,7 +27,7 @@ const PopularUser = (props: PopularUserInterface) => {
         </span>
       </div>
       <div className="popular-user__actions">
-        <Link to={`user/${props._id}`} className="popular-user__view">
+        <Link to={`/user/${props._id}`} className="popular-user__view">
           {t('action.view')}
         </Link>
       </div>

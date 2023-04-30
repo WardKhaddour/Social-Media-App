@@ -1,3 +1,4 @@
+import { IUSERS } from './../interfaces';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import Services from '../Services';
@@ -40,8 +41,9 @@ export const getAllPosts = (
         totalPages,
         page,
       }: { posts: IPOST[]; totalPages: number; page: number } = res.data;
+
       dispatch(homeActions.setPosts(posts));
-      dispatch(homeActions.setPostsPagination({ page, totalPages }));
+      dispatch(homeActions.sePagination({ page, totalPages }));
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));
@@ -91,9 +93,33 @@ export const mostPopularUsers = (): HomeAction<void> => {
     dispatch(homeActions.setIsLoading(true));
     try {
       const res = await Services.getMostPopularUsers();
-      const { users } = res.data;
+      const { users }: { users: IUSERS } = res.data;
 
       dispatch(homeActions.setPopularUsers(users));
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
+
+export const getAllUsers = (searchParams?: object): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+    try {
+      const res = await Services.getAllUsers(searchParams);
+      const {
+        users,
+        page,
+        totalPages,
+      }: {
+        users: IUSERS;
+        totalPages: number;
+        page: number;
+      } = res.data;
+
+      dispatch(homeActions.setAllUsers(users));
+      dispatch(homeActions.sePagination({ page, totalPages }));
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));

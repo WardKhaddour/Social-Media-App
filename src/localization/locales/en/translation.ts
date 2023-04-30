@@ -22,6 +22,7 @@ const translations = {
     userNoPosts: "{{name}} Haven't posted yet !",
     selectCategories: 'Select Categories',
     noPosts: 'No Posts Available',
+    noUsers: 'No Users Available',
   },
   label: {
     email: 'E-Mail',

@@ -1,3 +1,4 @@
+export const ALL_USERS = '/user';
 export const POSTS = '/post';
 export const FOLLOWING_POSTS = '/post/following';
 export const POST = (postId: string) => `/post/${postId}`;
