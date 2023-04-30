@@ -10,13 +10,6 @@
     @include respond(md) {
       grid-template-columns: 100%;
     }
-
-    &__no-posts {
-      font-size: 2rem;
-      grid-column: 1 / -1;
-      text-align: center;
-      margin: 4rem 1rem;
-    }
   }
 
   &__add-post {

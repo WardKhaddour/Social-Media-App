@@ -43,7 +43,7 @@ const Pagination = ({
   };
   return (
     <div className="pagination">
-      {page !== 1 && (
+      {page > 1 && (
         <>
           <button className="pagination__prev" onClick={getFirstPage}>
             &lt;&lt;
@@ -56,7 +56,7 @@ const Pagination = ({
       <span className="pagination__page">{page}</span>
       <span>/</span>
       <span className="pagination__total">{totalPages}</span>
-      {page !== totalPages && (
+      {page < totalPages && (
         <>
           <button className="pagination__next" onClick={getNextPage}>
             &gt;

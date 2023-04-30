@@ -28,9 +28,8 @@ const SavedItems = () => {
         {t('label.saved')}
       </h2>
       <section className="saved-items__posts">
-        {posts.map(post => (
-          <Post key={post._id} {...post} />
-        ))}
+        {!posts.length && <p className="no-posts">{t('msg.noPosts')}</p>}
+        {!!posts.length && posts.map(post => <Post key={post._id} {...post} />)}
       </section>
     </div>
   );

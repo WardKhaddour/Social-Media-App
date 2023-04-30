@@ -50,9 +50,7 @@ const Home = () => {
         {posts.map(post => (
           <Post key={post._id} {...post} />
         ))}
-        {!posts.length && (
-          <p className="home-posts__no-posts">{t('msg.noPosts')}</p>
-        )}
+        {!posts.length && <p className="no-posts">{t('msg.noPosts')}</p>}
         {!!posts.length && <Pagination page={page} totalPages={totalPages} />}
       </section>
     </>
