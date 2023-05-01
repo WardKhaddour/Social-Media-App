@@ -34,7 +34,6 @@ const Home = () => {
 
   useEffect(() => {
     const searchObj = Object.fromEntries(new URLSearchParams(search));
-    console.log(searchObj);
 
     setSearch(prev => {
       if (prev.get('sort')) {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import NavItem from './NavItem';
+import CategoryItem from './CategoryItem';
 import './Categories.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
@@ -15,8 +15,8 @@ const Categories = ({ className }: { className: string }) => {
       <h2 className={`${className}__header`}>{t('label.categories')}</h2>
 
       <ul className={className}>
-        {categories.map(category => (
-          <NavItem key={category._id} name={category.name} />
+        {categories.slice(0, 3).map(category => (
+          <CategoryItem key={category._id} name={category.name} />
         ))}
       </ul>
       <Link className={`${className}__link`} to="all-categories">

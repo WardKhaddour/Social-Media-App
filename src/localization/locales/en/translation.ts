@@ -23,6 +23,7 @@ const translations = {
     selectCategories: 'Select Categories',
     noPosts: 'No Posts Available',
     noUsers: 'No Users Available',
+    noCategories: 'No Categories Available',
   },
   label: {
     email: 'E-Mail',

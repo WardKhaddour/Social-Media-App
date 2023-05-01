@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import './HomeNav.scss';
-import NavItem from './NavItem';
+import CategoryItem from './CategoryItem';
 import { RootState } from 'store';
 import { useTranslation } from 'react-i18next';
 
@@ -12,11 +12,12 @@ const HomeNav = ({ className }: { className: string }) => {
   return (
     <nav className={className}>
       <ul className="home__nav--list">
-        <NavItem name={t('label.recommendedUsers')} to="/all-users" />
-        <NavItem name={t('label.allCategories')} to="/all-categories" />
+        <CategoryItem name={t('label.home')} to="/" />
+        <CategoryItem name={t('label.recommendedUsers')} to="/all-users" />
+        <CategoryItem name={t('label.allCategories')} to="/all-categories" />
 
         {categories.map(category => (
-          <NavItem key={category._id} name={category.name} />
+          <CategoryItem key={category._id} name={category.name} />
         ))}
       </ul>
     </nav>

@@ -1,4 +1,4 @@
-import './NavItem.scss';
+import './CategoryItem.scss';
 import {
   Link,
   useLocation,
@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
-const NavItem = ({ name, to }: { name: string; to?: string }) => {
+const CategoryItem = ({ name, to }: { name: string; to?: string }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [, setSearch] = useSearchParams();
@@ -23,12 +23,16 @@ const NavItem = ({ name, to }: { name: string; to?: string }) => {
   return (
     <>
       {!!to && (
-        <Link to={to} className="nav__item" onClick={handlePostsByCategory}>
+        <Link
+          to={to}
+          className="category__item"
+          onClick={handlePostsByCategory}
+        >
           {name}
         </Link>
       )}
       {!to && (
-        <li className="nav__item" onClick={handlePostsByCategory}>
+        <li className="category__item" onClick={handlePostsByCategory}>
           {name}
         </li>
       )}
@@ -36,4 +40,4 @@ const NavItem = ({ name, to }: { name: string; to?: string }) => {
   );
 };
 
-export default NavItem;
+export default CategoryItem;

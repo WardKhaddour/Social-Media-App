@@ -5,6 +5,7 @@ import UserProfile from './pages/UserProfile';
 import Me from './pages/Me';
 import SavedItems from './pages/SavedItems';
 import AllUsers from './pages/AllUsers';
+import AllCategories from './pages/AllCategories';
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +24,10 @@ const routes: RouteObject[] = [
   {
     path: 'all-users',
     element: <AllUsers />,
+  },
+  {
+    path: 'all-categories',
+    element: <AllCategories />,
   },
   {
     path: 'me',

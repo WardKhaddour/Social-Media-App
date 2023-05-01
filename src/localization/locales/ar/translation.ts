@@ -23,6 +23,7 @@ const translations = {
     selectCategories: 'اختر الفئات',
     noPosts: 'لا يوجد منشورات متوفرة!',
     noUsers: 'لا يوجد مستخدمين!',
+    noCategories: 'لا يوجد فئات!',
   },
   label: {
     email: 'البريد الالكتروني',

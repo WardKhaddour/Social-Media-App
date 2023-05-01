@@ -1,4 +1,4 @@
-import { IUSERS } from './../interfaces';
+import { IUSERS, ICATEGORIES } from './../interfaces';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import Services from '../Services';
@@ -127,14 +127,23 @@ export const getAllUsers = (searchParams?: object): HomeAction<void> => {
   };
 };
 
-export const getAllCategories = (): HomeAction<void> => {
+export const getAllCategories = (searchParams?: object): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {
-      const res = await Services.getCategories();
-      const { categories } = res.data;
+      const res = await Services.getCategories(searchParams);
+      const {
+        categories,
+        page,
+        totalPages,
+      }: {
+        categories: ICATEGORIES;
+        totalPages: number;
+        page: number;
+      } = res.data;
 
       dispatch(homeActions.setCategories(categories));
+      dispatch(homeActions.sePagination({ page, totalPages }));
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));

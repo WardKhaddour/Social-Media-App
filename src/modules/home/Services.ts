@@ -71,8 +71,10 @@ class Services {
     return res.data;
   }
 
-  static async getCategories() {
-    const res = await axiosInstance.get(CATEGORIES);
+  static async getCategories(searchParams?: object) {
+    const res = await axiosInstance.get(CATEGORIES, {
+      params: searchParams,
+    });
     return res.data;
   }
 

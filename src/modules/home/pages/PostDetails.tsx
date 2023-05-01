@@ -9,7 +9,7 @@ import {
   savePost,
 } from '../store/actions';
 import { Link, useParams } from 'react-router-dom';
-import NavItem from '../components/NavItem';
+import CategoryItem from '../components/CategoryItem';
 
 import { ReactComponent as IconLike } from 'assets/icons/like.svg';
 import { ReactComponent as IconLikeFilled } from 'assets/icons/like_filled.svg';
@@ -81,7 +81,7 @@ const PostDetails = () => {
           <span className="post__categories--title">Post Categories:</span>
           <span className="post__categories--list">
             {post?.category.map(cat => (
-              <NavItem name={cat.name} key={cat._id} />
+              <CategoryItem name={cat.name} key={cat._id} />
             ))}
           </span>
         </section>
