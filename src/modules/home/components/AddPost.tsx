@@ -26,7 +26,15 @@ const AddPost = () => {
     formState: { errors },
   } = methods;
   const [isFormShown, setIsFormShown] = useState(false);
-  const { categories } = useSelector((state: RootState) => state.home);
+  const { categories: allCategories } = useSelector(
+    (state: RootState) => state.home
+  );
+
+  const [categoriesState, setCategoriesState] = useState({
+    categories: allCategories.slice(0, 3),
+    currentNum: 3,
+  });
+
   const selectionRef = useRef<ISelectionRef>(null);
   const attachmentsRef = useRef<IAttachFiles>(null);
 
@@ -42,7 +50,20 @@ const AddPost = () => {
     event.stopPropagation();
   };
 
-  const handleLoadCategories = async () => {};
+  const handleLoadCategories = async () => {
+    setCategoriesState(prevState => {
+      const newState = {
+        categories: [
+          ...prevState.categories,
+          ...allCategories.slice(3, prevState.currentNum + 3),
+        ],
+        currentNum: prevState.currentNum + 3,
+      };
+      console.log(newState);
+
+      return newState;
+    });
+  };
 
   const formSubmitHandler = handleSubmit(async data => {
     const categories = selectionRef.current?.getSelections();
@@ -102,16 +123,18 @@ const AddPost = () => {
               />
               <Select
                 title={t('msg.selectCategories')}
-                options={categories}
+                options={categoriesState.categories}
                 ref={selectionRef}
               />
-              <button
-                onClick={handleLoadCategories}
-                className="add-post__form--load-categories"
-                type="button"
-              >
-                {t('action.loadMoreCategories')}
-              </button>
+              {categoriesState.currentNum < allCategories.length && (
+                <button
+                  onClick={handleLoadCategories}
+                  className="add-post__form--load-categories"
+                  type="button"
+                >
+                  {t('action.loadMoreCategories')}
+                </button>
+              )}
               <AttachFiles
                 ref={attachmentsRef}
                 primaryActionText={t('action.attachFiles')}
