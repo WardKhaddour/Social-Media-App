@@ -68,12 +68,7 @@ export const getPost = (postId: string): HomeAction<void> => {
   };
 };
 
-export const addNewPost = (data: {
-  title: string;
-  content: string;
-  categories?: string[];
-  attachments?: File[];
-}): HomeAction<void> => {
+export const addNewPost = (data: FormData): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));
     try {

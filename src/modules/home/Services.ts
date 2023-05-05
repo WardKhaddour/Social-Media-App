@@ -49,13 +49,12 @@ class Services {
     return res.data;
   }
 
-  static async addNewPost(data: {
-    title: string;
-    content: string;
-    categories?: string[];
-    attachments?: File[];
-  }) {
-    const res = await axiosInstance.post(POSTS, data);
+  static async addNewPost(data: FormData) {
+    const res = await axiosInstance.post(POSTS, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return res.data;
   }
 

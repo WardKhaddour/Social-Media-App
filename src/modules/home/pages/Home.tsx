@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 
 import './Home.scss';
-import AddPost from '../components/AddPost';
+import EditPost from '../components/EditPost';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getAllPosts } from '../store/actions';
@@ -51,7 +51,7 @@ const Home = () => {
 
   return (
     <>
-      {isAuthenticated && <AddPost />}
+      {isAuthenticated && <EditPost />}
       <hr />
       <FilterPosts />
       <section className="home-posts">

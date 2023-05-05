@@ -1,4 +1,10 @@
-import { MouseEvent, forwardRef, useImperativeHandle, useState } from 'react';
+import {
+  MouseEvent,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import './Select.scss';
 
@@ -19,12 +25,15 @@ export interface ISelectionRef {
 
 const Select = forwardRef<ISelectionRef, IProps>((props, ref) => {
   const [selections, setSelections] = useState(new Set<string>());
-
+  const categoriesRef = useRef<HTMLUListElement>(null);
   useImperativeHandle(ref, () => ({
     getSelections() {
       return Array.from(selections);
     },
     clearSelections() {
+      categoriesRef.current?.querySelectorAll('li').forEach(child => {
+        child.classList.remove('selected');
+      });
       setSelections(new Set());
     },
   }));
@@ -60,7 +69,11 @@ const Select = forwardRef<ISelectionRef, IProps>((props, ref) => {
   return (
     <div className="select">
       <h2 className="select__title">{props.title}</h2>
-      <ul className="select__list" onClick={handleSelection}>
+      <ul
+        className="select__list"
+        onClick={handleSelection}
+        ref={categoriesRef}
+      >
         {props.options?.map(option => (
           <li
             key={option._id}

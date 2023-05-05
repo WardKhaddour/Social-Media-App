@@ -73,26 +73,26 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
         <input
           id="attachments"
           onChange={handleAttachFile}
-          className="add-post__form--attach-file"
+          className="edit-post__form--attach-file"
           ref={attachmentsRef}
           type="file"
-          accept="image/*, .pdf"
+          accept="image/*, .pdf, video/*"
           multiple
         />
       </div>
       {files && (
         <div
-          className="add-post__form--attached-files"
+          className="edit-post__form--attached-files"
           onClick={handleRemoveFile}
         >
           {Array.from(files).map(file => (
-            <p className="add-post__form--attached-file" key={file.name}>
-              <span className="add-post__form--attached-file__name">
+            <p className="edit-post__form--attached-file" key={file.name}>
+              <span className="edit-post__form--attached-file__name">
                 {file.name}
               </span>
               <span
                 data-name={file}
-                className="add-post__form--attached-file__remove"
+                className="edit-post__form--attached-file__remove"
               >
                 {secondaryActionText}
               </span>

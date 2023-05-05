@@ -4,7 +4,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { useTranslation } from 'react-i18next';
 import { FormEvent, MouseEvent, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import './AddPost.scss';
+import './EditPost.scss';
 import FormInput from 'components/FormInput';
 import Select, { ISelectionRef } from './Select';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ interface PostInputs {
   content: string;
 }
 
-const AddPost = () => {
+const EditPost = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const methods = useForm<PostInputs>();
@@ -69,8 +69,17 @@ const AddPost = () => {
     const categories = selectionRef.current?.getSelections();
     const attachments = attachmentsRef.current?.getAttachedFiles();
 
-    const reqData = { ...data, category: categories, attachments };
-    await dispatch(addNewPost(reqData));
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('content', data.content);
+    categories?.forEach(cat => {
+      formData.append('category', cat);
+    });
+    attachments?.forEach(attachment => {
+      formData.append('attachments', attachment);
+    });
+
+    await dispatch(addNewPost(formData));
     selectionRef.current?.clearSelections();
     attachmentsRef.current?.clearAttachedFiles();
     methods.reset();
@@ -88,20 +97,20 @@ const AddPost = () => {
 
   return (
     <>
-      <form className="home__add-post" onSubmit={showFormHandler}>
-        <h3 className="home__add-post--title">{t('label.addPost')}</h3>
+      <form className="home__edit-post" onSubmit={showFormHandler}>
+        <h3 className="home__edit-post--title">{t('label.addPost')}</h3>
         <PrimaryButton text={t('action.add')} type="submit" />
       </form>
       {ReactDOM.createPortal(
         <Backdrop className={backdropClasses} onClick={hideFormHandler}>
           <FormProvider {...methods}>
             <form
-              className="add-post__form"
+              className="edit-post__form"
               onClick={preventCloseForm}
               dir="auto"
               onSubmit={formSubmitHandler}
             >
-              <h2 className="add-post__form--title">{t('label.addPost')}</h2>
+              <h2 className="edit-post__form--title">{t('label.addPost')}</h2>
               <FormInput
                 id="title"
                 label={t('label.title')}
@@ -129,7 +138,7 @@ const AddPost = () => {
               {categoriesState.currentNum < allCategories.length && (
                 <button
                   onClick={handleLoadCategories}
-                  className="add-post__form--load-categories"
+                  className="edit-post__form--load-categories"
                   type="button"
                 >
                   {t('action.loadMoreCategories')}
@@ -150,4 +159,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default EditPost;
