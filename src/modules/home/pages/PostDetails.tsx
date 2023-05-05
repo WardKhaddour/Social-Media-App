@@ -19,6 +19,7 @@ import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
 
 import PostComments from '../components/PostComments';
 import './PostDetails.scss';
+import replaceURLs from 'utils/validators/replaceURLs';
 
 const PostDetails = () => {
   const [postsLoading, setPostsLoading] = useState(true);
@@ -74,7 +75,10 @@ const PostDetails = () => {
         <span>At&nbsp;</span>
         <span>{new Date(post?.publishedAt!).toLocaleDateString()}</span>
       </section>
-      <section className="post__content">{post?.content}</section>
+      <section
+        className="post__content"
+        dangerouslySetInnerHTML={{ __html: replaceURLs(post?.content!) }}
+      ></section>
 
       {post?.category && post.category.length > 0 && (
         <section className="post__categories">
