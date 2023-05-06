@@ -1,4 +1,4 @@
-@import "assets/scss/main.scss";
+@import 'assets/scss/main.scss';
 
 .btn {
   all: unset;
@@ -34,6 +34,15 @@
     &:hover {
       background-color: $color-primary;
       color: $color-white;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $color-white;
+      color: $color-primary;
     }
   }
 }

@@ -10,7 +10,6 @@ interface PostProps {
   author: { name: string; _id: string };
   title: string;
   content: string;
-  attachment?: string;
   publishedAt: string;
   category: { _id: string; name: string }[];
   isSaved?: boolean;

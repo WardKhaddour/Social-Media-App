@@ -5,6 +5,7 @@ export interface IPOST {
   content: string;
   publishedAt: string;
   category: { _id: string; name: string }[];
+  attachments?: { type: string; url: string; fileName: string }[];
   likesNum: number;
   commentsNum: number;
   isLiked?: boolean;

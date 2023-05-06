@@ -20,6 +20,7 @@ import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
 import PostComments from '../components/PostComments';
 import './PostDetails.scss';
 import replaceURLs from 'utils/validators/replaceURLs';
+import PostAttachments from '../components/PostAttachments';
 
 const PostDetails = () => {
   const [postsLoading, setPostsLoading] = useState(true);
@@ -61,6 +62,7 @@ const PostDetails = () => {
   const handleSavePost = async () => {
     await dispatch(savePost(postId!));
   };
+  console.log(post);
 
   return (
     <div className="post" dir="auto">
@@ -90,7 +92,7 @@ const PostDetails = () => {
           </span>
         </section>
       )}
-
+      {post?.attachments && <PostAttachments attachments={post.attachments} />}
       {isAuthenticated && (
         <section className="post__action">
           <div className="post__action--like">

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import AttachFiles, { IAttachFiles } from './AttachFiles';
 import { addNewPost } from '../store/actions';
+import { notificationActions } from 'store/notification';
 
 interface PostInputs {
   title: string;
@@ -79,6 +80,13 @@ const EditPost = () => {
       formData.append('attachments', attachment);
     });
 
+    setIsFormShown(false);
+    dispatch(
+      notificationActions.setNotificationContent({
+        message: t('msg.addingPost'),
+        success: true,
+      })
+    );
     await dispatch(addNewPost(formData));
     selectionRef.current?.clearSelections();
     attachmentsRef.current?.clearAttachedFiles();
@@ -148,6 +156,7 @@ const EditPost = () => {
                 ref={attachmentsRef}
                 primaryActionText={t('action.attachFiles')}
                 secondaryActionText={t('action.remove')}
+                filesLimit={3}
               />
               <PrimaryButton text={t('action.add')} type="submit" />
             </form>

@@ -15,6 +15,7 @@ export interface IAttachFiles {
 interface IProps {
   primaryActionText?: string;
   secondaryActionText?: string;
+  filesLimit?: number;
 }
 
 const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
@@ -33,10 +34,14 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
   }));
 
   const handleAttachFile = (event: ChangeEvent<HTMLInputElement>) => {
+    if (props.filesLimit && files.length >= props.filesLimit) {
+      return;
+    }
     const fileList = event.target.files;
     if (fileList) {
       const newFiles: File[] = [];
-      for (let i = 0; i < fileList.length; i++) {
+      const filesLength = props.filesLimit || fileList.length;
+      for (let i = 0; i < filesLength; i++) {
         const file = fileList[i];
         const fileExists = files.some(f => f.name === file.name);
         if (!fileExists) {
@@ -66,11 +71,35 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
 
   return (
     <>
+      {props.filesLimit && files.length >= props.filesLimit && (
+        <p className="edit-post__form--attachments-limit">
+          You can attach only 3 files at most
+        </p>
+      )}
+
       <div className="form-control">
-        <button type="button" className="btn btn-secondary">
-          <label htmlFor="attachments">{primaryActionText}</label>
+        <button
+          type="button"
+          disabled
+          className={`btn btn-secondary ${
+            props.filesLimit && files.length >= props.filesLimit
+              ? 'btn-disabled'
+              : ''
+          }`}
+        >
+          <label
+            htmlFor="attachments"
+            className={` ${
+              props.filesLimit && files.length >= props.filesLimit
+                ? 'btn-disabled'
+                : ''
+            }`}
+          >
+            {primaryActionText}
+          </label>
         </button>
         <input
+          disabled={!!(props.filesLimit && files.length >= props.filesLimit)}
           id="attachments"
           onChange={handleAttachFile}
           className="edit-post__form--attach-file"
@@ -80,6 +109,7 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
           multiple
         />
       </div>
+
       {files && (
         <div
           className="edit-post__form--attached-files"

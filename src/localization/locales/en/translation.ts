@@ -24,6 +24,8 @@ const translations = {
     noPosts: 'No Posts Available',
     noUsers: 'No Users Available',
     noCategories: 'No Categories Available',
+    attachmentLimit: 'You can attach only 3 files at most',
+    addingPost: 'Adding post ...',
   },
   label: {
     email: 'E-Mail',
@@ -84,6 +86,7 @@ const translations = {
     attachFiles: 'Attach Files',
     remove: 'Remove',
     sortPosts: 'Sort Posts',
+    download: 'Download',
   },
   validateMsg: {
     emailRequired: 'E-Mail is required',

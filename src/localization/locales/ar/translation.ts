@@ -24,6 +24,8 @@ const translations = {
     noPosts: 'لا يوجد منشورات متوفرة!',
     noUsers: 'لا يوجد مستخدمين!',
     noCategories: 'لا يوجد فئات!',
+    attachmentLimit: 'يمكنك اضافة 3 ملفات على الأكثر',
+    addingPost: 'يتم إضافة المنشور ...',
   },
   label: {
     email: 'البريد الالكتروني',
@@ -84,6 +86,7 @@ const translations = {
     attachFiles: 'ارفاق ملفات',
     remove: 'إزالة',
     sortPosts: 'ترتيب المنشورات',
+    download: 'تنزيل',
   },
   validateMsg: {
     emailRequired: 'البريد الاكتروني مطلوب',

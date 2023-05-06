@@ -32,6 +32,12 @@
       }
     }
 
+    &--attachments-limit {
+      font-size: 1.8rem;
+      margin: 1rem 0;
+      color: $color-primary;
+    }
+
     &--attach-file {
       display: none;
     }
