@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface IAttachFiles {
   getAttachedFiles(): File[];
@@ -19,10 +20,15 @@ interface IProps {
 }
 
 const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
+  const { t } = useTranslation();
   const { primaryActionText = 'Attach Files', secondaryActionText = 'Remove' } =
     props;
   const [files, setFiles] = useState<File[]>([]);
   const attachmentsRef = useRef<HTMLInputElement>(null);
+
+  const cannotAttach =
+    !props.filesLimit ||
+    (props.filesLimit > 0 && files.length >= (props.filesLimit || 0));
 
   useImperativeHandle(ref, () => ({
     getAttachedFiles() {
@@ -34,7 +40,7 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
   }));
 
   const handleAttachFile = (event: ChangeEvent<HTMLInputElement>) => {
-    if (props.filesLimit && files.length >= props.filesLimit) {
+    if (cannotAttach) {
       return;
     }
     const fileList = event.target.files;
@@ -71,9 +77,9 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
 
   return (
     <>
-      {props.filesLimit && files.length >= props.filesLimit && (
+      {cannotAttach && (
         <p className="edit-post__form--attachments-limit">
-          You can attach only 3 files at most
+          {t('msg.attachmentLimit')}
         </p>
       )}
 
@@ -81,25 +87,17 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
         <button
           type="button"
           disabled
-          className={`btn btn-secondary ${
-            props.filesLimit && files.length >= props.filesLimit
-              ? 'btn-disabled'
-              : ''
-          }`}
+          className={`btn btn-secondary ${cannotAttach ? 'btn-disabled' : ''}`}
         >
           <label
             htmlFor="attachments"
-            className={` ${
-              props.filesLimit && files.length >= props.filesLimit
-                ? 'btn-disabled'
-                : ''
-            }`}
+            className={` ${cannotAttach ? 'btn-disabled' : ''}`}
           >
             {primaryActionText}
           </label>
         </button>
         <input
-          disabled={!!(props.filesLimit && files.length >= props.filesLimit)}
+          disabled={cannotAttach}
           id="attachments"
           onChange={handleAttachFile}
           className="edit-post__form--attach-file"

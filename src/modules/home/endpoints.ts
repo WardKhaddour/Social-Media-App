@@ -19,3 +19,6 @@ export const POST_COMMENT = (postId: string) => `post/${postId}/comment`;
 export const USER_DETAILS = (userId: string) => `user/${userId}`;
 
 export const FOLLOW_USER = (userId: string) => `user/follow/${userId}`;
+
+export const DELETE_ATTACHMENT = (postId: string, attachmentName: string) =>
+  `post/${postId}/attachment/${attachmentName}`;

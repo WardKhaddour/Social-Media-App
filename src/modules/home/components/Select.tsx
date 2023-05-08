@@ -1,6 +1,7 @@
 import {
   MouseEvent,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -16,6 +17,7 @@ interface IOption {
 interface IProps {
   title?: string;
   options: IOption[];
+  prevSelections?: IOption[];
 }
 
 export interface ISelectionRef {
@@ -26,6 +28,21 @@ export interface ISelectionRef {
 const Select = forwardRef<ISelectionRef, IProps>((props, ref) => {
   const [selections, setSelections] = useState(new Set<string>());
   const categoriesRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (props.prevSelections) {
+      categoriesRef.current?.querySelectorAll('li').forEach(child => {
+        if (
+          child.dataset.id &&
+          props.prevSelections?.findIndex(el => el._id === child.dataset.id) !==
+            -1
+        )
+          child.classList.add('selected');
+      });
+      setSelections(new Set(props.prevSelections.map(el => el._id)));
+    }
+  }, [props.prevSelections]);
+
   useImperativeHandle(ref, () => ({
     getSelections() {
       return Array.from(selections);

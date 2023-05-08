@@ -21,6 +21,7 @@ import PostComments from '../components/PostComments';
 import './PostDetails.scss';
 import replaceURLs from 'utils/validators/replaceURLs';
 import PostAttachments from '../components/PostAttachments';
+import EditPost from '../components/EditPost';
 
 const PostDetails = () => {
   const [postsLoading, setPostsLoading] = useState(true);
@@ -31,7 +32,7 @@ const PostDetails = () => {
   const { currentPost: post, commentsOnPost: comments } = useSelector(
     (state: RootState) => state.home
   );
-  const { isAuthenticated } = useSelector(
+  const { isAuthenticated, _id: userId } = useSelector(
     (state: RootState) => state.user.user
   );
 
@@ -62,11 +63,13 @@ const PostDetails = () => {
   const handleSavePost = async () => {
     await dispatch(savePost(postId!));
   };
-  console.log(post);
 
   return (
     <div className="post" dir="auto">
-      <h2 className="post__title">{post?.title}</h2>
+      <div className="post__title-edit">
+        <h2 className="post__title">{post?.title}</h2>
+        {userId === post?.author._id && <EditPost post={post} edit />}
+      </div>
       <h3 className="post__author">
         <span>By&nbsp;</span>
         <Link className="post__author--name" to={`/user/${post?.author._id}`}>
@@ -81,7 +84,6 @@ const PostDetails = () => {
         className="post__content"
         dangerouslySetInnerHTML={{ __html: replaceURLs(post?.content!) }}
       ></section>
-
       {post?.category && post.category.length > 0 && (
         <section className="post__categories">
           <span className="post__categories--title">Post Categories:</span>
@@ -92,7 +94,13 @@ const PostDetails = () => {
           </span>
         </section>
       )}
-      {post?.attachments && <PostAttachments attachments={post.attachments} />}
+      {post?.attachments && (
+        <PostAttachments
+          attachments={post.attachments}
+          authorId={post.author._id}
+          postId={post._id}
+        />
+      )}
       {isAuthenticated && (
         <section className="post__action">
           <div className="post__action--like">
@@ -120,7 +128,6 @@ const PostDetails = () => {
           </button>
         </section>
       )}
-
       {isAuthenticated && commentsShown && <PostComments postId={postId!} />}
     </div>
   );

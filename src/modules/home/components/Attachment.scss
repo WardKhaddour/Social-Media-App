@@ -1,0 +1,71 @@
+@import 'assets/scss/main';
+
+.post-attachment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
+  &__title {
+    align-self: flex-start;
+  }
+  &__content {
+    position: relative;
+  }
+  &__image,
+  &__video {
+    width: 50rem;
+    height: 50rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__pdf {
+    width: 50rem;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    font-size: 1.8rem;
+    justify-content: space-around;
+    background-color: $color-white;
+
+    &--download {
+      font-size: inherit;
+      text-decoration: none;
+      font-size: 1.8rem;
+      color: currentColor;
+      transition: all 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__delete {
+    all: unset;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: $color-white;
+    background-color: $color-primary;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    left: -10rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      padding: 1.5rem 2rem;
+    }
+  }
+}

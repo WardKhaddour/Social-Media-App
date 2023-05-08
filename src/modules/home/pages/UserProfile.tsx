@@ -109,7 +109,11 @@ const UserProfile = ({ id }: { id?: string }) => {
             </h4>
             <div className="user-profile__posts--content">
               {user?.posts.map(post => (
-                <Post key={post._id} {...post} />
+                <Post
+                  key={post._id}
+                  {...post}
+                  author={{ name: user.name, _id: user._id }}
+                />
               ))}
             </div>
           </>

@@ -83,6 +83,33 @@ export const addNewPost = (data: FormData): HomeAction<void> => {
   };
 };
 
+export const editPost = (data: FormData, postId: string): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+    try {
+      await Services.editPost(data, postId);
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
+
+export const deletePostAttachment = (
+  postId: string,
+  attachment: string
+): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+    try {
+      await Services.deletePostAttachment(postId, attachment);
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
+
 export const mostPopularUsers = (): HomeAction<void> => {
   return async dispatch => {
     dispatch(homeActions.setIsLoading(true));

@@ -13,6 +13,7 @@ import {
   MOST_POPULAR_POSTS,
   POSTS_BY_CATEGORY,
   ALL_USERS,
+  DELETE_ATTACHMENT,
 } from './endpoints';
 import { axiosInstance } from 'utils/api/axios';
 
@@ -55,6 +56,20 @@ class Services {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return res.data;
+  }
+  static async editPost(data: FormData, postId: string) {
+    const res = await axiosInstance.patch(POST(postId), data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return res.data;
+  }
+  static async deletePostAttachment(postId: string, attachment: string) {
+    const res = await axiosInstance.delete(
+      DELETE_ATTACHMENT(postId, attachment)
+    );
     return res.data;
   }
 

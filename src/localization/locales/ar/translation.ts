@@ -26,6 +26,7 @@ const translations = {
     noCategories: 'لا يوجد فئات!',
     attachmentLimit: 'يمكنك اضافة 3 ملفات على الأكثر',
     addingPost: 'يتم إضافة المنشور ...',
+    editingPost: 'يتم تعديل المنشور ...',
   },
   label: {
     email: 'البريد الالكتروني',
@@ -54,6 +55,7 @@ const translations = {
     myProfile: 'صفحتي الشخصية',
     updateMyProfile: 'تعديل حسابي',
     addPost: 'إنشاء منشور جديد',
+    editPost: 'تعديل المنشور',
     title: 'العنوان',
     content: 'المحتوى',
     attachments: 'المرفقات',
@@ -78,6 +80,7 @@ const translations = {
     confirm: 'تأكيد',
     resendToken: 'إعادة إرسال الرمز',
     add: 'إضافة',
+    edit: 'تعديل',
     seeAll: 'عرض الكل',
     view: 'عرض',
     follow: 'متابعة',

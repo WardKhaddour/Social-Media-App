@@ -10,15 +10,16 @@ import Select, { ISelectionRef } from './Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import AttachFiles, { IAttachFiles } from './AttachFiles';
-import { addNewPost } from '../store/actions';
+import { addNewPost, editPost } from '../store/actions';
 import { notificationActions } from 'store/notification';
+import { IPOST } from '../interfaces';
 
 interface PostInputs {
   title: string;
   content: string;
 }
 
-const EditPost = () => {
+const EditPost = (props: { post?: IPOST; edit?: boolean }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const methods = useForm<PostInputs>();
@@ -30,6 +31,7 @@ const EditPost = () => {
   const { categories: allCategories } = useSelector(
     (state: RootState) => state.home
   );
+  console.log(props.post?.content);
 
   const [categoriesState, setCategoriesState] = useState({
     categories: allCategories.slice(0, 3),
@@ -81,13 +83,24 @@ const EditPost = () => {
     });
 
     setIsFormShown(false);
-    dispatch(
-      notificationActions.setNotificationContent({
-        message: t('msg.addingPost'),
-        success: true,
-      })
-    );
-    await dispatch(addNewPost(formData));
+    if (props.edit) {
+      dispatch(
+        notificationActions.setNotificationContent({
+          message: t('msg.editingPost'),
+          success: true,
+        })
+      );
+      await dispatch(editPost(formData, props.post?._id!));
+    } else {
+      dispatch(
+        notificationActions.setNotificationContent({
+          message: t('msg.addingPost'),
+          success: true,
+        })
+      );
+      await dispatch(addNewPost(formData));
+    }
+
     selectionRef.current?.clearSelections();
     attachmentsRef.current?.clearAttachedFiles();
     methods.reset();
@@ -106,8 +119,13 @@ const EditPost = () => {
   return (
     <>
       <form className="home__edit-post" onSubmit={showFormHandler}>
-        <h3 className="home__edit-post--title">{t('label.addPost')}</h3>
-        <PrimaryButton text={t('action.add')} type="submit" />
+        {!props.edit && (
+          <h3 className="home__edit-post--title">{t('label.addPost')}</h3>
+        )}
+        <PrimaryButton
+          text={props.edit ? t('action.edit') : t('action.add')}
+          type="submit"
+        />
       </form>
       {ReactDOM.createPortal(
         <Backdrop className={backdropClasses} onClick={hideFormHandler}>
@@ -127,6 +145,7 @@ const EditPost = () => {
                 }}
                 isInvalidMessage={errors.title?.message}
                 className={titleInputClasses}
+                value={props.post?.title}
               />
               <FormInput
                 id="content"
@@ -137,11 +156,13 @@ const EditPost = () => {
                 }}
                 isInvalidMessage={errors.content?.message}
                 className={contentInputClasses}
+                value={props.post?.content}
               />
               <Select
                 title={t('msg.selectCategories')}
                 options={categoriesState.categories}
                 ref={selectionRef}
+                prevSelections={props.post?.category}
               />
               {categoriesState.currentNum < allCategories.length && (
                 <button
@@ -156,9 +177,12 @@ const EditPost = () => {
                 ref={attachmentsRef}
                 primaryActionText={t('action.attachFiles')}
                 secondaryActionText={t('action.remove')}
-                filesLimit={3}
+                filesLimit={3 - (props.post?.attachments?.length || 0)}
               />
-              <PrimaryButton text={t('action.add')} type="submit" />
+              <PrimaryButton
+                text={props.edit ? t('action.edit') : t('action.add')}
+                type="submit"
+              />
             </form>
           </FormProvider>
         </Backdrop>,

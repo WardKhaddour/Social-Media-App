@@ -51,9 +51,8 @@ const FormInput = (props: FormInputProps) => {
             id={props.id}
             dir="auto"
             {...register(props.id, props.validations)}
-          >
-            {props.value}
-          </textarea>
+            defaultValue={props.value}
+          ></textarea>
         ) : (
           <input
             className={props.className || 'form-control__input'}

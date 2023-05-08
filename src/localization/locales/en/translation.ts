@@ -26,6 +26,7 @@ const translations = {
     noCategories: 'No Categories Available',
     attachmentLimit: 'You can attach only 3 files at most',
     addingPost: 'Adding post ...',
+    editingPost: 'Editing post ...',
   },
   label: {
     email: 'E-Mail',
@@ -54,6 +55,7 @@ const translations = {
     myProfile: 'My Profile',
     updateMyProfile: 'Update My Profile',
     addPost: 'Add New Post',
+    editPost: 'Edit Post',
     title: 'Title',
     content: 'Content',
     attachments: 'Attachments',
@@ -78,6 +80,7 @@ const translations = {
     confirm: 'Confirm',
     resendToken: 'Resend Token',
     add: 'Add',
+    edit: 'Edit',
     seeAll: 'See All',
     view: 'View',
     follow: 'Follow',
