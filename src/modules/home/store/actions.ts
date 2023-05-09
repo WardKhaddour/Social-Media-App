@@ -210,10 +210,30 @@ export const addComment = (
   return async dispatch => {
     try {
       await Services.addComment(postId, comment);
-    } catch (err) {
-    } finally {
-      dispatch(homeActions.setIsLoading(false));
-    }
+    } catch (err) {}
+  };
+};
+
+export const editComment = (
+  postId: string,
+  commentId: string,
+  commentText: string
+): HomeAction<void> => {
+  return async dispatch => {
+    try {
+      await Services.editComment(postId, commentId, commentText);
+    } catch (err) {}
+  };
+};
+
+export const deleteComment = (
+  postId: string,
+  commentId: string
+): HomeAction<void> => {
+  return async dispatch => {
+    try {
+      await Services.deleteComment(postId, commentId);
+    } catch (err) {}
   };
 };
 

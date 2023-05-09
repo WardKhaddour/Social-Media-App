@@ -22,3 +22,6 @@ export const FOLLOW_USER = (userId: string) => `user/follow/${userId}`;
 
 export const DELETE_ATTACHMENT = (postId: string, attachmentName: string) =>
   `post/${postId}/attachment/${attachmentName}`;
+
+export const COMMENT = (postId: string, commentId: string) =>
+  `/post/${postId}/comment/${commentId}`;

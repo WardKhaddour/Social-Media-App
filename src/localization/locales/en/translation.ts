@@ -90,6 +90,7 @@ const translations = {
     remove: 'Remove',
     sortPosts: 'Sort Posts',
     download: 'Download',
+    cancel: 'Cancel',
   },
   validateMsg: {
     emailRequired: 'E-Mail is required',

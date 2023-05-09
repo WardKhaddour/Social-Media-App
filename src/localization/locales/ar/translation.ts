@@ -90,6 +90,7 @@ const translations = {
     remove: 'إزالة',
     sortPosts: 'ترتيب المنشورات',
     download: 'تنزيل',
+    cancel: 'إلغاء',
   },
   validateMsg: {
     emailRequired: 'البريد الاكتروني مطلوب',
