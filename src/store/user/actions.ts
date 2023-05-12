@@ -3,6 +3,7 @@ import { RootState } from '..';
 import { userActions } from './index';
 import Services from './Services';
 import { AnyAction } from 'redux';
+import { batch } from 'react-redux';
 
 interface UpdateUserPhoto {
   photo?: File;
@@ -20,15 +21,23 @@ export const getUserData = (): ThunkAction<
       const data = await Services.getUserData();
       const { user } = data.data;
 
-      dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
+      batch(() => {
+        dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
+        dispatch(userActions.setIsLoading(false));
+      });
     } catch (err: any) {
       const user = err?.response?.data?.data?.user;
       if (user)
-        dispatch(userActions.setUserData({ ...user, isAuthenticated: false }));
-
+        batch(() => {
+          dispatch(
+            userActions.setUserData({ ...user, isAuthenticated: false })
+          );
+          dispatch(userActions.setIsLoading(false));
+        });
+      else {
+        dispatch(userActions.setIsLoading(false));
+      }
       return false;
-    } finally {
-      dispatch(userActions.setIsLoading(false));
     }
   };
 };

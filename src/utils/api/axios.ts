@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
-import router from 'routes';
+import router from 'router';
 import store from 'store';
 import { notificationActions } from 'store/notification';
 import langHelper from 'utils/language/LangHelper';

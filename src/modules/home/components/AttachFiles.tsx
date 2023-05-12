@@ -46,11 +46,21 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
     const fileList = event.target.files;
     if (fileList) {
       const newFiles: File[] = [];
-      const filesLength = props.filesLimit || fileList.length;
+
+      let filesLength;
+      if (props.filesLimit) {
+        filesLength = Math.min(props.filesLimit, fileList.length);
+      } else {
+        filesLength = fileList.length;
+      }
+
       for (let i = 0; i < filesLength; i++) {
         const file = fileList[i];
+        if (!file) {
+          continue;
+        }
         const fileExists = files.some(f => f.name === file.name);
-        if (!fileExists) {
+        if (!fileExists && file) {
           newFiles.push(file);
         }
       }
@@ -72,7 +82,6 @@ const AttachFiles = forwardRef<IAttachFiles, IProps>((props, ref) => {
     const index = files.findIndex(file => file.name === element.dataset.name);
     newFiles.splice(index, 1);
     setFiles(newFiles);
-    console.log(newFiles);
   };
 
   return (

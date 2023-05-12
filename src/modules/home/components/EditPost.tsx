@@ -31,7 +31,6 @@ const EditPost = (props: { post?: IPOST; edit?: boolean }) => {
   const { categories: allCategories } = useSelector(
     (state: RootState) => state.home
   );
-  console.log(props.post?.content);
 
   const [categoriesState, setCategoriesState] = useState({
     categories: allCategories.slice(0, 3),
@@ -62,8 +61,6 @@ const EditPost = (props: { post?: IPOST; edit?: boolean }) => {
         ],
         currentNum: prevState.currentNum + 3,
       };
-      console.log(newState);
-
       return newState;
     });
   };

@@ -1,22 +1,19 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import router from './routes';
 import Notification from './components/Notification';
 import { getUserData } from './store/user/actions';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from './store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from './store';
 import LoadingSpinner from './components/LoadingSpinner';
 import { useTranslation } from 'react-i18next';
+import router from 'router';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [isLoading, setIsLoading] = useState(true);
   const { i18n } = useTranslation();
-
+  const { isLoading } = useSelector((state: RootState) => state.user);
   useEffect(() => {
-    dispatch(getUserData()).then(() => {
-      setIsLoading(false);
-    });
+    dispatch(getUserData());
   }, [dispatch]);
 
   if (isLoading) return <LoadingSpinner loading={isLoading} />;
@@ -29,6 +26,6 @@ function App() {
       <RouterProvider router={router} />
     </div>
   );
-}
+};
 
 export default App;

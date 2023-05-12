@@ -75,7 +75,6 @@ export const addNewPost = (data: FormData): HomeAction<void> => {
       const res = await Services.addNewPost(data);
 
       const { post }: { post: IPOST } = res.data;
-      console.log(post);
     } catch (err) {
     } finally {
       dispatch(homeActions.setIsLoading(false));

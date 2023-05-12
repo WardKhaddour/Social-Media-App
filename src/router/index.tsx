@@ -1,20 +1,20 @@
+import AuthModuleLayout from 'layout/Auth';
+import MainModuleLayout from 'layout/Main';
+import RestrictUnAuthenticated from 'middlewares/RestrictUnauthenticated';
 import { createBrowserRouter } from 'react-router-dom';
-import AuthLayout from '../layout/Auth';
-import MainLayout from '../layout/Main';
-import RestrictUnAuthenticated from '../middlewares/RestrictUnauthenticated';
 
 const router = createBrowserRouter([
   {
     path: '/auth/*',
     element: (
       <RestrictUnAuthenticated>
-        <AuthLayout />
+        <AuthModuleLayout />
       </RestrictUnAuthenticated>
     ),
   },
   {
     path: '/*',
-    element: <MainLayout />,
+    element: <MainModuleLayout />,
   },
 ]);
 
