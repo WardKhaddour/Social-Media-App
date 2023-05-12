@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import {
   addLike,
+  deletePost,
   getCommentsOnPost,
   getPost,
   savePost,
 } from '../store/actions';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import CategoryItem from '../components/CategoryItem';
 
 import { ReactComponent as IconLike } from 'assets/icons/like.svg';
@@ -22,11 +23,12 @@ import './PostDetails.scss';
 import replaceURLs from 'utils/validators/replaceURLs';
 import PostAttachments from '../components/PostAttachments';
 import EditPost from '../components/EditPost';
+import { t } from 'i18next';
 
 const PostDetails = () => {
   const [postsLoading, setPostsLoading] = useState(true);
   const [commentsShown, setCommentsShown] = useState(false);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { postId } = useParams();
   const { currentPost: post, commentsOnPost: comments } = useSelector(
@@ -64,11 +66,27 @@ const PostDetails = () => {
     await dispatch(savePost(postId!));
   };
 
+  const handleDeletePost = async () => {
+    await dispatch(deletePost(postId!));
+    navigate(-1);
+  };
+
   return (
     <div className="post" dir="auto">
       <div className="post__title-edit">
         <h2 className="post__title">{post?.title}</h2>
-        {userId === post?.author._id && <EditPost post={post} edit />}
+        {userId === post?.author._id && (
+          <div className="post__actions">
+            <EditPost post={post} edit />
+            <button
+              className="btn btn-secondary"
+              type="button"
+              onClick={handleDeletePost}
+            >
+              {t('action.delete')}
+            </button>
+          </div>
+        )}
       </div>
       <h3 className="post__author">
         <span>By&nbsp;</span>

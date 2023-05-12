@@ -67,6 +67,11 @@ class Services {
     });
     return res.data;
   }
+
+  static async deletePost(postId: string) {
+    const res = await axiosInstance.delete(POST(postId));
+    return res.data;
+  }
   static async deletePostAttachment(postId: string, attachment: string) {
     const res = await axiosInstance.delete(
       DELETE_ATTACHMENT(postId, attachment)

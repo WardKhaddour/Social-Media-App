@@ -11,6 +11,11 @@
     margin-bottom: 1rem;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
   &__title-edit {
     width: 100%;
     display: flex;

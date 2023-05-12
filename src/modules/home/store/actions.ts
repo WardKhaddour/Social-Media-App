@@ -95,6 +95,18 @@ export const editPost = (data: FormData, postId: string): HomeAction<void> => {
   };
 };
 
+export const deletePost = (postId: string): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(homeActions.setIsLoading(true));
+    try {
+      await Services.deletePost(postId);
+    } catch (err) {
+    } finally {
+      dispatch(homeActions.setIsLoading(false));
+    }
+  };
+};
+
 export const deletePostAttachment = (
   postId: string,
   attachment: string
