@@ -1,7 +1,4 @@
 import calcTimestamp from 'utils/date/calcTimestamp';
-import { ReactComponent as IconSave } from 'assets/icons/save.svg';
-import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
-import { ReactComponent as IconIgnore } from 'assets/icons/hide.svg';
 
 import './Post.scss';
 import { Link } from 'react-router-dom';
@@ -35,18 +32,6 @@ const Post = (props: PostProps) => {
               {cat.name}
             </span>
           ))}
-        </div>
-        <div className="post__card--actions">
-          <button type="button">
-            {props.isSaved ? (
-              <IconSaveFilled className="post__card--actions__icon post__card--actions__icon--filled" />
-            ) : (
-              <IconSave className="post__card--actions__icon" />
-            )}
-          </button>
-          <button type="button">
-            <IconIgnore className="post__card--actions__icon" />
-          </button>
         </div>
       </div>
     </Link>
