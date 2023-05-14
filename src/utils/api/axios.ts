@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import axios, { RawAxiosRequestHeaders } from 'axios';
 import router from 'router';
 import store from 'store';
 import { notificationActions } from 'store/notification';
@@ -19,7 +19,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: any) => {
     config.headers = { ...config.headers } as RawAxiosRequestHeaders;
     config.headers.lang = langHelper.getLang();
     return config;

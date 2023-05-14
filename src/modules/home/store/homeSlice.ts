@@ -8,6 +8,7 @@ import {
 } from '../interfaces';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import './socket';
 interface HOME_STATE {
   isLoading: boolean;
   posts: IPOST[];
@@ -28,7 +29,6 @@ const initialState: HOME_STATE = {
   savedPosts: [],
   popularUsers: [],
   allUsers: [],
-
   categories: [],
   currentPost: undefined,
   commentsOnPost: undefined,
@@ -42,11 +42,28 @@ const homeSlice = createSlice({
     setIsLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
-
     setPosts(state, action: PayloadAction<any>) {
       state.posts = action.payload;
     },
-
+    addNewPost(state, action: PayloadAction<any>) {
+      if (!state.posts.some(post => post._id === action.payload._id)) {
+        state.posts.unshift(action.payload);
+      }
+    },
+    updatePost(state, action: PayloadAction<any>) {
+      const postIndex = state.posts.findIndex(
+        post => post._id === action.payload._id
+      );
+      if (postIndex !== -1) {
+        state.posts[postIndex] = action.payload;
+      }
+      if (state.currentPost?._id === action.payload._id) {
+        state.currentPost = action.payload;
+      }
+    },
+    deletePost(state, action: PayloadAction<any>) {
+      state.posts = state.posts.filter(post => post._id !== action.payload);
+    },
     sePagination(state, action: PayloadAction<any>) {
       state.pagination = action.payload;
     },
