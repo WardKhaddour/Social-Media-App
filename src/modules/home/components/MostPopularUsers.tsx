@@ -7,10 +7,12 @@ import { RootState } from 'store';
 import { useTranslation } from 'react-i18next';
 
 const MostPopularUsers = ({ className }: { className: string }) => {
-  const { users: popularUsers } = useSelector(
-    (state: RootState) => state.home.allUsers
+  const { popularUsers } = useSelector(
+    (state: RootState) => state.home.homeLayout
   );
   const { t } = useTranslation();
+  console.log(popularUsers);
+
   return (
     <>
       <h2 className={`${className}__header`}>{t('label.recommendedUsers')}</h2>
