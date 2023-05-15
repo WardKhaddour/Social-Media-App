@@ -29,6 +29,59 @@ const postDetailsSlice = createSlice({
         state.post = action.payload;
       }
     },
+
+    addNewComment(state, action: PayloadAction<any>) {
+      if (state.post?._id !== action.payload.post) {
+        return;
+      }
+      state.comments
+        ? (state.comments = [action.payload.comment, ...state.comments])
+        : (state.comments = [action.payload.comment]);
+      if (state.post) state.post.commentsNum = action.payload.commentsNum;
+    },
+    updateComment(state, action: PayloadAction<any>) {
+      if (state.post?._id !== action.payload.post) {
+        return;
+      }
+      const commentIndex = state.comments?.findIndex(
+        comment => comment._id === action.payload.comment._id
+      );
+      console.log(commentIndex);
+
+      if (commentIndex !== -1 && state.comments && commentIndex !== undefined) {
+        state.comments[commentIndex] = {
+          ...state.comments[commentIndex],
+          ...action.payload.comment,
+        };
+      }
+    },
+
+    deleteComment(state, action: PayloadAction<any>) {
+      if (state.post?._id !== action.payload.post) {
+        return;
+      }
+      const commentIndex = state.comments?.findIndex(
+        comment => comment._id === action.payload.comment
+      );
+      if (commentIndex === undefined || commentIndex === -1) {
+        return;
+      }
+      state.comments = state.comments?.filter(
+        comment => comment._id !== action.payload.comment
+      );
+      if (state.post) state.post.commentsNum = action.payload.commentsNum;
+    },
+
+    updateLikes(state, action: PayloadAction<any>) {
+      if (state.post?._id !== action.payload.post) {
+        return;
+      }
+      if (state.post?.likesNum === undefined) {
+        return;
+      }
+      state.post.likesNum = action.payload.likesNum;
+      state.post.isLiked = action.payload.isLiked;
+    },
   },
 });
 
