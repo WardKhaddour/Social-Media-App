@@ -79,8 +79,18 @@ const postDetailsSlice = createSlice({
       if (state.post?.likesNum === undefined) {
         return;
       }
+
       state.post.likesNum = action.payload.likesNum;
-      state.post.isLiked = action.payload.isLiked;
+
+      if (action.payload.isLiked !== undefined)
+        state.post.isLiked = action.payload.isLiked;
+    },
+    updateSavePost(state, action: PayloadAction<any>) {
+      if (state.post?._id !== action.payload.post) {
+        return;
+      }
+
+      if (state.post) state.post.isSaved = action.payload.isSaved;
     },
   },
 });

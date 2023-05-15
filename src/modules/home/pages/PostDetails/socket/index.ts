@@ -23,3 +23,9 @@ socket.on('like', data => {
     store.dispatch(postDetailsActions.updateLikes(data.data));
   }
 });
+
+socket.on('savePost', data => {
+  if (data.action === 'update') {
+    store.dispatch(postDetailsActions.updateSavePost(data.data));
+  }
+});

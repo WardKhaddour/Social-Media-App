@@ -1,5 +1,6 @@
 import axios, { RawAxiosRequestHeaders } from 'axios';
 import router from 'router';
+import socket from 'socket';
 import store from 'store';
 import { notificationActions } from 'store/notification';
 import langHelper from 'utils/language/LangHelper';
@@ -22,6 +23,7 @@ axiosInstance.interceptors.request.use(
   (config: any) => {
     config.headers = { ...config.headers } as RawAxiosRequestHeaders;
     config.headers.lang = langHelper.getLang();
+    config.headers.socketId = socket.id;
     return config;
   },
   err => {
