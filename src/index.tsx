@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './localization';
 import App from 'App';
+import './socket';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

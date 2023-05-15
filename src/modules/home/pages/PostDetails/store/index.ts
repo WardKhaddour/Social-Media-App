@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { POST_STATE } from 'modules/home/interfaces/POST_STATE';
+import '../socket';
 
 const initialState: POST_STATE = {
   isLoading: false,
@@ -21,6 +22,12 @@ const postDetailsSlice = createSlice({
     },
     setCommentsOnPost(state, action: PayloadAction<any>) {
       state.comments = action.payload;
+    },
+
+    updateCurrentPost(state, action: PayloadAction<any>) {
+      if (state.post?._id === action.payload._id) {
+        state.post = action.payload;
+      }
     },
   },
 });
