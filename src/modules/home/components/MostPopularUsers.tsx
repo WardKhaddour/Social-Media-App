@@ -7,7 +7,9 @@ import { RootState } from 'store';
 import { useTranslation } from 'react-i18next';
 
 const MostPopularUsers = ({ className }: { className: string }) => {
-  const { popularUsers } = useSelector((state: RootState) => state.home);
+  const { users: popularUsers } = useSelector(
+    (state: RootState) => state.home.allUsers
+  );
   const { t } = useTranslation();
   return (
     <>

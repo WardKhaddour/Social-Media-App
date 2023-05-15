@@ -1,6 +1,4 @@
 import calcTimestamp from 'utils/date/calcTimestamp';
-import { ICOMMENT } from '../interfaces';
-
 import './CommentItem.scss';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState } from 'store';
@@ -8,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
 import { ReactComponent as IconOptions } from 'assets/icons/options.svg';
-import { deleteComment, editComment } from '../store/actions';
+// import { deleteComment, editComment } from '';
 import FormInput from 'components/FormInput';
 import { FormProvider, useForm } from 'react-hook-form';
 import PrimaryButton from 'components/PrimaryButton';
+import { deleteComment, editComment } from '../store/actions';
+import { COMMENT } from '../../../interfaces/COMMENT';
 
-const CommentItem = ({ comment }: { comment: ICOMMENT }) => {
+const CommentItem = ({ comment }: { comment: COMMENT }) => {
   const { t } = useTranslation();
   const { _id: userId } = useSelector((state: RootState) => state.user.user);
   const methods = useForm();

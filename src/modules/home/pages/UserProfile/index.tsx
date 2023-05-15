@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from 'store';
-import { followUser, getUserDetails } from '../store/actions';
+import { followUser, getUserProfileDetails } from './store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
-import Post from '../components/Post';
+import Post from '../../components/Post';
 
-import './UserProfile.scss';
+import './index.scss';
 import { useTranslation } from 'react-i18next';
 import SecondaryButton from 'components/SecondaryButton';
 
@@ -19,17 +19,16 @@ const UserProfile = ({ id }: { id?: string }) => {
   userId = userId || id;
 
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const { userProfileDetails: user } = useSelector(
-    (state: RootState) => state.home
+  const { userProfileDetails: user, isLoading } = useSelector(
+    (state: RootState) => state.home.userProfile
   );
 
   useEffect(() => {
     if (userId !== user?._id) {
-      setIsLoading(true);
-      dispatch(getUserDetails(userId!)).then(() => setIsLoading(false));
+      dispatch(getUserProfileDetails(userId!));
     }
   }, [dispatch, userId, user?._id]);
 

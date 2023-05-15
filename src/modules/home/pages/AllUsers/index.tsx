@@ -2,22 +2,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 
 import { useEffect, useState } from 'react';
-import { getAllUsers } from '../store/actions';
+import { getAllUsers } from './store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
-import Pagination from '../components/Pagination';
+import Pagination from '../../components/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import PopularUser from '../components/PopularUser';
+import PopularUser from '../../components/PopularUser';
 
-import './AllUsers.scss';
+import './index.scss';
 
 const AllUsers = () => {
   const { t } = useTranslation();
   const {
-    allUsers: users,
+     users,
     pagination,
     isLoading: usersIsLoading,
-  } = useSelector((state: RootState) => state.home);
+  } = useSelector((state: RootState) => state.home.allUsers);
   const [search, setSearch] = useSearchParams();
 
   const page = +pagination.page;

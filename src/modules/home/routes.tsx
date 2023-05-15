@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Posts';
 import PostDetails from './pages/PostDetails';
 import UserProfile from './pages/UserProfile';
-import Me from './pages/Me';
+import Me from './pages/UserProfile/Me';
 import SavedItems from './pages/SavedItems';
 import AllUsers from './pages/AllUsers';
 import AllCategories from './pages/AllCategories';

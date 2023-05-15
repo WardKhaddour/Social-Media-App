@@ -10,16 +10,17 @@ import Select, { ISelectionRef } from './Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import AttachFiles, { IAttachFiles } from './AttachFiles';
-import { addNewPost, editPost } from '../store/actions';
 import { notificationActions } from 'store/notification';
-import { IPOST } from '../interfaces';
+import { editPost } from '../pages/PostDetails/store/actions';
+import { addNewPost } from '../pages/Posts/store/actions';
+import { POST } from '../interfaces/POST';
 
 interface PostInputs {
   title: string;
   content: string;
 }
 
-const EditPost = (props: { post?: IPOST; edit?: boolean }) => {
+const EditPost = (props: { post?: POST; edit?: boolean }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const methods = useForm<PostInputs>();
@@ -29,7 +30,7 @@ const EditPost = (props: { post?: IPOST; edit?: boolean }) => {
   } = methods;
   const [isFormShown, setIsFormShown] = useState(false);
   const { categories: allCategories } = useSelector(
-    (state: RootState) => state.home
+    (state: RootState) => state.home.homeLayout
   );
 
   const [categoriesState, setCategoriesState] = useState({

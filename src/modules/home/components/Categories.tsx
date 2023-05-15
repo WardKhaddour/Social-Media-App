@@ -8,7 +8,9 @@ import { useTranslation } from 'react-i18next';
 const Categories = ({ className }: { className: string }) => {
   const { t } = useTranslation();
 
-  const { categories } = useSelector((state: RootState) => state.home);
+  const { categories } = useSelector(
+    (state: RootState) => state.home.homeLayout
+  );
 
   return (
     <>

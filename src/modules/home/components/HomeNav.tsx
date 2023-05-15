@@ -7,7 +7,9 @@ import { useTranslation } from 'react-i18next';
 const HomeNav = ({ className }: { className: string }) => {
   const { t } = useTranslation();
 
-  const { categories } = useSelector((state: RootState) => state.home);
+  const { categories } = useSelector(
+    (state: RootState) => state.home.homeLayout
+  );
 
   return (
     <nav className={className}>

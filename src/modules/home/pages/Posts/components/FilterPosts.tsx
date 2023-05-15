@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 import SortPosts from './SortPosts';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
-import { getAllPosts } from '../store/actions';
 import { useSearchParams } from 'react-router-dom';
+import { getAllPosts } from '../store/actions';
 
 const FilterPosts = () => {
   const { t } = useTranslation();

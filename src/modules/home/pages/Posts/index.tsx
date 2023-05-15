@@ -1,21 +1,21 @@
-import Post from '../components/Post';
+import Post from '../../components/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 
-import './Home.scss';
-import EditPost from '../components/EditPost';
+import './index.scss';
+import EditPost from '../../components/EditPost';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getAllPosts } from '../store/actions';
+import { getAllPosts } from './store/actions';
 import LoadingSpinner from 'components/LoadingSpinner';
-import FilterPosts from '../components/FilterPosts';
-import Pagination from '../components/Pagination';
+import FilterPosts from './components/FilterPosts';
+import Pagination from '../../components/Pagination';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const { t } = useTranslation();
   const { posts, pagination, isLoading } = useSelector(
-    (state: RootState) => state.home
+    (state: RootState) => state.home.posts
   );
 
   const page = +pagination.page;

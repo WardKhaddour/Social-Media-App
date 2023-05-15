@@ -4,10 +4,9 @@ import CommentItem from './CommentItem';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
-import { addComment } from '../store/actions';
 import FormInput from 'components/FormInput';
 import { useTranslation } from 'react-i18next';
-
+import { addComment } from '../store/actions';
 
 const PostComments = ({ postId }: { postId: string }) => {
   const { t } = useTranslation();
@@ -21,8 +20,8 @@ const PostComments = ({ postId }: { postId: string }) => {
   const { isAuthenticated } = useSelector(
     (state: RootState) => state.user.user
   );
-  const { isLoading, commentsOnPost: comments } = useSelector(
-    (state: RootState) => state.home
+  const { isLoading, comments } = useSelector(
+    (state: RootState) => state.home.postDetails
   );
 
   if (isLoading) {

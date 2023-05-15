@@ -8,9 +8,9 @@ import {
   getCommentsOnPost,
   getPost,
   savePost,
-} from '../store/actions';
+} from './store/actions';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import CategoryItem from '../components/CategoryItem';
+import CategoryItem from '../../components/CategoryItem';
 
 import { ReactComponent as IconLike } from 'assets/icons/like.svg';
 import { ReactComponent as IconLikeFilled } from 'assets/icons/like_filled.svg';
@@ -18,11 +18,11 @@ import { ReactComponent as IconComment } from 'assets/icons/comment.svg';
 import { ReactComponent as IconSave } from 'assets/icons/save.svg';
 import { ReactComponent as IconSaveFilled } from 'assets/icons/save_filled.svg';
 
-import PostComments from '../components/PostComments';
-import './PostDetails.scss';
+import PostComments from './components/PostComments';
+import './index.scss';
 import replaceURLs from 'utils/validators/replaceURLs';
-import PostAttachments from '../components/PostAttachments';
-import EditPost from '../components/EditPost';
+import PostAttachments from './components/PostAttachments';
+import EditPost from '../../components/EditPost';
 import { t } from 'i18next';
 
 const PostDetails = () => {
@@ -31,8 +31,8 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { postId } = useParams();
-  const { currentPost: post, commentsOnPost: comments } = useSelector(
-    (state: RootState) => state.home
+  const { post, comments } = useSelector(
+    (state: RootState) => state.home.postDetails
   );
   const { isAuthenticated, _id: userId } = useSelector(
     (state: RootState) => state.user.user
