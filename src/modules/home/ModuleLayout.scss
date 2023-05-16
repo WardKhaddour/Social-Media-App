@@ -4,14 +4,10 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: minmax(5rem, 8rem);
 
-  @include respond(md-1) {
+  @include respond(lg-1) {
     grid-template-columns: 1fr;
   }
 
-  &__nav {
-    grid-column: 1 / span 2;
-    position: relative;
-  }
   &__content--secondary {
     grid-column: 2;
     grid-row: 2;
@@ -20,7 +16,7 @@
     height: fit-content;
     position: sticky;
 
-    @include respond(md-1) {
+    @include respond(lg-1) {
       display: none;
     }
   }

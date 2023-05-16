@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import homeRoutes from './routes';
 import MostPopularUsers from './components/MostPopularUsers';
-import HomeNav from './components/HomeNav';
 import Categories from './components/Categories';
 import './ModuleLayout.scss';
 import { useDispatch } from 'react-redux';
@@ -27,7 +26,6 @@ const ModuleLayout = () => {
   if (isLoading) return <LoadingSpinner loading={isLoading} />;
   return (
     <div className="home">
-      <HomeNav className="home__nav" />
       <section className="home__content--secondary">
         <MostPopularUsers className="most-popular-users" />
         <Categories className="categories" />

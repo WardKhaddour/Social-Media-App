@@ -92,6 +92,10 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    &--links {
+      display: flex;
+    }
   }
 
   &__actions {
@@ -102,6 +106,11 @@
 
   &__action {
     margin: 0 0.5rem !important;
+    &--signup {
+      @include respond(xs) {
+        display: none;
+      }
+    }
   }
 
   &__logo {

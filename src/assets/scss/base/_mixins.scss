@@ -7,7 +7,7 @@
 
 @mixin respond($breakpoint) {
   @if $breakpoint == xxs {
-    @media only screen and (max-width: 18.75em) {
+    @media only screen and (max-width: 25em) {
       //300px
       @content;
     }
@@ -39,6 +39,13 @@
       @content;
     }
   }
+  @if $breakpoint == lg-1 {
+    @media only screen and (max-width: 68.75em) {
+      //1100px
+      @content;
+    }
+  }
+
   @if $breakpoint == lg {
     @media only screen and (max-width: 75em) {
       //1200px

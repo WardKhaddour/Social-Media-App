@@ -13,6 +13,13 @@
     transform: translateY(3px);
   }
 
+  @include respond(xs) {
+    font-size: 1.8rem;
+  }
+  @include respond(xxs) {
+    font-size: 1.5rem;
+  }
+
   &:focus-visible {
     font-size: 2.8rem;
   }
