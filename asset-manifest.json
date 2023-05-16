@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/topicNexus/static/css/main.e39f31bd.css",
+    "main.js": "/topicNexus/static/js/main.ddb9b2f6.js",
+    "static/media/logo.gif": "/topicNexus/static/media/logo.13cbe21c62b32d3ec0a9.gif",
+    "static/media/language.svg": "/topicNexus/static/media/language.0ddf9d401043b1a76a50b1242e7631bf.svg",
+    "static/media/settings.svg": "/topicNexus/static/media/settings.1de9dce9a99fae39549ea5f4a74ac9cb.svg",
+    "static/media/passwordShown.svg": "/topicNexus/static/media/passwordShown.243d25ed67f6772a79316d3eaffd7328.svg",
+    "index.html": "/topicNexus/index.html",
+    "static/media/users.svg": "/topicNexus/static/media/users.2ea3dff2499755ab75f0f9710efaa482.svg",
+    "static/media/like.svg": "/topicNexus/static/media/like.876f98e831191e7d31344dc44bb4a644.svg",
+    "static/media/passwordHidden.svg": "/topicNexus/static/media/passwordHidden.24bfedd6e290125be661cfab92112834.svg",
+    "static/media/options.svg": "/topicNexus/static/media/options.26b9018385c98f0f4edbeddbb11d4602.svg",
+    "static/media/profile.svg": "/topicNexus/static/media/profile.c9f7d89fd54a792a76504b0076cb22c9.svg",
+    "static/media/category.svg": "/topicNexus/static/media/category.18b1f3366f11e8ae2e4a5a87411aa1f3.svg",
+    "static/media/save_filled.svg": "/topicNexus/static/media/save_filled.568fc30f39167be0d203f45cdfc7e077.svg",
+    "static/media/like_filled.svg": "/topicNexus/static/media/like_filled.e0e2f892bc07fc4c7c1ec394ec0a8cac.svg",
+    "static/media/comment.svg": "/topicNexus/static/media/comment.b2e93f407983f8a3780990886f216785.svg",
+    "static/media/saved.svg": "/topicNexus/static/media/saved.0632a30b773887d3a569a090be62a803.svg",
+    "static/media/save.svg": "/topicNexus/static/media/save.c9eccb4b0e51e0fd9e54e763956d96b6.svg",
+    "static/media/logout.svg": "/topicNexus/static/media/logout.f38666f0ba43295a16b1f75a3d37b15c.svg",
+    "static/media/home.svg": "/topicNexus/static/media/home.0b0eca035fc0f95cf984a69e37cf98e6.svg",
+    "main.e39f31bd.css.map": "/topicNexus/static/css/main.e39f31bd.css.map",
+    "main.ddb9b2f6.js.map": "/topicNexus/static/js/main.ddb9b2f6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e39f31bd.css",
+    "static/js/main.ddb9b2f6.js"
+  ]
+}
