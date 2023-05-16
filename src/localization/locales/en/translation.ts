@@ -2,10 +2,8 @@ const translations = {
   title: {},
   msg: {
     welcome: 'Welcome',
-    loginMsg:
-      'Welcome again to react training App! login and try its nice features',
-    signupMsg:
-      'Welcome to react training App! signup and try its nice features',
+    loginMsg: 'Welcome again to TopicNexus! login and try its nice features',
+    signupMsg: 'Welcome to TopicNexus! signup and try its nice features',
     enterEmailFP: 'Enter your email to send recovery token to you',
     or: 'Or',
     resetPassword:

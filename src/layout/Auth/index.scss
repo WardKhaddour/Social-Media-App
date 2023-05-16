@@ -12,9 +12,13 @@
     justify-content: center;
     align-items: center;
     position: sticky;
-
     @include respond(md) {
       display: none;
+    }
+
+    &--img {
+      border-radius: 50%;
+      width: 25vw;
     }
   }
 
