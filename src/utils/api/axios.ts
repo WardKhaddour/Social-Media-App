@@ -1,4 +1,5 @@
 import axios, { RawAxiosRequestHeaders } from 'axios';
+import { BASE_URL } from '../../constants';
 import router from 'router';
 import socket from 'socket';
 import store from 'store';
@@ -8,7 +9,7 @@ import langHelper from 'utils/language/LangHelper';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
-  baseURL = `${process.env.REACT_APP_BASE_URL}/api/v1`;
+  baseURL = `${BASE_URL}/api/v1`;
 }
 
 const axiosInstance = axios.create({

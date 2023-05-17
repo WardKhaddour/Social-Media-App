@@ -18,6 +18,7 @@ import { signup } from '../store/actions';
 
 import './Signup.scss';
 import { useTranslation } from 'react-i18next';
+import { RECAPTCHA_SITE_KEY } from '../../../constants';
 
 interface Inputs {
   name: string;
@@ -114,7 +115,7 @@ const Signup = () => {
           />
           <ReCAPTCHA
             className="recaptcha"
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+            sitekey={RECAPTCHA_SITE_KEY}
             ref={recaptchaRef}
             size="invisible"
             badge={`${i18n.language === 'ar' ? 'bottomleft' : 'bottomright'}`}
