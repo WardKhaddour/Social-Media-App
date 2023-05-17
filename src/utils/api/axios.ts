@@ -6,11 +6,7 @@ import store from 'store';
 import { notificationActions } from 'store/notification';
 import langHelper from 'utils/language/LangHelper';
 
-let baseURL = '';
-
-if (process.env.NODE_ENV === 'development') {
-  baseURL = `${BASE_URL}/api/v1`;
-}
+let baseURL = `${BASE_URL}/api/v1`;
 
 const axiosInstance = axios.create({
   baseURL,
