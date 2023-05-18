@@ -14,14 +14,14 @@ import './index.scss';
 const AllUsers = () => {
   const { t } = useTranslation();
   const {
-     users,
+    users,
     pagination,
     isLoading: usersIsLoading,
   } = useSelector((state: RootState) => state.home.allUsers);
   const [search, setSearch] = useSearchParams();
 
-  const page = +pagination.page;
-  const totalPages = +pagination.totalPages;
+  const page = +(pagination?.page || 1);
+  const totalPages = +(pagination?.totalPages || 1);
 
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(usersIsLoading);

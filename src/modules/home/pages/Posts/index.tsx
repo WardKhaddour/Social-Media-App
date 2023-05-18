@@ -18,8 +18,8 @@ const Home = () => {
     (state: RootState) => state.home.posts
   );
 
-  const page = +pagination.page;
-  const totalPages = +pagination.totalPages;
+  const page = +(pagination?.page || 1);
+  const totalPages = +(pagination?.totalPages || 1);
 
   const { isAuthenticated } = useSelector(
     (state: RootState) => state.user.user

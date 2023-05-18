@@ -20,8 +20,8 @@ const AllCategories = () => {
   } = useSelector((state: RootState) => state.home.homeLayout);
   const [search, setSearch] = useSearchParams();
 
-  const page = +pagination.page;
-  const totalPages = +pagination.totalPages;
+  const page = +(pagination?.page || 1);
+  const totalPages = +(pagination?.totalPages || 1);
 
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(categoriesIsLoading);
