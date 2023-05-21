@@ -11,7 +11,6 @@ const MostPopularUsers = ({ className }: { className: string }) => {
     (state: RootState) => state.home.homeLayout
   );
   const { t } = useTranslation();
-  console.log(popularUsers);
 
   return (
     <>
