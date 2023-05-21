@@ -1,5 +1,19 @@
 @import 'assets/scss/main';
 
+.btn-follow-stats {
+  all: unset;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 1rem;
+  transition: all 0.2s;
+  border-radius: 5px;
+  &:hover,
+  &:focus-visible {
+    background-color: rgba($color-white, 0.7);
+  }
+}
+
 .user-profile {
   margin: 3rem 5rem;
   text-align: start;

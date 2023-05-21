@@ -26,3 +26,29 @@ export const followUser = (userId: string): HomeAction<void> => {
     } catch (err) {}
   };
 };
+
+export const getFollowers = (userId: string): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(userProfileActions.setFollowsIsLoading(true));
+    try {
+      const res = await Services.getFollowers(userId);
+      dispatch(userProfileActions.setFollowsIsLoading(false));
+      dispatch(userProfileActions.setFollowers(res.data.followers));
+    } catch (err) {
+      dispatch(userProfileActions.setFollowsIsLoading(false));
+    }
+  };
+};
+
+export const getFollowing = (userId: string): HomeAction<void> => {
+  return async dispatch => {
+    try {
+      dispatch(userProfileActions.setFollowsIsLoading(true));
+      const res = await Services.getFollowing(userId);
+      dispatch(userProfileActions.setFollowsIsLoading(false));
+      dispatch(userProfileActions.setFollowings(res.data.following));
+    } catch (err) {
+      dispatch(userProfileActions.setFollowsIsLoading(false));
+    }
+  };
+};

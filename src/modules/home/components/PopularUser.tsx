@@ -2,12 +2,16 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import './PopularUser.scss';
+import { MouseEventHandler } from 'react';
 
 interface PopularUserInterface {
   _id: string;
   name: string;
   photo: string;
   bio: string;
+  isFollowing?: boolean;
+  withFollowing?: boolean;
+  onToggleFollow?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const PopularUser = (props: PopularUserInterface) => {
@@ -30,6 +34,15 @@ const PopularUser = (props: PopularUserInterface) => {
         <Link to={`/user/${props._id}`} className="popular-user__view">
           {t('action.view')}
         </Link>
+        {props.withFollowing && (
+          <button
+            onClick={props.onToggleFollow}
+            type="button"
+            className="popular-user__follow"
+          >
+            {props.isFollowing ? t('action.unfollow') : t('action.follow')}
+          </button>
+        )}
       </div>
     </li>
   );

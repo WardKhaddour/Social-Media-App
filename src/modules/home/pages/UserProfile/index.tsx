@@ -9,6 +9,8 @@ import Post from '../../components/Post';
 import './index.scss';
 import { useTranslation } from 'react-i18next';
 import SecondaryButton from 'components/SecondaryButton';
+import { userProfileActions } from './store';
+import UsersFollow from './components/UsersFollows';
 
 const UserProfile = ({ id }: { id?: string }) => {
   const { _id, isAuthenticated } = useSelector(
@@ -44,8 +46,17 @@ const UserProfile = ({ id }: { id?: string }) => {
     await dispatch(followUser(user?._id!));
   };
 
+  const handleShowFollows = (type: string) => () => {
+    dispatch(
+      userProfileActions.setFollowStatsShown({
+        shown: true,
+        type,
+      })
+    );
+  };
   return (
     <section className="user-profile">
+      {userId && <UsersFollow userId={userId} />}
       <div className="user-profile__details">
         <h2 className="user-profile__details--name" dir="auto">
           {user?.name}
@@ -57,16 +68,24 @@ const UserProfile = ({ id }: { id?: string }) => {
           <img crossOrigin="anonymous" src={user?.photo} alt={user?.name} />
         </div>
         <p className="user-profile__details--statics">
-          <span className="user-profile__details--followers">
-            {t('label.followers', {
+          <button
+            onClick={handleShowFollows('followers')}
+            type="button"
+            className="user-profile__details--followers btn-follow-stats"
+          >
+            {t('label.followersNum', {
               num: user?.followersNum,
             })}
-          </span>
-          <span className="user-profile__details--following">
-            {t('label.following', {
+          </button>
+          <button
+            onClick={handleShowFollows('followings')}
+            type="button"
+            className="user-profile__details--following btn-follow-stats"
+          >
+            {t('label.followingNum', {
               num: user?.followingNum,
             })}
-          </span>
+          </button>
         </p>
 
         {isAuthenticated && (
