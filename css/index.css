@@ -1,0 +1,24 @@
+.saved-items {
+  padding: 3rem 4rem;
+}
+.saved-items__heading {
+  text-align: start;
+  margin-bottom: 4rem;
+}
+.saved-items__posts {
+  width: 50%;
+}t-align: start;
+}gin: 2rem;
+}
+.not-found__logo {
+  height: 25rem;
+  width: 25rem;
+}
+.not-found__logo img {
+  width: 100%;
+  height: 100%;
+}
+.not-found__content {
+  justify-self: flex-start;
+  font-size: 2.2rem;
+}

@@ -14,6 +14,7 @@ const MainModuleLayout = () => {
 
   const hideUserOptions = () => {
     dispatch(mainLayoutActions.hideOptions());
+    dispatch(mainLayoutActions.hideSideBar());
   };
 
   return (

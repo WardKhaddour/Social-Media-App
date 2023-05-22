@@ -4,6 +4,7 @@ const mainLayoutSlice = createSlice({
   name: 'main',
   initialState: {
     isOptionsShown: false,
+    isSideBarShown: false,
   },
   reducers: {
     toggleIsOptionsShown(state) {
@@ -14,6 +15,15 @@ const mainLayoutSlice = createSlice({
     },
     hideOptions(state) {
       state.isOptionsShown = false;
+    },
+    toggleSideBar(state) {
+      state.isSideBarShown = !state.isSideBarShown;
+    },
+    showSideBar(state) {
+      state.isSideBarShown = true;
+    },
+    hideSideBar(state) {
+      state.isSideBarShown = false;
     },
   },
 });

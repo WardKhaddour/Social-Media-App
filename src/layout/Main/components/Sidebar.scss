@@ -26,8 +26,7 @@
   &--hidden {
     display: none;
   }
-
-  &:hover {
+  &__shown {
     top: 0;
     transform: translateY(0);
     height: 100%;
@@ -38,30 +37,9 @@
       animation: showSideBarSm 0.5s forwards;
     }
   }
-  &:hover > .sidebar__list {
+
+  &__shown > .sidebar__list {
     visibility: visible;
-  }
-
-  // Show Sidebar on click for touch devices
-
-  &--hover__effect {
-    @media (hover: none) {
-      top: 0;
-      transform: translateY(0);
-      height: 100%;
-      animation: showSideBar 0.5s 0.5s forwards;
-      transition: all 0.5s;
-
-      @include respond(sm) {
-        animation: showSideBarSm 0.5s forwards;
-      }
-    }
-  }
-
-  &--hover__effect > .sidebar__list {
-    @media (hover: none) {
-      visibility: visible;
-    }
   }
 
   &__list {

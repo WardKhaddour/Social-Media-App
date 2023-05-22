@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
 import { ReactComponent as IconHome } from 'assets/icons/home.svg';
@@ -7,16 +7,21 @@ import { ReactComponent as IconProfile } from 'assets/icons/profile.svg';
 
 import './Sidebar.scss';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import SideBarLink from './SidebarLink';
+import { mainLayoutActions } from '../store';
+import { MouseEventHandler } from 'react';
 
 const Sidebar = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
-  const [sideBarShown, setSideBarShown] = useState(false);
+  const { isSideBarShown } = useSelector(
+    (state: RootState) => state.mainLayout
+  );
 
-  const toggleSideBar = () => {
-    setSideBarShown(prevState => !prevState);
+  const toggleSideBar: MouseEventHandler = event => {
+    event.stopPropagation();
+    dispatch(mainLayoutActions.toggleSideBar());
   };
 
   const sideBarLinks = [
@@ -50,9 +55,7 @@ const Sidebar = () => {
     },
   ];
 
-  const sideBarClasses = `sidebar  ${
-    sideBarShown ? 'sidebar--hover__effect' : ''
-  }`;
+  const sideBarClasses = `sidebar  ${isSideBarShown ? 'sidebar__shown' : ''}`;
 
   return (
     <section className={sideBarClasses} onClick={toggleSideBar}>
