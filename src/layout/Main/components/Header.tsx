@@ -12,12 +12,13 @@ import './Header.scss';
 import { MouseEventHandler } from 'react';
 import ToggleLanguage from './ToggleLanguage';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavItem from './NavItem';
 
 const AuthenticatedHeader = (props: { name: string; photo: string }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { isOptionsShown } = useSelector(
     (state: RootState) => state.mainLayout
   );
@@ -31,6 +32,7 @@ const AuthenticatedHeader = (props: { name: string; photo: string }) => {
 
   const logoutHandler = async () => {
     await dispatch(logout());
+    navigate('/');
   };
 
   const optionsClasses = isOptionsShown
