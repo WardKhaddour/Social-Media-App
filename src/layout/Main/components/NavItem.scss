@@ -29,4 +29,10 @@
       height: 100%;
     }
   }
+
+  &__label {
+    @include respond(xss) {
+      display: none;
+    }
+  }
 }

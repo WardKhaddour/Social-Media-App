@@ -2,6 +2,11 @@
 
 .home {
   padding: 4rem;
+
+  @include respond(xss) {
+    padding: 2.75rem;
+  }
+
   &-posts {
     display: grid;
     grid-template-columns: 50% 50%;
