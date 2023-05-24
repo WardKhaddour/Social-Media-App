@@ -3,6 +3,7 @@ import { RootState } from 'store';
 import { userActions } from 'store/user';
 import Services from '../Services';
 import { AnyAction } from 'redux';
+import localStorageHelper from 'utils/localStorage';
 
 type UserAction<T> = ThunkAction<Promise<T>, RootState, unknown, AnyAction>;
 
@@ -25,7 +26,8 @@ export const confirmEmail = (userData: {
     dispatch(userActions.setIsLoading(true));
     try {
       const res = await Services.confirmEmail(userData);
-      const { user } = res.data;
+      const { user, token } = res.data;
+      localStorageHelper.setToken(token);
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
 
@@ -131,16 +133,8 @@ export const deleteUser = (userData: { password: string }): UserAction<any> => {
 
 export const logout = (): UserAction<any> => {
   return async dispatch => {
-    dispatch(userActions.setIsLoading(true));
-    try {
-      await Services.logout();
+    localStorageHelper.removeToken();
 
-      dispatch(userActions.reset());
-    } catch (err) {
-      console.log(err);
-      return false;
-    } finally {
-      dispatch(userActions.setIsLoading(false));
-    }
+    dispatch(userActions.reset());
   };
 };

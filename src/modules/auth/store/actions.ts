@@ -1,3 +1,4 @@
+import localStorageHelper from 'utils/localStorage';
 import Services from '../Services';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -31,8 +32,8 @@ export const login = (userData: UserLoginData): AuthAction<boolean> => {
     dispatch(userActions.setIsLoading(true));
     try {
       const res = await Services.login(userData);
-      const { user } = res.data;
-
+      const { user, token } = res.data;
+      localStorageHelper.setToken(token);
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
 
       return true;
@@ -49,7 +50,9 @@ export const signup = (userData: UserSignupData): AuthAction<boolean> => {
     dispatch(userActions.setIsLoading(true));
     try {
       const res = await Services.signup(userData);
-      const { user } = res.data;
+      const { user, token } = res.data;
+      localStorageHelper.setToken(token);
+
       dispatch(userActions.setUserData({ ...user, isAuthenticated: false }));
 
       return true;
@@ -86,7 +89,8 @@ export const resetPassword = (
     dispatch(userActions.setIsLoading(true));
     try {
       const res = await Services.resetPassword(userData);
-      const { user } = res.data;
+      const { user, token } = res.data;
+      localStorageHelper.setToken(token);
 
       dispatch(userActions.setUserData({ ...user, isAuthenticated: true }));
 

@@ -5,6 +5,7 @@ import socket from 'socket';
 import store from 'store';
 import { notificationActions } from 'store/notification';
 import langHelper from 'utils/language/LangHelper';
+import localStorageHelper from 'utils/localStorage';
 
 let baseURL = `${BASE_URL}/api/v1`;
 
@@ -21,6 +22,10 @@ axiosInstance.interceptors.request.use(
     config.headers = { ...config.headers } as RawAxiosRequestHeaders;
     config.headers.lang = langHelper.getLang();
     config.headers.socketId = socket.id;
+    if (localStorageHelper.getToken()) {
+      config.headers.Authorization = `Bearer ${localStorageHelper.getToken()}`;
+    }
+
     return config;
   },
   err => {
