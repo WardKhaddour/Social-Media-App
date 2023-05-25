@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     position: sticky;
+    overflow-y: hidden;
     @include respond(md) {
       display: none;
     }
@@ -29,6 +30,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+    overflow-y: scroll;
   }
 }
 
