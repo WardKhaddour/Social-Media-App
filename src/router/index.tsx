@@ -1,8 +1,10 @@
-import AuthModuleLayout from 'layout/Auth';
 import MainModuleLayout from 'layout/Main';
 import NotFoundModuleLayout from 'layout/NotFound';
 import RestrictUnAuthenticated from 'middlewares/RestrictUnauthenticated';
+import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+
+const AuthModuleLayout = React.lazy(() => import('layout/Auth'));
 
 const router = createBrowserRouter([
   {

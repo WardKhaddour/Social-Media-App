@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import Notification from './components/Notification';
 import { getUserData } from './store/user/actions';
@@ -23,7 +23,9 @@ const App = () => {
   return (
     <div className={appClasses}>
       <Notification />
-      <RouterProvider router={router} />
+      <Suspense fallback={<LoadingSpinner loading />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </div>
   );
 };
