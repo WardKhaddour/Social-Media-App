@@ -63,6 +63,7 @@ const translations = {
     sortOptionsDate: 'تاريخ النشر',
     sortOptionsLike: 'الأكثر اعجاباً',
     sortOptionsComment: 'الأكثر تعليقاً',
+    likedBy: 'الاعجابات',
   },
   action: {
     login: 'تسجيل الدخول',

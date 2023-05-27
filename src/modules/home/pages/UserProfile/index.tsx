@@ -24,9 +24,11 @@ const UserProfile = ({ id }: { id?: string }) => {
   // const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const { userProfileDetails: user, isLoading } = useSelector(
-    (state: RootState) => state.home.userProfile
-  );
+  const {
+    userProfileDetails: user,
+    isLoading,
+    followStats,
+  } = useSelector((state: RootState) => state.home.userProfile);
 
   useEffect(() => {
     if (userId !== user?._id) {
@@ -56,7 +58,7 @@ const UserProfile = ({ id }: { id?: string }) => {
   };
   return (
     <section className="user-profile">
-      {userId && <UsersFollow userId={userId} />}
+      {userId && followStats?.shown && <UsersFollow userId={userId} />}
       <div className="user-profile__details">
         <h2 className="user-profile__details--name" dir="auto">
           {user?.name}

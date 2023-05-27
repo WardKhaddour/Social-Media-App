@@ -24,6 +24,8 @@ import replaceURLs from 'utils/validators/replaceURLs';
 import PostAttachments from './components/PostAttachments';
 import EditPost from '../../components/EditPost';
 import { t } from 'i18next';
+import { postDetailsActions } from './store';
+import PostLikes from './components/PostLikes';
 
 const PostDetails = () => {
   const [postsLoading, setPostsLoading] = useState(true);
@@ -31,7 +33,7 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { postId } = useParams();
-  const { post, comments } = useSelector(
+  const { post, comments, isLikesShown } = useSelector(
     (state: RootState) => state.home.postDetails
   );
   const { isAuthenticated, _id: userId } = useSelector(
@@ -71,8 +73,13 @@ const PostDetails = () => {
     navigate(-1);
   };
 
+  const handleViewPostLikes = () => {
+    dispatch(postDetailsActions.setIsLikesShown(true));
+  };
+
   return (
     <div className="post" dir="auto">
+      {post?._id && isLikesShown && <PostLikes postId={post?._id} />}
       <div className="post__title-edit">
         <h2 className="post__title">{post?.title}</h2>
         {userId === post?.author._id && (
@@ -129,7 +136,12 @@ const PostDetails = () => {
                 <IconLike className="post__action--icon " />
               )}
             </button>
-            <span>{post?.likesNum}</span>
+            <button
+              className="post__action--likes"
+              onClick={handleViewPostLikes}
+            >
+              {post?.likesNum}
+            </button>
           </div>
           <div className="post__action--comment">
             <button className="post__action--button" onClick={toggleComments}>

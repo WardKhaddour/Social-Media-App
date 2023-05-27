@@ -66,6 +66,19 @@ export const addLike = (postId: string): HomeAction<void> => {
   };
 };
 
+export const getPostLikes = (postId: string): HomeAction<void> => {
+  return async dispatch => {
+    dispatch(postDetailsActions.setIsLoading(true));
+    try {
+      const res = await Services.getPostLikes(postId);
+      dispatch(postDetailsActions.setLikes(res.data.likes));
+      dispatch(postDetailsActions.setIsLoading(false));
+    } catch (err) {
+      dispatch(postDetailsActions.setIsLoading(false));
+    }
+  };
+};
+
 export const savePost = (postId: string): HomeAction<void> => {
   return async dispatch => {
     try {

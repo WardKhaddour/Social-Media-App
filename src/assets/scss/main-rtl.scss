@@ -41,7 +41,8 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       animation: showSideBarRTL 0.5s 0.5s forwards;
       @include respond(md) {
         animation: showSideBarRTL_SM 0.5s forwards;

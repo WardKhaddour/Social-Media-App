@@ -67,6 +67,17 @@
       display: flex;
       align-items: center;
     }
+    &--likes {
+      all: unset;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s;
+      padding: 1rem;
+      &:hover,
+      &:focus-visible {
+        background-color: $color-white;
+      }
+    }
 
     &--button {
       all: unset;
@@ -77,7 +88,8 @@
       transition: all 0.2s;
       width: 4rem;
       height: 4rem;
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background-color: $color-white;
       }
     }

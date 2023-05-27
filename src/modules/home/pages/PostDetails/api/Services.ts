@@ -37,6 +37,10 @@ class Services {
     const res = await axiosInstance.post(LIKE_POST(postId));
     return res.data;
   }
+  static async getPostLikes(postId: string) {
+    const res = await axiosInstance.get(LIKE_POST(postId));
+    return res.data;
+  }
 
   static async savePost(postId: string) {
     const res = await axiosInstance.post(SAVE_POST(postId));

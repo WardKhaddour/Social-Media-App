@@ -63,6 +63,7 @@ const translations = {
     sortOptionsDate: 'Date',
     sortOptionsLike: 'Most Liked',
     sortOptionsComment: 'Most Comments',
+    likedBy: 'Liked By',
   },
   action: {
     login: 'Login',

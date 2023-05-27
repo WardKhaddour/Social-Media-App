@@ -6,6 +6,8 @@ const initialState: POST_STATE = {
   isLoading: false,
   post: undefined,
   comments: undefined,
+  likes: undefined,
+  isLikesShown: false,
 };
 
 const postDetailsSlice = createSlice({
@@ -24,6 +26,12 @@ const postDetailsSlice = createSlice({
       state.comments = action.payload;
     },
 
+    setLikes(state, action: PayloadAction<any>) {
+      state.likes = action.payload;
+    },
+    setIsLikesShown(state, action: PayloadAction<any>) {
+      state.isLikesShown = action.payload;
+    },
     updateCurrentPost(state, action: PayloadAction<any>) {
       if (state.post?._id === action.payload._id) {
         state.post = action.payload;

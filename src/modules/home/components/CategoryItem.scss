@@ -10,7 +10,8 @@
   margin: 1rem;
   cursor: pointer;
   transition: all 0.2s;
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background-color: rgba($color: $color-primary, $alpha: 0.9);
   }
 }

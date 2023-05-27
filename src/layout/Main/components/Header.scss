@@ -71,7 +71,8 @@
     transition: all 0.2s;
     border-radius: 5px;
     padding: 2px;
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: $color-primary;
       color: $color-white;
     }

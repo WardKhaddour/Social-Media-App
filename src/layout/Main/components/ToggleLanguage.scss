@@ -45,7 +45,8 @@
       padding: 1rem;
       transition: all 0.2s;
       cursor: pointer;
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: $color-primary;
         background-color: $color-white;
       }

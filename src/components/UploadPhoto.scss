@@ -38,7 +38,8 @@
     transition: all 0.2s;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: $color-primary;
     }
   }

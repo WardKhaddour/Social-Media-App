@@ -35,7 +35,6 @@ const UsersFollow = ({ userId }: Props) => {
     }
   }, [userId, dispatch, followStats?.type]);
 
-  const backdropClasses = followStats?.shown ? '' : 'hidden';
   const handleHideFollows = () => {
     dispatch(
       userProfileActions.setFollowStatsShown({
@@ -61,7 +60,7 @@ const UsersFollow = ({ userId }: Props) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <Backdrop className={backdropClasses} onClick={handleHideFollows}>
+        <Backdrop className="" onClick={handleHideFollows}>
           <>
             {isLoading && <div className="loading-spinner"></div>}
             {!isLoading && (
@@ -104,6 +103,7 @@ const UsersFollow = ({ userId }: Props) => {
                           withFollowing={isAuthenticated}
                           onToggleFollow={handleToggleFollow(follower.user._id)}
                           isFollowing={follower.isFollowing}
+                          onView={handleHideFollows}
                         />
                       </li>
                     ))}

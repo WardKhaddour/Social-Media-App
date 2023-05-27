@@ -12,6 +12,7 @@ interface PopularUserInterface {
   isFollowing?: boolean;
   withFollowing?: boolean;
   onToggleFollow?: MouseEventHandler<HTMLButtonElement>;
+  onView?: MouseEventHandler<HTMLElement>;
 }
 
 const PopularUser = (props: PopularUserInterface) => {
@@ -31,7 +32,11 @@ const PopularUser = (props: PopularUserInterface) => {
         </span>
       </div>
       <div className="popular-user__actions">
-        <Link to={`/user/${props._id}`} className="popular-user__view">
+        <Link
+          to={`/user/${props._id}`}
+          onClick={props.onView}
+          className="popular-user__view"
+        >
           {t('action.view')}
         </Link>
         {props.withFollowing && (
